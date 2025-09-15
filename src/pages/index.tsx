@@ -31,7 +31,7 @@ export default function Index() {
       <div className={"h-full transition-[width] duration-100 ease-in-out sm:sticky sm:left-0 sm:top-0 sm:w-16 xl:sidebar-anchored:w-[240px] xl:sidebar-floating:w-16 hidden sm:block " + (open ? "xl:w-[240px]" : "xl:w-16")}>
         <nav className="bg-gray-100 dark:bg-gray-800 sm:z-[2] w-full fixed h-full sm:h-dvh translate-x-full sm:translate-x-0 sm:sticky sm:top-0 sm:left-0">
           <div className="flex h-full flex-col justify-stretch">
-            <div className={"sticky top-0 z-10 flex h-16 shrink-0 items-center justify-between px-4 sm:h-4 xl:h-16 " + (open ? "justify-between" : "justify-center")} style={{ height: 72 }}>
+            <div className={"sticky top-0 z-10 flex h-16 shrink-0 items-center justify-between px-4 sm:h-4 xl:h-16 " + (open ? "justify-between" : "justify-center")}>
               {open && (
                 <div className="pl-1 sm:hidden sm:sidebar-floating:hidden xl:block">
                   <a className="text-surface-accent-0 dark:text-white" aria-label="Freepik" href="#">
@@ -71,7 +71,7 @@ export default function Index() {
                         )}
                       </a>
                     ))} */}
-                    {Apis.map((value: Api, index: number) =>
+                    {Apis.filter((value: Api, index: number) => index < 10).map((value: Api, index: number) =>
                       // <li key={index} className="py-3">
                       //   <Link className="flex flex-col items-center justify-center text-gray-800 dark:text-gray-100" href={`/services/api/${value.name}`}>
                       //     <Image src={value.icon} alt="" width={28} height={28} />
@@ -97,7 +97,7 @@ export default function Index() {
             <div className="sticky bottom-0 z-10 mt-auto flex flex-col gap-4 p-4">
               {open && (
                 <div className="hidden xl:block">
-                  <button data-cy="creditsCta.getAPlan" className="w-full max-w-[240px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg px-4 py-[9px] duration-100 ease-in sm:sidebar-floating:hidden lg:w-[208px]">
+                  <button className="w-full max-w-[240px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg px-4 py-[9px] duration-100 ease-in sm:sidebar-floating:hidden lg:w-[208px]">
                     <div className="flex flex-col items-start gap-[2px] text-sm">
                       <p className="text-left font-semibold text-premium-gold-700 dark:text-premium-gold-600">Get a plan</p>
                       <p className="text-left font-normal text-surface-foreground-0">Unlock more features</p>
@@ -130,7 +130,7 @@ export default function Index() {
         </nav>
       </div>
       <main className="max-w-[100vw] flex-1">
-        <header className="sticky top-0 z-[1]">
+        {/* <header className="sticky top-0 z-[1]">
           <div className="grid w-full grid-cols-2 grid-rows-[4rem] items-center justify-between border-b border-black/10 dark:border-white/10 px-4 pb-5 lg:flex lg:h-18 lg:pb-0">
             <div className={"flex items-center gap-2 -min-w-[150px]"}>
               <button className="cursor-pointer flex items-center rounded-lg hover:bg-gray-700 p-[9px] hover:bg-surface-2 sm:hidden" onClick={() => setOpen(!open)}>
@@ -176,7 +176,7 @@ export default function Index() {
                   </button>
                 </div>
               </div>
-            </div> */}
+            </div> 
             <div className="flex items-center gap-1 min-w-[150px] justify-end">
               <ThemeToggle />
               <div className="items-center flex justify-end lg:flex-initial">
@@ -192,6 +192,46 @@ export default function Index() {
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+        </header> */}
+        <header className="z-50 flex h-14 w-full shrink-0 items-center justify-between border-b border-black/10 dark:border-white/10 px-4 lg:h-16 lg:gap-4">
+          <div id="logo" className="relative flex min-w-0 shrink-0 items-center gap-0 sm:gap-2 flex-1">
+            <div className="flex items-center gap-2">
+              {/* <button className="flex items-center justify-center gap-2 font-semibold transition duration-150 ease-in-out disabled:cursor-not-allowed disabled:opacity-50 disabled:aria-pressed:cursor-default disabled:aria-pressed:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface-border-10 active:outline-none bg-ghost-0 text-ghost-foreground-0 aria-pressed:bg-ghost-2 hover:enabled:bg-ghost-1 active:enabled:bg-ghost-2 rounded size-8 p-0 text-sm" data-cy="toggle-sidebar"></button> */}
+              <a href="/" className="relative flex items-start gap-2">
+                {/* <span className="pointer-events-none fill-current my-auto hidden h-4 w-[109px] text-blue-500 lg:block dark:text-white xl:hidden">A</span> */}
+                <button className="cursor-pointer flex items-center rounded-lg hover:bg-gray-700 p-[9px] hover:bg-surface-2 sm:hidden" onClick={() => setOpen(!open)}>
+                  <Menu size={16} />
+                </button>
+                {!open && (
+                  <div className="">
+                    <Image className="h-[25px] w-auto hidden dark:block" src="/icons/logo-light.svg" alt="" width={0} height={0} sizes="100vw" />
+                    <Image className="h-[25px] w-auto block dark:hidden" src="/icons/logo-dark.svg" alt="" width={0} height={0} sizes="100vw" />
+                  </div>
+                )}
+              </a>
+            </div>
+            <div className="flex flex-1 items-center gap-2">
+              <a href="/pikaso/explore" className="">
+                <span className="hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs" data-cy="header-ai-suite-link">AI Suite</span>
+              </a>
+              <span className="opacity-50">/</span>
+              <div className="group flex items-center gap-2">
+                <a aria-current="page" href="/pikaso/ai-image-generator" className="hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs">Image Generator</a>
+              </div>
+            </div>
+          </div>
+          <div id="action-buttons" className="flex shrink-0 items-center justify-end gap-3">
+            <div id="user" className="order-last flex shrink-0 items-center gap-3"><div>
+              <div className="relative z-20 flex size-8 shrink-0 flex-col">
+                <button className="flex shrink-0 items-center gap-2 absolute flex size-full h-full items-center justify-center">
+                  <div className="relative">
+                    <img src="https://lh3.googleusercontent.com/a-/AOh14Gj7e34T4vp4Jjj68t8ct726o4sc39BErozvo5WWaQ=s96-c" data-cy="user-avatar" className="size-6 bg-surface-2 rounded-full object-contain" />
+                  </div>
+                </button>
+              </div>
+            </div>
             </div>
           </div>
         </header>
