@@ -1,7 +1,6 @@
 .LoginBg {
   @apply bg-no-repeat bg-cover bg-center min-h-screen;
-  background-image: url("/images/background/bg-04.jpg");
-  color: #ffff;
+  background-image: url("/images/background/bg-04.jpg");  
 }
 
 .Card {

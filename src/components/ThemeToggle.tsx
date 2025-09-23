@@ -17,14 +17,10 @@ const ThemeToggle = () => {
   };
 
   return (
-    <>
-      <button
-        onClick={toggleTheme}
-        className="cursor-pointer flex items-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 p-[9px] hover:bg-surface-2" >
-        {currentTheme == "dark" ? <Sun size={16} /> : <Moon size={16} />}
-      </button>
-    </>
-  )
-}
+    <button onClick={toggleTheme} className="cursor-pointer flex items-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 p-[9px] hover:bg-surface-2">
+      {currentTheme == "dark" ? <Sun size={16} /> : <Moon size={16} />}
+    </button>
+  );
+};
 
-export default ThemeToggle
+export default ThemeToggle;
