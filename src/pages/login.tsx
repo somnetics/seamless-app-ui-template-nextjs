@@ -52,46 +52,46 @@ export default function Login() {
           body: JSON.stringify(formData),
         });
 
-        if (!response.ok) {
-          if (response.status === 500) {
-            throw new Error('500 Internal Server Error');
-          } else {
-            // get response data
-            const data = await response.json();
+        if (response.status === 500) {
+          throw new Error('500 Internal Server Error');
+        } else {
+          // get response data
+          const data = await response.json();
 
-            setTimeout(() => {
-              // on error
-              if (data.status == "error") {
-                // set fprm validation
-                form.querySelectorAll(".form-field").forEach((ele) => {
-                  // add invalid field
-                  ele.classList.add("is-invalid");
-                });
+          // pause
+          setTimeout(() => {
+            // on error
+            if (data.status == "error") {
+              // set fprm validation
+              form.querySelectorAll(".form-field").forEach((ele) => {
+                // add invalid field
+                ele.classList.add("is-invalid");
+              });
 
-                setTimeout(() => {
-                  // add wiggle
-                  document.querySelector(".card")?.classList.add("invalid-login");
-                }, 100);
+              setTimeout(() => {
+                // add wiggle
+                document.querySelector(".card")?.classList.add("invalid-login");
+              }, 100);
 
-                // show message
-                addToast(data.message, MessageTypes.Error);
+              // show message
+              addToast(data.message, MessageTypes.Error);
 
-                // activate page progress
-                showProgress(false);
-              } else {
+              // activate page progress
+              showProgress(false);
+            } else {
+              // activate page progress
+              showProgress(false);
+
+              // redirect to home page
+              router.replace("/");
+
+              // pause
+              setTimeout(() => {
                 // show message
                 addToast(data.message, MessageTypes.Success, 1500);
-
-                setTimeout(() => {
-                  // activate page progress
-                  showProgress(false);
-
-                  // redirect to home page
-                  router.replace("/");
-                }, 2000);
-              }
-            }, 500);
-          }
+              }, 500);
+            }
+          }, 500);
         }
       } catch (err: any) {
         setTimeout(() => {

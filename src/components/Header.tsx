@@ -1,29 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useGlobalState } from "@/context/globalState";
 import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 
 export default function Header() {
-  const [open, setOpen] = useState(true);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [open, setOpen] = useState(true);
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isMainMenuOpen, setToogleMainMenu } = useGlobalState();
 
   return (
     <header className="z-50 flex h-14 w-full shrink-0 items-center justify-between border-b border-black/10 dark:border-white/10 px-4 lg:h-16 lg:gap-4">
       <div id="logo" className="relative flex min-w-0 shrink-0 items-center gap-0 sm:gap-2 flex-1">
         <div className="flex items-center gap-2">
           {/* <button className="flex items-center justify-center gap-2 font-semibold transition duration-150 ease-in-out disabled:cursor-not-allowed disabled:opacity-50 disabled:aria-pressed:cursor-default disabled:aria-pressed:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface-border-10 active:outline-none bg-ghost-0 text-ghost-foreground-0 aria-pressed:bg-ghost-2 hover:enabled:bg-ghost-1 active:enabled:bg-ghost-2 rounded size-8 p-0 text-sm" data-cy="toggle-sidebar"></button> */}
-          <a href="/" className="relative flex items-start gap-2">
+          <div className="relative flex items-start gap-2">
             {/* <span className="pointer-events-none fill-current my-auto hidden h-4 w-[109px] text-blue-500 lg:block dark:text-white xl:hidden">A</span> */}
-            <button className="cursor-pointer flex items-center rounded-lg hover:bg-gray-700 p-[9px] hover:bg-surface-2 sm:hidden" onClick={() => setOpen(!open)}>
+            <button className="cursor-pointer flex items-center rounded-lg hover:bg-gray-700 p-[9px] hover:bg-surface-2 sm:hidden" onClick={() => setToogleMainMenu(!isMainMenuOpen)}>
               <Menu size={16} />
             </button>
-            {!open && (
+            {!isMainMenuOpen && (
               <div className="">
                 <Image className="h-[25px] w-auto hidden dark:block" src="/icons/logo-light.svg" alt="" width={0} height={0} sizes="100vw" />
                 <Image className="h-[25px] w-auto block dark:hidden" src="/icons/logo-dark.svg" alt="" width={0} height={0} sizes="100vw" />
               </div>
             )}
-          </a>
+          </div>
         </div>
         <div className="flex flex-1 items-center gap-2">
           <a href="/pikaso/explore" className="">

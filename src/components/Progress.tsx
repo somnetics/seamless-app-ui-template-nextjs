@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import styles from "./Progress.module.scss";
+import styles from "./Progress.module.css";
 
 type ProgressContextType = {
   showProgress: (show: boolean) => void;

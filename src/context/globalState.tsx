@@ -28,9 +28,9 @@ type GlobalStateContextType = {
   setUsers: Dispatch<SetStateAction<User[]>>;
   user: User | undefined;
   setUser: Dispatch<SetStateAction<User | undefined>>;
-  toogleSidePanel: string | undefined;
-  setToogleSidePanel: Dispatch<SetStateAction<string | undefined>>;
-  savePanelSateToSession: (state: string) => Promise<void>;
+  isMainMenuOpen: boolean;
+  setToogleMainMenu: Dispatch<SetStateAction<boolean>>;
+  savePanelSateToSession: (state: boolean) => Promise<void>;
   saveUserToSession: (option: Project) => Promise<void>;  
   registerSSE: (endpoint: string) => void;
   eventData: any;
@@ -50,7 +50,7 @@ export function useGlobalState() {
 export const GlobalStateProvider = ({ children }: { children: React.ReactNode }) => {
   const [users, setUsers] = useState<User[]>([]);
   const [user, setUser] = useState<User | undefined>(); 
-  const [toogleSidePanel, setToogleSidePanel] = useState<string>();
+  const [isMainMenuOpen, setToogleMainMenu] = useState<boolean>(true);
   const [eventData, setEventData] = useState<any>();
 
   const saveUserToSession = async (option: any) => {
@@ -70,7 +70,7 @@ export const GlobalStateProvider = ({ children }: { children: React.ReactNode })
     setUser(option);
   }
 
-  const savePanelSateToSession = async (state: string) => {
+  const savePanelSateToSession = async (state: boolean) => {
     // call api
     const response = await fetch('/api/session', {
       method: 'POST',
@@ -84,7 +84,7 @@ export const GlobalStateProvider = ({ children }: { children: React.ReactNode })
     await response.json();
 
     // set user
-    setToogleSidePanel(state);
+    setToogleMainMenu(state);
   }
 
   const registerSSE = (endpoint: string) => {
@@ -118,8 +118,8 @@ export const GlobalStateProvider = ({ children }: { children: React.ReactNode })
       setUsers,
       user,
       setUser,     
-      toogleSidePanel,
-      setToogleSidePanel,
+      isMainMenuOpen,
+      setToogleMainMenu,
       savePanelSateToSession,
       saveUserToSession,      
       eventData,

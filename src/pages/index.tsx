@@ -21,7 +21,7 @@ export default function Index() {
           <div className="mt-8 w-full px-5 lg:mt-12">
             <div className="flex w-full items-center justify-between">
               <h1 className="text-blue">Hello</h1>
-              <a href="" className="items-center transition-colors duration-[300ms] no-underline inline-flex py-[10px] sprinkles-text-base font-semibold rounded-[6px] whitespace-nowrap bg-blue text-white hover:bg-blue-700 h-11 px-4 leading-tight xl:h-12">
+              <a href="" className="btn items-center transition-colors duration-[300ms] no-underline inline-flex py-[10px] sprinkles-text-base font-semibold rounded-[6px] whitespace-nowrap bg-blue text-white hover:bg-blue-700 h-11 px-4 leading-tight xl:h-12">
                 Home
               </a>
               <Button className="bg-gray-400/10 hover:bg-blue-400/10 text-shadow-gray-200 hover:text-blue-500 hover:inset-ring hover:inset-ring-blue-500/30">
