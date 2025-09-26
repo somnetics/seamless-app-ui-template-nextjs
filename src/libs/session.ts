@@ -7,7 +7,8 @@ export interface SessionData {
   access_token?: string;
   refresh_token?: string;  
   access?: any;
-  panelCollapse: string;  
+  theme: string;  
+  isMenuCollapse: string;  
   isLoggedIn: boolean;
 }
 
@@ -15,7 +16,8 @@ export const defaultSession: SessionData = {
   username: "guest",
   fullname: "Guest",
   email: "",  
-  panelCollapse: "false",  
+  theme: "light",
+  isMenuCollapse: "false",  
   isLoggedIn: false
 };
 

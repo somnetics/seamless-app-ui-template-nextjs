@@ -1,18 +1,20 @@
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+import styles from "./Button.module.css";
 
 type ButtonType = {
   children: React.ReactNode;
   type?: ButtonProps["type"];
+  color?: string;
   disabled?: boolean;
   className?: string;
   processing?: boolean;
   onClick?: any;
 };
 
-export default function Button({ children, type = "button", disabled = false, className = "", processing = false, onClick }: ButtonType) {
+export default function Button({ children, type = "button", color = "primary", disabled = false, className = "", processing = false, onClick }: ButtonType) {
   return (
-    <button type={type} disabled={disabled} className={`flex items-center gap-2 text-sm font-semibold p-2 rounded transition ${disabled ? "text-gray-400" : `cursor-pointer ${className}`} ${processing ? "pe-none" : ""}`} onClick={onClick}>
-      {processing ? <span className="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> : ""}
+    <button type={type} disabled={disabled} className={`${styles.btn} ${disabled ? styles.disabled : styles[color] + " " + className} ${disabled || processing ? "pe-none" : "cursor-pointer"}`} onClick={onClick}>
+      {processing ? <span className={styles.loader}></span> : ""}
       {processing ? "Processing..." : children}
     </button>
   );

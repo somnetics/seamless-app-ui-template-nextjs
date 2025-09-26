@@ -11,14 +11,13 @@ export default async function handle(
 
   // check request
   if (req.method === "POST") {
-    // set proejct id
-    if (req.body.project) session.project = req.body.project;
+    console.log(req.body)
 
-    // set user id
-    if (req.body.user) session.user = req.body.user;
-
-    // set panel collapse
-    if (req.body.panelCollapse) session.panelCollapse = req.body.panelCollapse;
+    // set menu state
+    if (typeof req.body.menuCollapse !== "undefined") session.isMenuCollapse = req.body.menuCollapse;
+    
+    // set theme state
+    if (typeof req.body.theme !== "undefined") session.theme = req.body.theme;
 
     // save session
     await session.save();

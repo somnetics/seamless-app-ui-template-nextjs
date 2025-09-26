@@ -8,7 +8,6 @@ import { useToast, MessageTypes } from "@/components/Toast";
 import { Copyright, Heart } from "lucide-react";
 import styles from "@/styles/login.module.css";
 import Button from "@/components/Button";
-import { LogIn } from "lucide-react";
 
 export default function Login() {
   const router = useRouter();
@@ -116,8 +115,8 @@ export default function Login() {
       <main className={styles.LoginBg + " flex h-screen min-h-full flex-col justify-center px-6 py-12 lg:px-8"}>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="flex gap-2 items-start justify-center mb-8">
-            <Image className="h-auto" src="/icons/logo-light.svg" alt="" width={175} height={36.89} />
-            <span className="inline-flex items-center rounded-md bg-purple-400/10 px-2 py-1 text-xs font-medium text-purple-400 inset-ring inset-ring-purple-400/30">Beta v4.0</span>
+            <Image className="block" src="/icons/logo-light.png" alt="" width={175} height={37} />
+            <span className="inline-flex items-center rounded-sm px-1 py-[2px] leading-tight text-xs font-medium bg-blue-light-400/20 text-blue-light-400 inset-ring inset-ring-blue-light-400/30">v4.0</span>
           </div>
           <div className={styles.Card}>
             <form className="space-y-6" onSubmit={onSubmit}>
@@ -130,7 +129,7 @@ export default function Login() {
                   <label htmlFor="" className="">
                     Username
                   </label>
-                  <div className="outline-2 outline-gray-700 focus-within:outline-blue-600 rounded-md">
+                  <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
                     <input type="text" name="username" className="outline-none p-2 w-full" defaultValue="soumen.sardar" />
                   </div>
                 </div>
@@ -138,26 +137,21 @@ export default function Login() {
                   <label htmlFor="" className="">
                     Password
                   </label>
-                  <div className="outline-2 outline-gray-700 focus-within:outline-blue-600 rounded-md">
+                  <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
                     <input type="password" name="password" className="outline-none p-2 w-full" defaultValue="admin123" />
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <label className="flex items-center">
-                    <input type="checkbox" className="accent-blue-700 hover:accent-blue-600 mr-2" /> Remember me
+                    <input type="checkbox" className="accent-indigo-600 hover:accent-indigo-700 mr-2" /> Remember me
                   </label>
-                  <a href="#" className="text-blue-700 hover:text-blue-600">
+                  <a href="#" className="text-indigo-600 hover:text-indigo-700">
                     Forgot password?
                   </a>
                 </div>
-                {/* <Button className="bg-gray-400/10 hover:bg-blue-400/10 text-shadow-gray-200 text-blue-500 inset-ring inset-ring-blue-500/30">
-                  <LogIn size={16} strokeWidth={2} />
-                  <span className="text-sm">Sign in to your account</span>
-                </Button> */}
-                <button type="submit" className="w-full bg-blue-700 hover:bg-blue-600 text-white font-medium py-3 px-2 rounded-lg cursor-pointer">
+                <Button type="submit" className="justify-center h-11">
                   Sign in to your account
-                </button>
-                {/* <button type="submit" className="w-full bg-blue-400/10 text-blue-400 inset-ring inset-ring-blue-400/30 hover:bg-blue-400/20 font-medium py-3 px-2 rounded-lg cursor-pointer">Sign in to your account</button> */}
+                </Button>
               </div>
             </form>
           </div>

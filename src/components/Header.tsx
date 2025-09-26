@@ -1,32 +1,44 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SessionData } from "@/libs/session";
 import { useGlobalState } from "@/context/globalState";
-import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
+import { useEffect } from "react";
 
-export default function Header() {
-  // const [open, setOpen] = useState(true);
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isMainMenuOpen, setToogleMainMenu } = useGlobalState();
+export default function Header({ session }: { session: SessionData }) {
+  const { isMainMenuOpen, saveMenuStateToSession } = useGlobalState();
+
+  // useEffect(() => {
+  //   if (localStorage) {
+  //     console.log(isMainMenuOpen);
+  //     console.log(localStorage.getItem("isMenuCollapse"));
+
+  //     // set panel collapse
+  //     saveMenuStateToSession(localStorage.getItem("isMenuCollapse") as string);
+  //   }
+  // }, []);
 
   return (
-    <header className="z-50 flex h-14 w-full shrink-0 items-center justify-between border-b border-black/10 dark:border-white/10 px-4 lg:h-16 lg:gap-4">
-      <div id="logo" className="relative flex min-w-0 shrink-0 items-center gap-0 sm:gap-2 flex-1">
-        <div className="flex items-center gap-2">
-          {/* <button className="flex items-center justify-center gap-2 font-semibold transition duration-150 ease-in-out disabled:cursor-not-allowed disabled:opacity-50 disabled:aria-pressed:cursor-default disabled:aria-pressed:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface-border-10 active:outline-none bg-ghost-0 text-ghost-foreground-0 aria-pressed:bg-ghost-2 hover:enabled:bg-ghost-1 active:enabled:bg-ghost-2 rounded size-8 p-0 text-sm" data-cy="toggle-sidebar"></button> */}
-          <div className="relative flex items-start gap-2">
-            {/* <span className="pointer-events-none fill-current my-auto hidden h-4 w-[109px] text-blue-500 lg:block dark:text-white xl:hidden">A</span> */}
-            <button className="cursor-pointer flex items-center rounded-lg hover:bg-gray-700 p-[9px] hover:bg-surface-2 sm:hidden" onClick={() => setToogleMainMenu(!isMainMenuOpen)}>
+    <header className="sticky top-0 z-[999] flex h-14 w-full shrink-0 items-center justify-between border-b bg-white dark:bg-gray-900 border-black/10 dark:border-white/10 px-4 lg:h-16 lg:gap-4">
+      <div className="relative flex min-w-0 shrink-0 items-center gap-0 sm:gap-2 flex-1">
+        {(isMainMenuOpen || session.isMenuCollapse) != "true" && (
+          <div className="relative flex items-start gap-4">
+            <button
+              className="cursor-pointer flex items-center rounded-lg hover:bg-gray-700 p-[9px] hover:bg-surface-2 sm:hidden"
+              onClick={(e: any) => {
+                e.preventDefault();
+                saveMenuStateToSession(isMainMenuOpen == "true" ? "false" : "true");
+              }}
+            >
               <Menu size={16} />
             </button>
-            {!isMainMenuOpen && (
-              <div className="">
-                <Image className="h-[25px] w-auto hidden dark:block" src="/icons/logo-light.svg" alt="" width={0} height={0} sizes="100vw" />
-                <Image className="h-[25px] w-auto block dark:hidden" src="/icons/logo-dark.svg" alt="" width={0} height={0} sizes="100vw" />
-              </div>
-            )}
+            <Link href="/" className="flex items-start justify-center gap-2">
+              <Image className="hidden dark:block h-[25px]" src="/icons/logo-light.png" alt="" width={119} height={25} />
+              <Image className="block dark:hidden h-[25px]" src="/icons/logo-dark.png" alt="" width={119} height={25} />
+              <span className="inline-flex items-center rounded-sm px-1 py-[2px] leading-tight text-[11px] h-[18px] font-medium bg-blue-light-400/20 text-blue-light-400 inset-ring inset-ring-blue-light-400/30">v4.0</span>
+            </Link>
           </div>
-        </div>
+        )}
         <div className="flex flex-1 items-center gap-2">
           <a href="/pikaso/explore" className="">
             <span className="hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs" data-cy="header-ai-suite-link">
@@ -47,7 +59,7 @@ export default function Header() {
             <div className="relative z-20 flex size-8 shrink-0 flex-col">
               <button className="shrink-0 gap-2 absolute flex size-full h-full items-center justify-center">
                 <div className="relative">
-                  <img src="https://lh3.googleusercontent.com/a-/AOh14Gj7e34T4vp4Jjj68t8ct726o4sc39BErozvo5WWaQ=s96-c" data-cy="user-avatar" className="size-6 bg-surface-2 rounded-full object-contain" />
+                  <Image src="/avatars/user.png" alt="" width={24} height={24} className="size-6 bg-surface-2 rounded-full object-contain" />
                 </div>
               </button>
             </div>

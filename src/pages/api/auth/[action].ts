@@ -38,7 +38,7 @@ export default async function handle(
       session.refresh_token = data.refresh_token;
       session.access = data.access;
       session.isLoggedIn = true;
-
+      
       // save session
       await session.save();
 

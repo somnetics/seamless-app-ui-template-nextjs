@@ -1,24 +1,27 @@
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { SessionData } from "@/libs/session";
+import { useGlobalState } from "@/context/globalState";
 import { Sun, Moon } from "lucide-react";
 
-const ThemeToggle = () => {
+const ThemeToggle = ({ session }: { session: SessionData }) => {
+  const globalState = useGlobalState();
   const { systemTheme, theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const currentTheme = theme === "system" ? systemTheme : theme;
 
-  // Avoid hydration mismatch
-  useEffect(() => setMounted(true), []);
+  const toggleTheme = async () => {
+    // get theme
+    const theme = currentTheme === "dark" ? "light" : "dark";
 
-  if (!mounted) return null;
+    // save data to session
+    await globalState.saveThemeToSession(theme);
 
-  const toggleTheme = () => {
-    setTheme(currentTheme === "dark" ? "light" : "dark");
+    // set theme
+    setTheme(theme);
   };
 
   return (
     <button onClick={toggleTheme} className="cursor-pointer flex items-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 p-[9px] hover:bg-surface-2">
-      {currentTheme == "dark" ? <Sun size={16} /> : <Moon size={16} />}
+      {(globalState.theme || session.theme) == "light" ? <Moon size={16} /> : <Sun size={16} />}
     </button>
   );
 };
