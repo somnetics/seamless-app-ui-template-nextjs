@@ -110,7 +110,7 @@
 /* scrollbar */
 html {
   scroll-behavior: smooth;  
-  scrollbar-width: thin;
+  /* scrollbar-width: thin; */
   scrollbar-color: #c8c8c8 transparent;
 }
 
@@ -121,7 +121,7 @@ html.dark {
 .scrollable {
   overflow-y: auto; 
   overflow-x: hidden; 
-  scrollbar-width: thin;
+  /* scrollbar-width: thin; */
   scrollbar-gutter: auto;
   scrollbar-color: transparent transparent;
 }
@@ -149,3 +149,7 @@ html.dark .scrollable:hover {
   border-radius: 5px;
 }
 /* scrollbar */
+
+.simplebar-scrollbar::before {
+  background: rgb(128, 128, 128) !important;  
+}

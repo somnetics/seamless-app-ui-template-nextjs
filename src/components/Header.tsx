@@ -33,9 +33,9 @@ export default function Header({ session }: { session: SessionData }) {
               <Menu size={16} />
             </button>
             <Link href="/" className="flex items-start justify-center gap-2">
-              <Image className="hidden dark:block h-[25px]" src="/icons/logo-light.png" alt="" width={119} height={25} />
-              <Image className="block dark:hidden h-[25px]" src="/icons/logo-dark.png" alt="" width={119} height={25} />
-              <span className="inline-flex items-center rounded-sm px-1 py-[2px] leading-tight text-[11px] h-[18px] font-medium bg-blue-light-400/20 text-blue-light-400 inset-ring inset-ring-blue-light-400/30">v4.0</span>
+              <Image className="hidden dark:block h-[25px]" src="/icons/logo-light.svg" alt="" width={119} height={25} />
+              <Image className="block dark:hidden h-[25px]" src="/icons/logo-dark.svg" alt="" width={119} height={25} />
+              <span className="inline-flex items-center rounded-sm px-1 py-[2px] leading-tight text-xs h-[18px] font-medium inset-ring bg-blue-500/20 text-blue-500 inset-ring-blue-500/30 dark:bg-blue-light-400/20 dark:text-blue-light-400 dark:inset-ring-blue-light-400/30">v{process.env.NEXT_PUBLIC_SEAMLESS_VERSION}</span>
             </Link>
           </div>
         )}

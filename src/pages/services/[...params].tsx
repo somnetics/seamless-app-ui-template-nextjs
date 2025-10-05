@@ -3,8 +3,8 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
-import SideMenu from "@/components/sidemenu";
-import Header from "@/components/header";
+import MainMenu from "@/components/MainMenu";
+import Header from "@/components/Header";
 import { Apis, Api } from "@/libs/apis";
 import { ExternalLink, Trash2, Download, Edit2, Copy, ArrowLeft, KeySquare, Plus } from 'lucide-react';
 
@@ -35,7 +35,7 @@ export default function ApiDetails({ meta, service }: PageProps) {
         <title>Seamless 4.0 - Enterprise Service Platform</title>
       </Head>
       <main className="min-h-screen xl:flex">
-        <SideMenu />
+        <MainMenu session={}/>
         <div className="flex-1 transition-all duration-300 ease-in-out lg:ml-[85px]">
           <Header />
           <div className="flex w-full item-center justify-between border-b border-gray-200 py-3 px-12">
@@ -226,24 +226,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     keywords: `product, workflow`
   };
 
-//   // let session = await getIronSession(
-//   //   req,
-//   //   res,
-//   //   sessionOptions
-//   // );
+  // let session = await getIronSession(
+  //   req,
+  //   res,
+  //   sessionOptions
+  // );
 
-//   // if (!session.isLoggedIn) {
-//   //   return {
-//   //     redirect: {
-//   //       destination: "/login",
-//   //       permanent: false,
-//   //     },
-//   //   };
-//   // }
+  // if (!session.isLoggedIn) {
+  //   return {
+  //     redirect: {
+  //       destination: "/login",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
-//   // if (typeof session.isLoggedIn === "undefined") {
-//   //   session = { ...defaultSession, ...session };
-//   // }
+  // if (typeof session.isLoggedIn === "undefined") {
+  //   session = { ...defaultSession, ...session };
+  // }
 
   // get service details
   const serviceName = typeof query.params !== "undefined" ? query.params[0] : "";

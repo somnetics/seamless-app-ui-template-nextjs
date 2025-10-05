@@ -8,7 +8,11 @@ import { useProgress } from "@/components/Progress";
 import { useToast, MessageTypes } from "@/components/Toast";
 import { ScrollArea } from "radix-ui";
 
-import { Settings, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import dynamic from "next/dynamic";
+const SimpleBar = dynamic(() => import("simplebar-react"), { ssr: false });
+import 'simplebar-react/dist/simplebar.min.css';
+
+import { Settings, PanelLeftClose, PanelLeftOpen, Pin, Star } from "lucide-react";
 import { Icon } from "@/components/Icon";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Apis, Api } from "@/libs/apis";
@@ -16,9 +20,9 @@ import { Apis, Api } from "@/libs/apis";
 export default function MainMenu({ session }: { session: SessionData }) {
   const router = useRouter();
   const { addToast } = useToast();
-  const { showProgress } = useProgress();
-  const { isMainMenuOpen, setToogleMainMenu, saveMenuStateToSession } = useGlobalState();
-
+  const { showProgress } = useProgress();  
+  const { isMainMenuOpen, saveMenuStateToSession } = useGlobalState();
+  
   const handleLogout = async (e: any) => {
     e.preventDefault();
 
@@ -54,24 +58,26 @@ export default function MainMenu({ session }: { session: SessionData }) {
 
   useEffect(() => {
     if (localStorage) {
-      console.log(isMainMenuOpen);
-      console.log(localStorage.getItem("isMenuCollapse"));
-
       // set panel collapse
       saveMenuStateToSession(localStorage.getItem("isMenuCollapse") as string);
     }
   }, []);
 
+  useEffect(() => {
+    const wrappers = document.querySelectorAll('.simplebar-content-wrapper');
+    wrappers.forEach(el => el.classList.add('simplebar-visible'));
+  }, []);
+
   return (
-    <div className={"h-full transition-[width] duration-100 ease-in-out sm:sticky sm:left-0 sm:top-0 sm:w-16 hidden sm:block " + ((isMainMenuOpen || session.isMenuCollapse) == "true" ? "lg:w-[250px]" : "lg:w-16")}>
+    <div className={"h-full transition-[width] duration-100 ease-in-out sm:sticky sm:left-0 sm:top-0 sm:w-16 hidden sm:block " + ((isMainMenuOpen || session.isMenuCollapse) == "true" ? "lg:w-[240px]" : "lg:w-16")}>
       <nav className="bg-gray-100 dark:bg-gray-800 sm:z-[2] w-full fixed h-full sm:h-dvh translate-x-full sm:translate-x-0 sm:sticky sm:top-0 sm:left-0">
         <div className="flex h-full flex-col justify-stretch relative">
-          <div className={"flex shrink-0 items-center justify-between px-4 sm:h-4 lg:h-16 border-b border-black/10 dark:border-white/10"}>
+          <div className={"sticky top-0 z-10 flex shrink-0 items-center justify-between px-4 mb-4 sm:h-4 lg:h-16 border-b border-black/10 dark:border-white/10"}>
             {(isMainMenuOpen || session.isMenuCollapse) == "true" && (
               <Link href="/" className="pl-1 sm:hidden lg:flex items-start justify-center gap-2">
-                <Image className="hidden dark:block h-[25px]" src="/icons/logo-light.png" alt="" width={119} height={25} />
-                <Image className="block dark:hidden h-[25px]" src="/icons/logo-dark.png" alt="" width={119} height={25} />
-                <span className="inline-flex items-center rounded-sm px-1 py-[2px] leading-tight text-[11px] h-[18px] font-medium bg-blue-light-400/20 text-blue-light-400 inset-ring inset-ring-blue-light-400/30">v4.0</span>
+                <Image className="hidden dark:block h-[25px]" src="/icons/logo-light.svg" alt="" width={119} height={25} />
+                <Image className="block dark:hidden h-[25px]" src="/icons/logo-dark.svg" alt="" width={119} height={25} />
+                <span className="inline-flex items-center rounded-sm px-1 py-[2px] leading-tight text-xs h-[18px] font-medium inset-ring bg-blue-500/20 text-blue-500 inset-ring-blue-500/30 dark:bg-blue-light-400/20 dark:text-blue-light-400 dark:inset-ring-blue-light-400/30">v{process.env.NEXT_PUBLIC_SEAMLESS_VERSION}</span>
               </Link>
             )}
             <button
@@ -84,7 +90,7 @@ export default function MainMenu({ session }: { session: SessionData }) {
               {(isMainMenuOpen || session.isMenuCollapse) == "true" ? <PanelLeftClose size={16} /> : <PanelLeftOpen size={16} />}
             </button>
           </div>
-          <div className="flex-1 p-4 scrollable">            
+          <SimpleBar autoHide={false} className="px-4 flex-1" style={{ height: 100 }}>
             <div className="size-full">
               <div className="flex flex-col gap-1">
                 {[
@@ -94,7 +100,7 @@ export default function MainMenu({ session }: { session: SessionData }) {
                   { name: "Credentials", icon: "KeySquare", link: "/credentials" },
                   { name: "Users", icon: "User", link: "/users" },
                 ].map((item: any, i) => (
-                  <div key={i} className="group relative">
+                  <div key={i} className="group">
                     <Link href={item.link} className="text-sm lg:w-full sm:w-8 w-full rounded-lg flex items-center gap-1 sm:h-8 h-10 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 py-1">
                       <span className="flex size-8 shrink-0 items-center justify-center text-gray-700 dark:text-white">
                         <Icon name={item.icon} size={16} />
@@ -106,15 +112,7 @@ export default function MainMenu({ session }: { session: SessionData }) {
                   </div>
                 ))}
               </div>
-
               <div className="mb-[15px] mt-4 border-t border-black/10 dark:border-white/10"></div>
-
-              {/* {isMainMenuOpen && (
-                  <p className="mb-1 hidden h-8 items-center text-xs font-semibold text-gray-800 dark:text-gray-300 lg:flex">
-                    Pinned
-                  </p>
-                )} */}
-
               <div className="space-y-1">
                 {Apis.slice(0, 10).map((value: Api, i: number) => (
                   <div key={i} className="group relative">
@@ -127,9 +125,7 @@ export default function MainMenu({ session }: { session: SessionData }) {
                       </span>
                       {(isMainMenuOpen || session.isMenuCollapse) == "true" && (
                         <button className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 p-2 rounded cursor-pointer">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 14 14" aria-hidden="true" className="fill-black/50 hover:fill-black dark:fill-white/50 dark:hover:fill-white transition-colors duration-300 size-3">
-                            <path d="m5.181 9.65 2.893 2.896.418-.418a4.72 4.72 0 0 0 1.225-4.504l-.145-.591L10.803 5.8l.128.128a1.82 1.82 0 0 0 2.326.237 1.774 1.774 0 0 0 .224-2.699L10.573.55A1.82 1.82 0 0 0 8.248.314a1.773 1.773 0 0 0-.225 2.698l.173.173L6.962 4.42l-.581-.143A4.71 4.71 0 0 0 1.872 5.5l-.417.418 2.893 2.894L0 13.164.835 14z"></path>
-                          </svg>
+                          <Star size={16} className="stroke-black/50 fill-black/50 hover:stroke-black hover:fill-black dark:stroke-white/50 dark:fill-white/50 dark:hover:fill-white transition-colors duration-300 size-3" />
                         </button>
                       )}
                     </a>
@@ -137,8 +133,7 @@ export default function MainMenu({ session }: { session: SessionData }) {
                 ))}
               </div>
             </div>
-          </div>
-          {/* <div className="mb-[15px] mt-4 mx-4 border-t border-black/10 dark:border-white/10"></div> */}
+          </SimpleBar>          
           <div className="sticky bottom-0 z-10 mt-auto flex flex-col gap-4 p-4">
             {(isMainMenuOpen || session.isMenuCollapse) == "true" && (
               <div className="hidden lg:block">
