@@ -11,9 +11,9 @@ import Button from "@/components/Button";
 import Form from "@/components/Form";
 import { Home, Trash } from "lucide-react";
 
-// import Form1 from "@/mdx/form.mdx";
+import Form1 from "@/mdx/form.mdx";
 
-export default function Index({ session }: { session: SessionData }) {
+export default function Documentation({ session }: { session: SessionData }) {
   // const [open, setOpen] = useState(true);
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -46,9 +46,22 @@ export default function Index({ session }: { session: SessionData }) {
           </div> */}
           {/* <Form /> */}
           <div className="container-lg">
-            <div className="prose dark:prose-invert prose-h1:font-bold prose-h1:text-[28px] prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl -prose-headings:underline">
-              {/* <Form1 /> */}
-            </div>
+            <body className="bg-gray-950 text-gray-200 font-inter">
+              <div className="flex flex-col lg:flex-row justify-between max-w-7xl mx-auto px-6 py-16">
+                <div className="lg:w-3/4 space-y-10">
+                  <div className="prose dark:prose-invert prose-h1:font-bold prose-h1:text-[28px] prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl -prose-headings:underline">
+                    <Form1 />
+                  </div>
+                </div>
+                <div className="lg:w-1/4 mt-16 lg:mt-0 border-l border-gray-800 pl-6">
+                  <ul className="space-y-3 text-gray-400 text-sm">
+                    <li><a href="#" className="text-white font-medium">Installation</a></li>
+                    <li><a href="#" className="hover:text-white">Importing the module in your application</a></li>
+                    <li><a href="#" className="hover:text-white">Dark mode support</a></li>
+                  </ul>
+                </div>
+              </div>
+            </body>
           </div>
         </div>
       </Page>

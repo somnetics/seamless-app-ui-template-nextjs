@@ -1,0 +1,112 @@
+@reference "../../styles/globals.css";
+
+.btn {
+  @apply flex items-center gap-2 text-sm font-medium whitespace-nowrap;
+  @apply transition-colors duration-[300ms] no-underline rounded-md px-3 py-2 leading-tight;  
+}
+
+.btn.primary {
+  @apply text-white bg-primary-500 hover:bg-primary-600;
+}
+
+.btn.secondary {
+  @apply bg-white hover:bg-gray-300/50 text-gray-700 dark:text-white border-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 border dark:border-white/10;
+}
+
+.btn.success {
+  @apply bg-green-500 hover:bg-green-600;
+}
+
+.btn.danger {
+  @apply bg-red-500 hover:bg-red-600;
+}
+
+.btn.disabled {  
+  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+}
+
+.btn.text-sm {
+  @apply px-3 py-1 text-sm;
+}
+
+.btn.text-md {
+  @apply px-4 py-2 text-base;
+}
+
+.btn.text-lg {
+  @apply px-6 py-3 text-lg;
+}
+
+.btn.rounded-sm {
+  @apply rounded-sm;
+}
+
+.btn.rounded-md {
+  @apply rounded-md;
+}
+
+.btn.rounded-lg {
+  @apply rounded-lg;
+}
+
+.btn .loader {
+  width: 16px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(farthest-side, #ffffff 94%, #0000) top/3px 3px no-repeat,
+    conic-gradient(#0000 30%, #ffffff);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 0);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 0);
+  animation: btnLoaderAnimation .75s infinite linear;
+}
+
+@keyframes btnLoaderAnimation {
+  100% {
+    transform: rotate(1turn)
+  }
+}
+
+
+/* .btn {
+  @apply flex items-center gap-2 text-sm font-medium whitespace-nowrap;
+  @apply transition-colors duration-[300ms] no-underline px-3 py-2 rounded-lg leading-tight;  
+}
+
+.primary {
+  @apply text-white bg-primary-500 hover:bg-primary-600;
+}
+
+.secondary {
+  @apply bg-white text-gray-700 font-bold border-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700;
+}
+
+.success {
+  @apply text-white bg-green-500 hover:bg-green-600;
+}
+
+.danger {
+  @apply text-white bg-red-500 hover:bg-red-600;
+}
+
+.disabled {  
+  @apply text-gray-400/50 bg-gray-400/30 hover:bg-gray-400/30;
+}
+
+.loader {
+  width: 16px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(farthest-side, #ffffff 94%, #0000) top/3px 3px no-repeat,
+    conic-gradient(#0000 30%, #ffffff);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 0);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 0);
+  animation: l13 .75s infinite linear;
+}
+
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn)
+  }
+} */

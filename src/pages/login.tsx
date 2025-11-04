@@ -116,7 +116,7 @@ export default function Login() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="flex gap-2 items-start justify-center mb-8">
             <Image className="block" src="/icons/logo-light.svg" alt="" width={175} height={37} />
-            <span className="inline-flex items-center rounded-sm px-1 py-[2px] leading-tight text-xs font-medium inset-ring bg-blue-light-400/20 text-blue-light-400 inset-ring-blue-light-400/30">v{process.env.NEXT_PUBLIC_SEAMLESS_VERSION}</span>            
+            <span className="inline-flex items-center rounded-sm px-1 py-[2px] leading-tight text-xs font-medium inset-ring bg-blue-light-400/20 text-blue-light-400 inset-ring-blue-light-400/30">v{process.env.NEXT_PUBLIC_SEAMLESS_VERSION}</span>
           </div>
           <div className={styles.Card}>
             <form className="space-y-6" onSubmit={onSubmit}>
@@ -129,7 +129,7 @@ export default function Login() {
                   <label htmlFor="" className="">
                     Username
                   </label>
-                  <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
+                  <div className="outline-2 outline-gray-300 dark:outline-gray-600 focus-within:outline-blue-600 rounded-md">
                     <input type="text" name="username" className="outline-none p-2 w-full" defaultValue="soumen.sardar" />
                   </div>
                 </div>
@@ -137,15 +137,15 @@ export default function Login() {
                   <label htmlFor="" className="">
                     Password
                   </label>
-                  <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
+                  <div className="outline-2 outline-gray-300 focus-within:outline-blue-600 rounded-md">
                     <input type="password" name="password" className="outline-none p-2 w-full" defaultValue="admin123" />
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <label className="flex items-center">
-                    <input type="checkbox" className="accent-indigo-600 hover:accent-indigo-700 mr-2" /> Remember me
+                    <input type="checkbox" className="accent-blue-600 hover:accent-blue-700 mr-2" /> Remember me
                   </label>
-                  <a href="#" className="text-indigo-600 hover:text-indigo-700">
+                  <a href="#" className="text-blue-500 hover:text-blue-600">
                     Forgot password?
                   </a>
                 </div>

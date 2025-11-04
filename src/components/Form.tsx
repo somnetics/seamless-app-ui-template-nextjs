@@ -15,7 +15,7 @@ export default function Form() {
             <label htmlFor="" className="">
               Username
             </label>
-            <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
+            <div className="border-2 outline-2 outline-transparent bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 focus-within:outline-primary-500 rounded-md">
               <input type="text" name="username" className="outline-none p-2 w-full" placeholder="Enter Username" defaultValue="" required />
             </div>
           </div>
@@ -23,7 +23,7 @@ export default function Form() {
             <label htmlFor="" className="">
               Password
             </label>
-            <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
+            <div className="outline-2 bg-white dark:bg-gray-700 outline-gray-200 dark:outline-gray-600 focus-within:outline-primary-600 rounded-md">
               <input type="password" name="password" className="outline-none p-2 w-full" placeholder="Enter Password" defaultValue="" required />
             </div>
           </div>
@@ -120,26 +120,30 @@ export default function Form() {
           </label>
           <div className="flex items-center">
             <input checked id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-            <label htmlFor="default-radio-1" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Active</label>
+            <label htmlFor="default-radio-1" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              Active
+            </label>
           </div>
           <div className="flex items-center">
             <input checked id="default-radio-2" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-            <label htmlFor="default-radio-2" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Inactive</label>
+            <label htmlFor="default-radio-2" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              Inactive
+            </label>
           </div>
         </div>
 
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center">
-              <input type="checkbox" className="accent-indigo-600 hover:accent-indigo-700 mr-2" /> Remember me
-            </label>
-            <a href="#" className="text-indigo-600 hover:text-indigo-700">
-              Forgot password?
-            </a>
-          </div>
-          <Button type="submit" className="justify-center h-11 w-2xs">
-            Submit
-          </Button>
+        <div className="flex items-center justify-between text-sm">
+          <label className="flex items-center">
+            <input type="checkbox" className="accent-indigo-600 hover:accent-indigo-700 mr-2" /> Remember me
+          </label>
+          <a href="#" className="text-primary-500 hover:text-primary-600">
+            Forgot password?
+          </a>
         </div>
+        <Button type="submit" className="justify-center h-11 w-2xs">
+          Submit
+        </Button>
+      </div>
     </form>
   );
 }

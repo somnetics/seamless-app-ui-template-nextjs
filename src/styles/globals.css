@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
+@import "./theme.css";
+/* @plugin "./theme.ts"; */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -6,7 +9,45 @@
   --color-white: #ffffff;
   --color-black: #101828;
 
-  --color-brand-25: #f2f7ff;
+  /* auto shades */
+  /* --color-primary-50: color-mix(in srgb, var(--primary) 10%, white);
+  --color-primary-100: color-mix(in srgb, var(--primary) 20%, white); */
+  /* --color-primary-200: color-mix(in srgb, var(--primary) 35%, white);
+  --color-primary-300: color-mix(in srgb, var(--primary) 50%, white);
+  --color-primary-400: color-mix(in oklch, var(--primary) 70%, white);
+  --color-primary-500: var(--primary);
+  --color-primary-600: color-mix(in oklch, var(--primary) 80%, black);
+  --color-primary-700: color-mix(in oklch, var(--primary) 65%, black);
+  --color-primary-800: color-mix(in srgb, var(--primary) 45%, black);
+  --color-primary-900: color-mix(in srgb, var(--primary) 30%, black);
+  --color-primary-950: color-mix(in srgb, var(--primary) 15%, black); */
+  
+  /* --color-primary-50: #eceeff;
+  --color-primary-100: #f8f9ff;
+  --color-primary-200: #c8cafc;
+  --color-primary-300: #979bfa;
+  --color-primary-400: #676cf7;
+  --color-primary-500: #465fff;
+  --color-primary-600: #2c49ff;
+  --color-primary-700: #0910bc;
+  --color-primary-800: #070c8b;
+  --color-primary-900: #05085a;
+  --color-primary-950: #001492; */
+
+  --color-primary-50: oklch(97% 0.014 254.604);
+  --color-primary-100: oklch(93.2% 0.032 255.585);
+  --color-primary-200: oklch(88.2% 0.059 254.128);
+  --color-primary-300: oklch(80.9% 0.105 251.813);
+  --color-primary-400: oklch(70.7% 0.165 254.624);
+  --color-primary-500: oklch(62.3% 0.214 259.815);
+  --color-primary-600: oklch(54.6% 0.245 262.881);
+  --color-primary-700: oklch(48.8% 0.243 264.376);
+  --color-primary-800: oklch(42.4% 0.199 265.638);
+    
+  /* --color-primary-500: hsla(230, 100%, 60%, 1);
+  --color-primary-600: hsla(230, 100%, 60%, .90); */
+
+  /* --color-brand-25: #f2f7ff;
   --color-brand-50: #ecf3ff;
   --color-brand-100: #dde9ff;
   --color-brand-200: #c2d6ff;
@@ -99,57 +140,21 @@
   --color-warning-950: #4e1d09;
 
   --color-theme-pink-500: #ee46bc;
-  --color-theme-purple-500: #7a5af8;
+  --color-theme-purple-500: #7a5af8; */
 
   --color-gray-600: #3b3b3b;
   --color-gray-700: #303030;
   --color-gray-800: #1c1c1c;
   --color-gray-900: #121212;
+
+  /* --color-primary: var(--token-color-brand); */
+  /* --color-theme-purple-500: #7a5af8; */
 }
 
-/* scrollbar */
-html {
-  scroll-behavior: smooth;  
-  /* scrollbar-width: thin; */
-  scrollbar-color: #c8c8c8 transparent;
-}
+@import 'prismjs/themes/prism-tomorrow.css';
 
-html.dark {
-  scrollbar-color: #424242 transparent;
-}
-
-.scrollable {
-  overflow-y: auto; 
-  overflow-x: hidden; 
-  /* scrollbar-width: thin; */
-  scrollbar-gutter: auto;
-  scrollbar-color: transparent transparent;
-}
-
-.scrollable:hover {
-  scrollbar-color: #c8c8c8 transparent;
-}
-
-html.dark .scrollable:hover {
-  scrollbar-color: #424242 transparent;
-}
-
-.scrollable::-webkit-scrollbar {
-  /* width: 0px;
-  height: 0px;   */
-  background-color: transparent;
-}
-
-.scrollable:hover::-webkit-scrollbar {
-  /* width: 8px;
-  height: 8px;   */
-}
-
-.scrollable::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-}
-/* scrollbar */
-
-.simplebar-scrollbar::before {
-  background: rgb(128, 128, 128) !important;  
+/* optional Tailwind prose tweaks */
+.prose pre {
+  border-radius: 0.5rem;
+  overflow-x: auto;
 }

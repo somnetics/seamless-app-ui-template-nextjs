@@ -4,8 +4,9 @@ import { SessionData } from "@/libs/session";
 import { useGlobalState } from "@/context/globalState";
 import { Menu } from "lucide-react";
 import { useEffect } from "react";
+import { Breadcrumb, Nav } from "./Breadcrumb";
 
-export default function Header({ session }: { session: SessionData }) {
+export default function Header({ session, navs, border = true }: { session: SessionData, navs?: Nav[], border?: boolean }) {
   const { isMainMenuOpen, saveMenuStateToSession } = useGlobalState();
 
   // useEffect(() => {
@@ -19,7 +20,7 @@ export default function Header({ session }: { session: SessionData }) {
   // }, []);
 
   return (
-    <header className="sticky top-0 z-[999] flex h-14 w-full shrink-0 items-center justify-between border-b bg-white dark:bg-gray-900 border-black/10 dark:border-white/10 px-4 lg:h-16 lg:gap-4">
+    <header className={"sticky top-0 z-[999] flex h-14 w-full shrink-0 items-center justify-between bg-white dark:bg-gray-900 border-black/10 dark:border-white/10 px-4 lg:h-16 lg:gap-4 " + (border ? "border-b" : "border-0")}>
       <div className="relative flex min-w-0 shrink-0 items-center gap-0 sm:gap-2 flex-1">
         {(isMainMenuOpen || session.isMenuCollapse) != "true" && (
           <div className="relative flex items-start gap-4">
@@ -39,7 +40,10 @@ export default function Header({ session }: { session: SessionData }) {
             </Link>
           </div>
         )}
-        <div className="flex flex-1 items-center gap-2">
+
+        {navs && (<Breadcrumb navs={navs} />)}
+
+        {/* <div className="flex flex-1 items-center gap-2">
           <a href="/pikaso/explore" className="">
             <span className="hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs" data-cy="header-ai-suite-link">
               AI Suite
@@ -51,7 +55,7 @@ export default function Header({ session }: { session: SessionData }) {
               Image Generator
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
       <div id="action-buttons" className="flex shrink-0 items-center justify-end gap-3">
         <div id="user" className="order-last flex shrink-0 items-center gap-3">

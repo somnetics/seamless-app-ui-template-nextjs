@@ -1,0 +1,77 @@
+@reference "../../styles/globals.css";
+
+.check-radio {
+  @apply flex items-center gap-2 text-sm font-normal whitespace-nowrap;
+  @apply transition-colors duration-[300ms] leading-tight;
+}
+
+.check-radio .check-radio-input:checked[type=checkbox] {
+  --ct-check-radio-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e")
+}
+
+.check-radio .check-radio-input:checked[type=radio] {
+  --ct-check-radio-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e")
+}
+
+.check-radio .check-radio-input {
+  --ct-border-color-translucent: rgba(128, 128, 128, 0.30);
+  --ct-check-radio-bg: transparent;
+  --ct-border-width: 1px;
+  @apply bg-white dark:bg-gray-600 border border-black/10 dark:border-white/10 h-4 w-4;
+
+  /* width: 1.135em; */
+  /* height: 1.135em; */
+  /* background-color: var(--ct-check-radio-bg); */
+  background-image: var(--ct-check-radio-bg-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  /* border: var(--ct-border-width) solid var(--ct-border-color-translucent); */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact
+}
+
+.check-radio .check-radio-input[type=checkbox] {
+  border-radius: .25em
+}
+
+.check-radio .check-radio-input[type=radio] {
+  border-radius: 50%
+}
+
+.check-radio .check-radio-input:active {
+  -webkit-filter: brightness(90%);
+  filter: brightness(90%)
+}
+
+.check-radio .check-radio-input:focus {
+  border-color: var(--ct-border-color-translucent);
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none
+}
+
+.check-radio .check-radio-input:checked {
+  @apply bg-primary-500 hover:bg-primary-600;
+}
+
+.check-radio .check-radio-input:disabled {
+  pointer-events: none;
+  -webkit-filter: none;
+  filter: none;
+  opacity: .5
+}
+
+.check-radio .check-radio-input~.check-radio-label {
+  user-select: none;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.check-radio .check-radio-input:disabled~.check-radio-label,
+.check-radio .check-radio-input[disabled]~.check-radio-label {    
+  opacity: .5
+}

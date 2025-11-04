@@ -2,15 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { SessionData } from "@/libs/session";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useGlobalState } from "@/context/globalState";
 import { useProgress } from "@/components/Progress";
 import { useToast, MessageTypes } from "@/components/Toast";
-import { ScrollArea } from "radix-ui";
 
-import dynamic from "next/dynamic";
-const SimpleBar = dynamic(() => import("simplebar-react"), { ssr: false });
-import 'simplebar-react/dist/simplebar.min.css';
+import "overlayscrollbars/overlayscrollbars.css";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 import { Settings, PanelLeftClose, PanelLeftOpen, Pin, Star } from "lucide-react";
 import { Icon } from "@/components/Icon";
@@ -19,10 +17,12 @@ import { Apis, Api } from "@/libs/apis";
 
 export default function MainMenu({ session }: { session: SessionData }) {
   const router = useRouter();
+  const pathname = usePathname();
+
   const { addToast } = useToast();
-  const { showProgress } = useProgress();  
-  const { isMainMenuOpen, saveMenuStateToSession } = useGlobalState();
-  
+  const { showProgress } = useProgress();
+  const { isMainMenuOpen, saveMenuStateToSession, theme } = useGlobalState();
+
   const handleLogout = async (e: any) => {
     e.preventDefault();
 
@@ -64,12 +64,12 @@ export default function MainMenu({ session }: { session: SessionData }) {
   }, []);
 
   useEffect(() => {
-    const wrappers = document.querySelectorAll('.simplebar-content-wrapper');
-    wrappers.forEach(el => el.classList.add('simplebar-visible'));
+    const wrappers = document.querySelectorAll(".simplebar-content-wrapper");
+    wrappers.forEach((el) => el.classList.add("simplebar-visible"));
   }, []);
 
   return (
-    <div className={"h-full transition-[width] duration-100 ease-in-out sm:sticky sm:left-0 sm:top-0 sm:w-16 hidden sm:block " + ((isMainMenuOpen || session.isMenuCollapse) == "true" ? "lg:w-[240px]" : "lg:w-16")}>
+    <div className={"h-full transition-[width] duration-100 ease-in-out sm:sticky sm:left-0 sm:top-0 sm:w-16 hidden sm:block " + ((isMainMenuOpen || session.isMenuCollapse) == "true" ? "lg:w-[250px]" : "lg:w-16")}>
       <nav className="bg-gray-100 dark:bg-gray-800 sm:z-[2] w-full fixed h-full sm:h-dvh translate-x-full sm:translate-x-0 sm:sticky sm:top-0 sm:left-0">
         <div className="flex h-full flex-col justify-stretch relative">
           <div className={"sticky top-0 z-10 flex shrink-0 items-center justify-between px-4 mb-4 sm:h-4 lg:h-16 border-b border-black/10 dark:border-white/10"}>
@@ -90,54 +90,52 @@ export default function MainMenu({ session }: { session: SessionData }) {
               {(isMainMenuOpen || session.isMenuCollapse) == "true" ? <PanelLeftClose size={16} /> : <PanelLeftOpen size={16} />}
             </button>
           </div>
-          <SimpleBar autoHide={false} className="px-4 flex-1" style={{ height: 100 }}>
-            <div className="size-full">
-              <div className="flex flex-col gap-1">
-                {[
-                  { name: "Home", icon: "Home", link: "/" },
-                  { name: "Services", icon: "ServerCog", link: "/services" },
-                  { name: "Tenants", icon: "Building2", link: "/tenants" },
-                  { name: "Credentials", icon: "KeySquare", link: "/credentials" },
-                  { name: "Users", icon: "User", link: "/users" },
-                ].map((item: any, i) => (
-                  <div key={i} className="group">
-                    <Link href={item.link} className="text-sm lg:w-full sm:w-8 w-full rounded-lg flex items-center gap-1 sm:h-8 h-10 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 py-1">
-                      <span className="flex size-8 shrink-0 items-center justify-center text-gray-700 dark:text-white">
-                        <Icon name={item.icon} size={16} />
-                      </span>
-                      <span className="flex items-center gap-2 min-w-0 max-w-full flex-1 sm:hidden sm:max-w-36 lg:inline">
-                        <span className="block truncate sm:hidden lg:block">{item.name}</span>
-                      </span>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-              <div className="mb-[15px] mt-4 border-t border-black/10 dark:border-white/10"></div>
-              <div className="space-y-1">
-                {Apis.slice(0, 10).map((value: Api, i: number) => (
-                  <div key={i} className="group relative">
-                    <a href="#" className="text-sm lg:w-full sm:w-8 w-full rounded-lg flex items-center gap-1 sm:h-8 h-10 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 py-1">
-                      <span className="flex size-8 shrink-0 items-center justify-center">
-                        <Image src={value.icon} alt="" width={16} height={16} />
-                      </span>
-                      <span className="flex items-center gap-2 min-w-0 max-w-full flex-1 sm:hidden sm:max-w-36 lg:inline">
-                        <span className="block truncate sm:hidden lg:block">{value.title}</span>
-                      </span>
-                      {(isMainMenuOpen || session.isMenuCollapse) == "true" && (
-                        <button className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 p-2 rounded cursor-pointer">
-                          <Star size={16} className="stroke-black/50 fill-black/50 hover:stroke-black hover:fill-black dark:stroke-white/50 dark:fill-white/50 dark:hover:fill-white transition-colors duration-300 size-3" />
-                        </button>
-                      )}
-                    </a>
-                  </div>
-                ))}
-              </div>
+          <OverlayScrollbarsComponent className="px-4 flex-1" options={{ scrollbars: { autoHide: "leave", theme: (theme || session.theme) == "dark" ? "os-theme-light" : "os-theme-dark" } }}>
+            <div className="flex flex-col gap-1">
+              {[
+                { name: "Home", icon: "Home", link: "/" },
+                { name: "Services", icon: "ServerCog", link: "/services" },
+                // { name: "Tenants", icon: "Building2", link: "/tenants" },
+                { name: "Credentials", icon: "KeySquare", link: "/credentials" },
+                // { name: "Users", icon: "User", link: "/users" },
+              ].map((item: any, i) => (
+                <div key={i} className="group">
+                  <Link href={item.link} className={"text-sm lg:w-full sm:w-8 w-full rounded-lg flex items-center gap-1 sm:h-8 h-10 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 py-1 " + (pathname.startsWith(item.link) && item.link.length > 1 || item.link == pathname ? "bg-gray-200 dark:bg-gray-700" : "")}>
+                    <span className="flex size-8 shrink-0 items-center justify-center text-gray-700 dark:text-white">
+                      <Icon name={item.icon} size={16} />
+                    </span>
+                    <span className="flex items-center gap-2 min-w-0 max-w-full flex-1 sm:hidden sm:max-w-36 lg:inline">
+                      <span className="block truncate sm:hidden lg:block">{item.name}</span>
+                    </span>
+                  </Link>
+                </div>
+              ))}
             </div>
-          </SimpleBar>          
+            <div className="mb-[15px] mt-4 border-t border-black/10 dark:border-white/10"></div>
+            <div className="space-y-1">
+              {Apis.slice(0, 10).map((api: Api, i: number) => (
+                <div key={i} className="group">
+                  <Link href={`/services/${api.name}/overview`} className={"text-sm lg:w-full sm:w-8 w-full rounded-lg flex items-center gap-1 sm:h-8 h-10 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 py-1 " + (pathname.split("/")[1] == "services" && pathname.split("/")[2] == api.name ? "bg-gray-200 dark:bg-gray-700" : "")}>
+                    <span className="flex size-8 shrink-0 items-center justify-center text-gray-700 dark:text-white">
+                      <Image src={api.icon} alt="" width={16} height={16} />
+                    </span>
+                    <span className="flex items-center gap-2 min-w-0 max-w-full flex-1 sm:hidden sm:max-w-36 lg:inline">
+                      <span className="block truncate sm:hidden lg:block">{api.title}</span>
+                    </span>
+                    {(isMainMenuOpen || session.isMenuCollapse) == "true" && (
+                      <button className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 p-2 rounded cursor-pointer">
+                        <Star size={16} className="stroke-black/50 fill-black/50 hover:stroke-black hover:fill-black dark:stroke-white/50 dark:fill-white/50 dark:hover:fill-white transition-colors duration-300 size-3" />
+                      </button>
+                    )}
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </OverlayScrollbarsComponent>
           <div className="sticky bottom-0 z-10 mt-auto flex flex-col gap-4 p-4">
             {(isMainMenuOpen || session.isMenuCollapse) == "true" && (
               <div className="hidden lg:block">
-                <button className="w-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg px-4 py-[9px] duration-100 ease-in">
+                <button className="w-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg px-4 py-[9px]">
                   <div className="flex flex-col items-start gap-[2px] text-sm truncate">
                     <p className="text-left font-semibold text-warning-500 dark:text-warning-500">30 Days Free Trial</p>
                     <p className="text-left font-normal text-surface-foreground-0">Unlock more features</p>
@@ -147,9 +145,9 @@ export default function MainMenu({ session }: { session: SessionData }) {
             )}
             <div className={"flex items-center justify-between gap-6 flex-col " + ((isMainMenuOpen || session.isMenuCollapse) == "true" ? "lg:flex-row" : "lg:flex-col")}>
               <div className={"flex gap-2 flex-col " + ((isMainMenuOpen || session.isMenuCollapse) == "true" ? "lg:flex-row" : "lg:flex-col")}>
-                <a className="p-[9px] hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg flex items-center cursor-pointer no-underline visited:text-inherit" href="#">
+                <Link href="/admin/account" className={"p-[9px] hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg flex items-center cursor-pointer no-underline visited:text-inherit " + (pathname.startsWith("/admin") ? "bg-gray-200 dark:bg-gray-700" : "")}>
                   <Settings size={16} />
-                </a>
+                </Link>
                 <a className="p-[9px] hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg flex items-center cursor-pointer no-underline visited:text-inherit" href="#">
                   <Icon name="Bell" size={16} />
                 </a>

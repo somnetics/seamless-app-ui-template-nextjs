@@ -11,8 +11,6 @@ export default async function handle(
 
   // check request
   if (req.method === "POST") {
-    console.log(req.body)
-
     // set menu state
     if (typeof req.body.menuCollapse !== "undefined") session.isMenuCollapse = req.body.menuCollapse;
     
