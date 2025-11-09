@@ -1,3 +1,7 @@
 @import "../components/Button/style.css";
+@import "../components/Textbox/style.css";
+@import "../components/Textarea/style.css";
 @import "../components/CheckRadio/style.css";
 @import "../components/Dropdown/style.css";
+@import "../components/DataTable/style.css";
+@import "../components/Tags/style.css";

@@ -64,10 +64,10 @@ export default function ApiDetails({ session, meta }: PageProps) {
         <div className="relative mx-auto flex flex-col">
           <div className="px-4">
             <TabContent containerClassName="w-full mx-auto px-[20px] max-w-[1400px] py-10" tabs={[
-              { name: "Account", icon: "UserCog", link: "/admin/account", page: <Account /> },
-              { name: "Tenants", icon: "Building2", link: "/admin/tenants", page: <Users /> },
-              { name: "Users", icon: "User", link: "/admin/users", page: <Users /> },
-              { name: "Services", icon: "ServerCog", link: "/admin/services", page: <Account /> },
+              { name: "Account", icon: "UserCog", link: "/admin/account", content: <Account /> },
+              { name: "Tenants", icon: "Building2", link: "/admin/tenants", content: <Users /> },
+              { name: "Users", icon: "User", link: "/admin/users", content: <Users /> },
+              { name: "Services", icon: "ServerCog", link: "/admin/services", content: <Account /> },
             ]} />
 
             {/* <div className="h-fit mx-auto lg:max-w-[800px] w-full">A</div> */}

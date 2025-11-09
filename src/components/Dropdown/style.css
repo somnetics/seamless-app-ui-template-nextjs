@@ -1,68 +1,61 @@
 @reference "../../styles/globals.css";
 
-.btn {
-  @apply flex items-center gap-2 text-sm font-medium whitespace-nowrap;
-  @apply transition-colors duration-[300ms] no-underline rounded-md px-3 py-2 leading-tight;  
+.select {
+  @apply bg-white dark:bg-gray-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 w-full font-light;
+  @apply transition-all duration-300 ease-in-out;
+  appearance: none;
 }
 
-.btn.primary {
-  @apply text-white bg-primary-500 hover:bg-primary-600;
+.select.primary {
+  @apply focus-within:ring-primary-500;
 }
 
-.btn.secondary {
-  @apply bg-white hover:bg-gray-300/50 text-gray-700 dark:text-white border-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 border dark:border-white/10;
-}
-
-.btn.success {
-  @apply bg-green-500 hover:bg-green-600;
-}
-
-.btn.danger {
-  @apply bg-red-500 hover:bg-red-600;
-}
-
-.btn.disabled {  
+.select.disabled {
   @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
 }
 
-.btn.text-sm {
+html.light .select .select-input {
+  background-image: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 6'%3e %3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4'/%3e %3c/svg%3e");  
+}
+
+html.dark .select .select-input {
+  background-image: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 6'%3e %3cpath stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4'/%3e %3c/svg%3e");  
+}
+
+.select .select-input {
+  @apply outline-none w-full font-light;
+  appearance: none;
+  background-position: right .75rem center;
+  background-repeat: no-repeat;
+  background-size: .75em .75em;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact
+}
+
+.select .select-input > option {
+  @apply bg-white dark:bg-gray-700;
+}
+
+.select .select-input.text-sm {
   @apply px-3 py-1 text-sm;
 }
 
-.btn.text-md {
+.select .select-input.text-md {
   @apply px-4 py-2 text-base;
 }
 
-.btn.text-lg {
+.select .select-input.text-lg {
   @apply px-6 py-3 text-lg;
 }
 
-.btn.rounded-sm {
+.select.rounded-sm {
   @apply rounded-sm;
 }
 
-.btn.rounded-md {
+.select.rounded-md {
   @apply rounded-md;
 }
 
-.btn.rounded-lg {
+.select.rounded-lg {
   @apply rounded-lg;
-}
-
-.btn .loader {
-  width: 16px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    radial-gradient(farthest-side, #ffffff 94%, #0000) top/3px 3px no-repeat,
-    conic-gradient(#0000 30%, #ffffff);
-  mask: radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 0);
-  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 0);
-  animation: btnLoaderAnimation .75s infinite linear;
-}
-
-@keyframes btnLoaderAnimation {
-  100% {
-    transform: rotate(1turn)
-  }
 }

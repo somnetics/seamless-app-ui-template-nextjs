@@ -12,7 +12,7 @@ export default async function handle(
   // check request
   if (req.method === "POST" && req.query.action === "login") {
     // call api
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_HOST}/authenticate`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_HOST}/auth/authenticate`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -40,7 +40,7 @@ const variants = cva(
 );
 
 export default function Button({ children, color = "primary", size = "md", rounded = "md", processing = false, ...props }: ButtonProps) {
-  return (
+  return (    
     <button {...props} className={twMerge(variants({ color: props.disabled ? "disabled" : color, size: size, rounded: rounded }), props.className)}>
       {processing ? <span className="loader"></span> : ""}
       {processing ? "Processing..." : children}

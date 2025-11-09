@@ -1,0 +1,46 @@
+@reference "../../styles/globals.css";
+
+.tag {
+  @apply border border-black/10 dark:border-white/10 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200;
+  @apply transition-colors duration-150 ease-in-out text-nowrap text-sm;  
+}
+
+.tag.text-xs {
+  @apply px-3 py-1 text-xs;
+}
+
+.tag.text-sm {
+  @apply px-3 py-1 text-sm;
+}
+
+.tag.text-md {
+  @apply px-4 py-2 text-base;
+}
+
+.tag.text-lg {
+  @apply px-6 py-3 text-lg;
+}
+
+.tag.rounded-sm {
+  @apply rounded-sm;
+}
+
+.tag.rounded-md {
+  @apply rounded-md;
+}
+
+.tag.rounded-lg {
+  @apply rounded-lg;
+}
+
+.tag.rounded-full {
+  @apply rounded-full;
+}
+
+.tag.default {
+  @apply hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200;
+}
+
+.tag.selected {
+  @apply bg-black dark:bg-white text-gray-200 dark:text-gray-700;
+}

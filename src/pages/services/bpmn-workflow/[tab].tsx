@@ -31,6 +31,11 @@ import { Apis, Api } from "@/libs/apis";
 
 import Overview from "@/components/BpmnWorkflow/Overview";
 import Daigrams from "@/components/BpmnWorkflow/Daigrams";
+import Trash from "@/components/BpmnWorkflow/Trash";
+
+import DropDown from '@/components/Dropdown';
+import Textbox from '@/components/Textbox';
+import Textarea from '@/components/Textarea';
 
 interface PageProps {
   session: SessionData;
@@ -58,6 +63,20 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
   //   }
   // }, [router.query.params])
 
+  const formBody = <>
+    <Textbox  />
+
+    <DropDown
+      label={'status'}
+      options={[
+        { label: "Active", value: "active" },
+        { label: "Inactive", value: "inactive" }
+      ]}
+    />
+
+    <Textarea rows={6} />
+  </>
+
   return (
     <>
       <Page session={session} title="Seamless Developer Console" breadcrumbs={[
@@ -78,7 +97,7 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
                 <Button
                   onClick={() => {
                     showModal({
-                      title: "New Task", body: <p>hello</p>, onSubmit: async (formData, close) => {
+                      title: "New Task", body: formBody, onSubmit: async (formData, close) => {
                         // // let updated data
                         // const taskData: any = { project: project.id, status: "1" };
 
@@ -144,25 +163,23 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
                 <div className="flex items-center">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Documentation</p>
-                    <a href={`/documentation/${service.name}/v3.5`} className="text-[13px] text-blue-500 hover:text-blue-600 flex items-center">
+                    <a href={`/documentation/${service.name}/v3.5`} className="text-[13px] text-primary-500 hover:text-primary-600 flex items-center">
                       <span className="me-2">API Documentation</span>
-                      <ExternalLink size={15} className="text-blue-500 hover:text-blue-600" />
+                      <ExternalLink size={15} className="text-primary-500 hover:text-primary-600" />
                     </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
           <TabContent className="px-12 mt-3 mb-4 justify-start" tabs={[
-            { name: "Overview", icon: "BookText", link: "/services/bpmn-workflow/overview", page: <Overview /> },
-            { name: "Daigrams", icon: "Workflow", link: "/services/bpmn-workflow/daigrams", page: <Daigrams state={false} /> },
-            { name: "Trash", icon: "Trash2", link: "/services/bpmn-workflow/trash", page: <Daigrams state={true} /> },
+            { name: "Overview", icon: "BookText", link: "/services/bpmn-workflow/overview", content: <Overview session={session} /> },
+            { name: "Daigrams", icon: "Workflow", link: "/services/bpmn-workflow/daigrams", content: <Daigrams session={session} endpoint="/seamless/user/search-user/search" /> },
+            { name: "Trash", icon: "Trash2", link: "/services/bpmn-workflow/trash", content: <Trash session={session} endpoint="/seamless/user/search-user/trash" /> },
           ]} />
         </div>
       </Page>
     </>
-
   );
 }
 

@@ -78,6 +78,7 @@ export const GlobalStateProvider = ({ children }: { children: React.ReactNode })
     // save data to session
     await saveDataToSession({ menuCollapse: state });
 
+    // store menu state to local storage
     localStorage.setItem("isMenuCollapse", state);
 
     // set user

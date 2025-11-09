@@ -47,7 +47,7 @@ export const Apis: Api[] = [
     title: "BPMN Workflow",
     service: "automation",
     description: "BPMN base workflow modeler",
-    icon: "/icons/services/workflow.svg"
+    icon: "/icons/services/bpmn-io.svg"
   },
   {
     name: "form",

@@ -12,8 +12,8 @@ type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputEle
 export default function CheckRadio({ children, color = "primary", ...props }: InputProps) {
   return (   
     <div className={twMerge("check-radio", props.className)}>
-      <input {...props} className="check-radio-input" />
-      {children && (<label className="check-radio-label" htmlFor={props.id}>{children}</label>)}
+      <input id="chk" {...props} className="check-radio-input" />
+      {children && (<label className="check-radio-label" htmlFor={props.id || "chk"}>{children}</label>)}
     </div>
   );
 }

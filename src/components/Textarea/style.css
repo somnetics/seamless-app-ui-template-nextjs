@@ -1,0 +1,46 @@
+@reference "../../styles/globals.css";
+
+.txtarea {
+  @apply bg-white dark:bg-gray-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 w-full font-light;
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.txtarea.primary {
+  @apply focus-within:ring-primary-500;
+}
+
+.txtarea.readonly {
+  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+}
+
+.txtarea.disabled {
+  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+}
+
+.txtarea .txtarea-input {
+  @apply outline-none w-full font-light flex;
+}
+
+.txtarea .txtarea-input.text-sm {
+  @apply px-3 py-1 text-sm;
+}
+
+.txtarea .txtarea-input.text-md {
+  @apply px-4 py-2 text-base;
+}
+
+.txtarea .txtarea-input.text-lg {
+  @apply px-6 py-3 text-lg;
+}
+
+.txtarea.rounded-sm {
+  @apply rounded-sm;
+}
+
+.txtarea.rounded-md {
+  @apply rounded-md;
+}
+
+.txtarea.rounded-lg {
+  @apply rounded-lg;
+}

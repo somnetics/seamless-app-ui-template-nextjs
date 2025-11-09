@@ -1,25 +1,18 @@
-import { SessionData } from "@/libs/session";
-import Button from "../Button"
-import Textbox from '@/components/Textbox';
-import Tags from '@/components/Tags';
-import { Preview } from "@/components/Markdown/Preview";
-
-const source = `
 # Seamless v4 Service Discovery
 
 Seamless Service Discovery NPM package using NodeJS.
 
 ## Installation
 
-\`\`\`sh
+```sh
 npm i seamless4-service-discovery
-\`\`\`
+```
 
 ## Importing the module in your application
 
 Add the below code snippet in your Typescript application
 
-\`\`\`javascript
+```javascript
 // import seamless service discovery
 import { Service, SrvRequest, SrvResponse } from "seamless4-service-discovery";
 
@@ -47,11 +40,11 @@ service.app.get("/other", async (req: SrvRequest, res: SrvResponse) => {
 
 // run service
 service.run();
-\`\`\`
+```
 
 Add the below code snippet in your Javascript application
 
-\`\`\`javascript
+```javascript
 // import seamless service discovery
 const { Service } = require("seamless4-service-discovery");
 
@@ -79,23 +72,4 @@ service.app.get("/other", async (req, res) => {
 
 // run service
 service.run();
-\`\`\`
-`;
-
-export default function Overview({ session }: { session: SessionData }) {
-  return (
-    <>
-      <div className="flex flex-col lg:flex-row justify-between 1max-w-9xl mx-auto p-4 mb-4">
-        <div className="prose dark:prose-invert prose-h1:font-bold prose-h1:text-[28px] prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl -prose-headings:underline">
-          <Preview source={source} theme={session.theme} />
-        </div>
-        <div className="lg:w-1/4 mt-16 lg:mt-0 border-l border-black/10 dark:border-white/10 pl-6">
-          <Tags tags={[
-            { label: "Apple", value: "apple" },
-            { label: "Mango", value: "mango" },
-          ]} value="mango" size="sm" rounded="full" />
-        </div>
-      </div>
-    </>
-  )
-}
+```

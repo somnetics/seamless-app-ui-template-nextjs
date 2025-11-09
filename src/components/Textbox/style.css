@@ -1,0 +1,46 @@
+@reference "../../styles/globals.css";
+
+.txt {
+  @apply bg-white dark:bg-gray-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 w-full font-light;
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.txt.primary {
+  @apply focus-within:ring-primary-500;
+}
+
+.txt.readonly {
+  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+}
+
+.txt.disabled {
+  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+}
+
+.txt .txt-input {
+  @apply outline-none w-full font-light;
+}
+
+.txt .txt-input.text-sm {
+  @apply px-3 py-1 text-sm;
+}
+
+.txt .txt-input.text-md {
+  @apply px-4 py-2 text-base;
+}
+
+.txt .txt-input.text-lg {
+  @apply px-6 py-3 text-lg;
+}
+
+.txt.rounded-sm {
+  @apply rounded-sm;
+}
+
+.txt.rounded-md {
+  @apply rounded-md;
+}
+
+.txt.rounded-lg {
+  @apply rounded-lg;
+}

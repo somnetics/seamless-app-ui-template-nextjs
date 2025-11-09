@@ -1,0 +1,14 @@
+@reference "../../styles/globals.css";
+
+.wmde-markdown {
+  background-color: transparent !important;
+  font-family: var(--default-font-family) !important;
+}
+
+.dark .wmde-markdown pre {  
+  background-color: var(--color-gray-800) !important;
+}
+
+.light .wmde-markdown pre {
+  background-color: var(--color-gray-100) !important;
+}

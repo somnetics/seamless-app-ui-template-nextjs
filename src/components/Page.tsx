@@ -11,7 +11,7 @@ export default function Page({ children, title, session, controls, breadcrumbs, 
       <Head>
         <title>{title}</title>
       </Head>
-      <div className="relative grid grid-cols-1 text-gray-700 dark:text-gray-200 sm:grid-cols-[auto_minmax(0,1fr)]">
+      <div className="relative grid grid-cols-1 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 sm:grid-cols-[auto_minmax(0,1fr)]">
         <MainMenu session={session} />
         <main className="max-w-[100vw] flex-1">
           <Header session={session} navs={breadcrumbs} border={border} />

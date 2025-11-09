@@ -6,8 +6,11 @@ import { checkLogin } from "@/libs/checkSession";
 import { useProgress } from "@/components/Progress";
 import { useToast, MessageTypes } from "@/components/Toast";
 import { Copyright, Heart } from "lucide-react";
-import styles from "@/styles/login.module.css";
 import Button from "@/components/Button";
+import Textbox from "@/components/Textbox";
+// import Textbox from "@/components/Textbox_test";
+import CheckRadio from "@/components/CheckRadio";
+import styles from "@/styles/login.module.css";
 
 export default function Login() {
   const router = useRouter();
@@ -129,23 +132,26 @@ export default function Login() {
                   <label htmlFor="" className="">
                     Username
                   </label>
-                  <div className="outline-2 outline-gray-300 dark:outline-gray-600 focus-within:outline-blue-600 rounded-md">
+                  {/* <div className="outline-2 outline-gray-300 dark:outline-gray-600 focus-within:outline-blue-600 rounded-md">
                     <input type="text" name="username" className="outline-none p-2 w-full" defaultValue="soumen.sardar" />
-                  </div>
+                  </div> */}
+                  <Textbox type="text" name="username" defaultValue="soumen.sardar" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="" className="">
                     Password
                   </label>
-                  <div className="outline-2 outline-gray-300 focus-within:outline-blue-600 rounded-md">
+                  {/* <div className="outline-2 outline-gray-300 focus-within:outline-blue-600 rounded-md">
                     <input type="password" name="password" className="outline-none p-2 w-full" defaultValue="admin123" />
-                  </div>
+                  </div> */}
+                  <Textbox type="password" name="password" defaultValue="admin123" />
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <label className="flex items-center">
+                  {/* <label className="flex items-center">
                     <input type="checkbox" className="accent-blue-600 hover:accent-blue-700 mr-2" /> Remember me
-                  </label>
-                  <a href="#" className="text-blue-500 hover:text-blue-600">
+                  </label> */}
+                  <CheckRadio type="checkbox">Remember me</CheckRadio>
+                  <a href="#" className="text-primary-500 hover:text-primary-600">
                     Forgot password?
                   </a>
                 </div>
