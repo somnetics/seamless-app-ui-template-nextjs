@@ -16,16 +16,17 @@ type Tab = {
 type TabContentType = {
   tabs: Tab[];
   className?: string;
+  ulClassName?: string;
   containerClassName?: string
 }
 
-export default function TabContent({ tabs, className = "", containerClassName = "px-12" }: TabContentType) {
+export default function TabContent({ tabs, className = "", ulClassName = "", containerClassName = "px-12" }: TabContentType) {
   const pathname = usePathname();
 
   return (
     <>
-      <nav>
-        <ul className={twMerge("flex justify-center gap-3 border-b border-black/10 dark:border-white/10 text-sm", className)}>
+      <nav className={className}>
+        <ul className={twMerge("flex justify-center gap-3 border-b border-black/10 dark:border-white/10 text-sm", ulClassName)}>
           {tabs.map((tab: Tab, index: number) => (
             <li key={index} className={twMerge("border-b hover:border-gray-700 dark:hover:border-gray-300", pathname.startsWith(tab.link) ? "border-gray-700 dark:border-gray-300" : "border-transparent")}>
               <Link href={tab.link} className={twMerge("flex items-center gap-2 py-2 px-4 text-gray-500 dark:text-gray-400", pathname.startsWith(tab.link) ? "text-gray-700 dark:text-gray-200" : "hover:text-gray-700 dark:hover:text-gray-200")}>

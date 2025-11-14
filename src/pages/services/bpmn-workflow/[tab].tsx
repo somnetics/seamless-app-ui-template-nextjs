@@ -20,7 +20,7 @@ import Header from "@/components/Header";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
 import { Search, Info, Pin, Star } from "lucide-react";
-import Form from "@/components/Form";
+import Form from "@/components/FormOld";
 import { useProgress } from "@/components/Progress";
 import { useModal } from '@/components/Modal';
 import { useToast, MessageTypes } from "@/components/Toast";
@@ -64,10 +64,9 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
   // }, [router.query.params])
 
   const formBody = <>
-    <Textbox  />
+    <Textbox />
 
     <DropDown
-      label={'status'}
       options={[
         { label: "Active", value: "active" },
         { label: "Inactive", value: "inactive" }
@@ -163,19 +162,20 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
                 <div className="flex items-center">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Documentation</p>
-                    <a href={`/documentation/${service.name}/v3.5`} className="text-[13px] text-primary-500 hover:text-primary-600 flex items-center">
+                    <Link href={`/documentation/${service.name}/v3.5`} target="_blank" className="text-[13px] flex items-center">
                       <span className="me-2">API Documentation</span>
                       <ExternalLink size={15} className="text-primary-500 hover:text-primary-600" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <TabContent className="px-12 mt-3 mb-4 justify-start" tabs={[
-            { name: "Overview", icon: "BookText", link: "/services/bpmn-workflow/overview", content: <Overview session={session} /> },
-            { name: "Daigrams", icon: "Workflow", link: "/services/bpmn-workflow/daigrams", content: <Daigrams session={session} endpoint="/seamless/user/search-user/search" /> },
-            { name: "Trash", icon: "Trash2", link: "/services/bpmn-workflow/trash", content: <Trash session={session} endpoint="/seamless/user/search-user/trash" /> },
+          <TabContent className="sticky top-[64px] z-[999] bg-gray-50 dark:bg-gray-950" ulClassName="px-12 mt-3 mb-4 justify-start" tabs={[
+            { name: "Overview", icon: "BookText", link: "/services/bpmn-workflow/overview", content: <Overview session={session} /> }, {
+              name: "Daigrams", icon: "Workflow", link: "/services/bpmn-workflow/daigrams", content: <Daigrams session={session} endpoint="/seamless/auth/user" />
+            },
+            { name: "Trash", icon: "Trash2", link: "/services/bpmn-workflow/trash", content: <Trash session={session} endpoint="/seamless/auth/user" /> },
           ]} />
         </div>
       </Page>

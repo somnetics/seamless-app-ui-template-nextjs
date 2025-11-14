@@ -44,6 +44,8 @@
   --color-primary-700: oklch(48.8% 0.243 264.376);
   --color-primary-800: oklch(42.4% 0.199 265.638);
 
+  --color-gray-950: #0d1422;
+
   /* --color-primary-500: var(--color-green-500); */
   /* --color-primary-600: var(--color-green-600); */
 

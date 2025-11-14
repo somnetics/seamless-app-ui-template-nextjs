@@ -8,10 +8,8 @@ import MainMenu from "@/components/MainMenu";
 import Header from "@/components/Header";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
-import Form from "@/components/Form";
+import Form from "@/components/FormOld";
 import { Home, Trash } from "lucide-react";
-
-// import Form1 from "@/mdx/form.mdx";
 
 export default function Index({ session }: { session: SessionData }) {
   // const [open, setOpen] = useState(true);
@@ -47,7 +45,7 @@ export default function Index({ session }: { session: SessionData }) {
           {/* <Form /> */}
           <div className="container-lg">
             <div className="prose dark:prose-invert prose-h1:font-bold prose-h1:text-[28px] prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl -prose-headings:underline">
-              {/* <Form1 /> */}
+              {/* <Form1 /> */}              
             </div>
           </div>
         </div>

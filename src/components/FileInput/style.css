@@ -1,0 +1,47 @@
+@reference "../../styles/globals.css";
+
+.file {
+  @apply bg-white dark:bg-gray-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 w-full font-light;
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.file.primary {
+  @apply focus-within:ring-primary-500;
+}
+
+.file.readonly {
+  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+}
+
+.file.disabled {
+  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+}
+
+.file .file-input {
+  @apply outline-none w-full font-light;
+  @apply w-full text-black/40 dark:text-white font-medium dark:bg-gray-700 file:cursor-pointer cursor-pointer file:border-0 file:rounded-xs file:py-2.5 file:px-4 file:mr-4 file:bg-black/10 file:hover:bg-black/20 file:dark:bg-gray-900 file:dark:hover:bg-gray-800 file:dark:text-white rounded;
+}
+
+.file .file-input.text-sm {
+  @apply text-sm;
+}
+
+.file .file-input.text-md {
+  @apply text-base;
+}
+
+.file .file-input.text-lg {
+  @apply text-lg;
+}
+
+.file.rounded-sm {
+  @apply rounded-sm;
+}
+
+.file.rounded-md {
+  @apply rounded-md;
+}
+
+.file.rounded-lg {
+  @apply rounded-lg;
+}

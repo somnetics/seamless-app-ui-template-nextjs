@@ -1,7 +1,7 @@
 import { SessionData } from "@/libs/session";
 import Button from "../Button"
 import Textbox from '@/components/Textbox';
-import Tags from '@/components/Tags';
+import Tags, { TagsType } from '@/components/Tags';
 import { Preview } from "@/components/Markdown/Preview";
 
 const source = `
@@ -83,6 +83,10 @@ service.run();
 `;
 
 export default function Overview({ session }: { session: SessionData }) {
+  const tagOnClick = (item: TagsType) => {
+    console.log(item)
+  };
+
   return (
     <>
       <div className="flex flex-col lg:flex-row justify-between 1max-w-9xl mx-auto p-4 mb-4">
@@ -90,10 +94,12 @@ export default function Overview({ session }: { session: SessionData }) {
           <Preview source={source} theme={session.theme} />
         </div>
         <div className="lg:w-1/4 mt-16 lg:mt-0 border-l border-black/10 dark:border-white/10 pl-6">
-          <Tags tags={[
-            { label: "Apple", value: "apple" },
-            { label: "Mango", value: "mango" },
-          ]} value="mango" size="sm" rounded="full" />
+          <div className="sticky top-[130px] z-[999]">
+            <Tags tags={[
+              { label: "Apple", value: "apple" },
+              { label: "Mango", value: "mango" },
+            ]} value={["mango"]} size="xs" rounded="full" onSelect={tagOnClick} />
+          </div>
         </div>
       </div>
     </>

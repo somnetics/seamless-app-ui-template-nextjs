@@ -19,7 +19,7 @@ import Header from "@/components/Header";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
 import { Search, Info, Pin, Star } from "lucide-react";
-import Form from "@/components/Form";
+import Form from "@/components/FormOld";
 import { useProgress } from "@/components/Progress";
 import { useModal } from '@/components/Modal';
 import { useToast, MessageTypes } from "@/components/Toast";
@@ -60,19 +60,18 @@ export default function ApiDetails({ session, meta }: PageProps) {
     <>
       <Page session={session} title="Seamless Developer Console" breadcrumbs={[
         { link: "/services", name: "Admin" },
-      ]} border={false}>
+      ]} border={true}>
         <div className="relative mx-auto flex flex-col">
-          <div className="px-4">
-            <TabContent containerClassName="w-full mx-auto px-[20px] max-w-[1400px] py-10" tabs={[
-              { name: "Account", icon: "UserCog", link: "/admin/account", content: <Account /> },
-              { name: "Tenants", icon: "Building2", link: "/admin/tenants", content: <Users /> },
-              { name: "Users", icon: "User", link: "/admin/users", content: <Users /> },
-              { name: "Services", icon: "ServerCog", link: "/admin/services", content: <Account /> },
-            ]} />
+          <TabContent ulClassName="px-12 mt-3 mb-4" containerClassName="w-full mx-auto px-[20px] max-w-[1400px] py-10" tabs={[
+            { name: "Account", icon: "UserCog", link: "/admin/account", content: <Account /> },
+            { name: "Tenants", icon: "Building2", link: "/admin/tenants", content: <Users /> },
+            { name: "Users", icon: "User", link: "/admin/users", content: <Users /> },
+            { name: "Services", icon: "ServerCog", link: "/admin/services", content: <Account /> },
+          ]} />
 
-            {/* <div className="h-fit mx-auto lg:max-w-[800px] w-full">A</div> */}
+          {/* <div className="h-fit mx-auto lg:max-w-[800px] w-full">A</div> */}
 
-            {/* <div className="w-full mx-auto px-[20px] max-w-[1400px] py-10">
+          {/* <div className="w-full mx-auto px-[20px] max-w-[1400px] py-10">
               <div className="flex items-center justify-between mb-25">
                 <h1 className="text-xl font-semibold text-surface-foreground-0 leading-tight">My collections</h1>
                 <button type="button" className="items-center transition-colors duration-[300ms] no-underline inline-flex py-[10px] px-[25px] sprinkles-text-base font-semibold rounded-[6px] whitespace-nowrap bg-blueFreepik text-white hover:bg-blueScience dark:text-blueScience dark:hover:bg-blueFreepik">
@@ -90,7 +89,6 @@ export default function ApiDetails({ session, meta }: PageProps) {
                 </button>
               </div>
             </div> */}
-          </div>
         </div>
       </Page>
     </>

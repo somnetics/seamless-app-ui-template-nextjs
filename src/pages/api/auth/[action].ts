@@ -18,10 +18,13 @@ export default async function handle(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        // realm: process.env.NEXT_PUBLIC_SEAMLESS_KEYCLOAK_REALM,
+        // authUrl: process.env.NEXT_PUBLIC_SEAMLESS_KEYCLOAK_URL,
         client_id: process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_ID,
         client_secret: process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_SECRET,
         username: req.body.username,
         password: req.body.password,
+        grant_type: "password",
       })
     });
 
@@ -38,7 +41,7 @@ export default async function handle(
       session.refresh_token = data.refresh_token;
       session.access = data.access;
       session.isLoggedIn = true;
-      
+
       // save session
       await session.save();
 

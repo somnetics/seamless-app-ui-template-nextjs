@@ -123,7 +123,7 @@ export default function Login() {
           </div>
           <div className={styles.Card}>
             <form className="space-y-6" onSubmit={onSubmit}>
-              <div className={"relative grid gap-6 py-12 px-8 w-full text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 text-sm rounded-xl z-1"}>
+              <div className={"relative grid gap-6 py-12 px-8 w-full text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 text-sm rounded-xl z-1"}>
                 <div className="flex gap-2 flex-col items-center justify-center">
                   <h1 className="text-2xl font-bold">Welcome Back</h1>
                   <p className="text-center text-[13px]">Lets get started to build something interesting.</p>

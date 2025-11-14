@@ -53,13 +53,18 @@ export async function apiFetch<T = any>(
     const token = session.access_token;
 
     // set bearer token to header
-    if (token) headers.set("Authorization", `Bearer ${session.access_token}`);
+    if (token) {
+      headers.set("Authorization", `Bearer ${session.access_token}`);
+      headers.set("client_id", process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_ID as string);
+      headers.set("client_secret", process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_SECRET as string);
+    }
   }
 
   // extent fetch options
   const fetchOptions: RequestInit = {
     ...options,
     headers,
+    // cache: "no-store"
   };
 
   // get response

@@ -12,6 +12,7 @@ export default function Trash({ session, endpoint }: { session: SessionData, end
         { field: "status", label: "Status" },
       ]}
       endpoint={endpoint}
+      resultVariable="users"
       actions={[
         { label: "Edit", icon: <Edit2 size={16} className="text-blue-500 hover:text-blue-600" />, onClick: (e, row) => { alert(row) } },
         { label: "Trash", icon: <Trash2 size={16} className="text-red-500 hover:text-red-600" />, onClick: () => { alert("OK") } },

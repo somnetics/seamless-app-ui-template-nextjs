@@ -58,9 +58,10 @@ export default function Header({ session, navs, border = true }: { session: Sess
         </div> */}
       </div>
       <div id="action-buttons" className="flex shrink-0 items-center justify-end gap-3">
+        <span className="text-sm">{session.fullname}</span>
         <div id="user" className="order-last flex shrink-0 items-center gap-3">
           <div>
-            <div className="relative z-20 flex size-8 shrink-0 flex-col">
+            <div className="relative z-20 flex size-8 shrink-0 flex-col">              
               <button className="shrink-0 gap-2 absolute flex size-full h-full items-center justify-center">
                 <div className="relative">
                   <Image src="/avatars/user.png" alt="" width={24} height={24} className="size-6 bg-surface-2 rounded-full object-contain" />

@@ -18,15 +18,21 @@ export default async function handle(
     if (typeof req.body.theme !== "undefined") session.theme = req.body.theme;
 
     // get refresh token
-    const refresh_token = session.refresh_token || req.body.refresh_token;
+    // const refresh_token = session.refresh_token || req.body.refresh_token;
 
     // if refresh token is not requested
-    if (typeof refresh_token !== "undefined") {
+    if (typeof req.body.refresh_token !== "undefined") {
       // request for new refresh token    
       const response = await fetch(`${process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_HOST}/auth/get-refresh-token`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ refresh_token: refresh_token }),
+        body: JSON.stringify({
+          realm: process.env.NEXT_PUBLIC_SEAMLESS_KEYCLOAK_REALM,
+          authUrl: process.env.NEXT_PUBLIC_SEAMLESS_KEYCLOAK_URL,
+          client_id: process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_ID,
+          client_secret: process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_SECRET,
+          refresh_token: req.body.refresh_token          
+        })
       });
 
       // throw error

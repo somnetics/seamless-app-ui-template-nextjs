@@ -9,7 +9,8 @@ import Header from "@/components/Header";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
 import { Search, Info, Pin, Star } from "lucide-react";
-import Form from "@/components/Form";
+import Form from "@/components/FormOld";
+import Tags, { TagsType } from "@/components/Tags";
 
 import { Services, Service } from "@/libs/services";
 import { Apis, Api } from "@/libs/apis";
@@ -17,9 +18,8 @@ import { Apis, Api } from "@/libs/apis";
 export default function ServiceList({ session }: { session: SessionData }) {
   const [serviceName, setServiceName] = useState<string>("");
 
-  const serviceOnClick = (e: any) => {
-    e.preventDefault();
-    setServiceName(e.target.dataset.name);
+  const serviceOnClick = (item: TagsType) => {    
+    setServiceName(item.value);
   };
 
   return (
@@ -46,7 +46,7 @@ export default function ServiceList({ session }: { session: SessionData }) {
               </div>
             </form>
           </div>
-          <div className="flex items-center justify-center flex-wrap gap-3 py-4 sticky top-[64px] z-50 bg-white dark:bg-gray-900">
+          {/* <div className="flex items-center justify-center flex-wrap gap-3 py-4 sticky top-[64px] z-50 bg-white dark:bg-gray-900">
             <button type="button" className={"transition-colors duration-150 ease-in-out text-nowrap text-sm px-4 h-8 rounded-full border border-black/10 dark:border-white/10 cursor-pointer " + (serviceName == "" ? "bg-black dark:bg-white text-gray-200 dark:text-gray-700" : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200")} data-name="" onClick={serviceOnClick}>
               All Services
             </button>
@@ -55,7 +55,11 @@ export default function ServiceList({ session }: { session: SessionData }) {
                 {value.title}
               </button>
             ))}
+          </div> */}
+          <div className="flex items-center justify-center flex-wrap gap-3 py-4 sticky top-[64px] z-50 bg-white dark:bg-gray-900">
+            <Tags tags={[{ label: "All Services", value: "" }, ...Services.map((service: Service) => ({ label: service.title, value: service.name }))]} value={[""]} onSelect={serviceOnClick} />
           </div>
+
           <div className={"grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4 py-4"}>
             {Apis.filter((value: Api) => value.service == serviceName || serviceName == "").map((value: Api, index: number) => (
               <Link key={index} href={`/services/${value.name}/overview`}>

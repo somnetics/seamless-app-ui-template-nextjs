@@ -137,7 +137,7 @@ export default function MainMenu({ session }: { session: SessionData }) {
               <div className="hidden lg:block">
                 <button className="w-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg px-4 py-[9px]">
                   <div className="flex flex-col items-start gap-[2px] text-sm truncate">
-                    <p className="text-left font-semibold text-orange-500 dark:text-orange-500">30 Days Free Trial</p>
+                    <p className="text-left font-semibold text-amber-500 dark:text-amber-500">30 Days Free Trial</p>
                     <p className="text-left font-normal text-surface-foreground-0">Unlock more features</p>
                   </div>
                 </button>

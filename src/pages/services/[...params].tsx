@@ -20,7 +20,7 @@ import Header from "@/components/Header";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
 import { ScrollText } from "lucide-react";
-import Form from "@/components/Form";
+import Form from "@/components/FormOld";
 import TabContent from "@/components/TabContent";
 
 import { Services, Service } from "@/libs/services";
@@ -108,9 +108,9 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
               </div>
             </div>
           </div>
-          <TabContent className="px-12 mt-3 mb-4 justify-start" tabs={[
-            { name: "Overview", icon: "BookText", link: `/services/${service.name}/overview`, page: <Overview /> },
-            { name: "Logs", icon: "ScrollText", link: `/services/${service.name}/logs`, page: <Logs /> },
+          <TabContent ulClassName="px-12 mt-3 mb-4 justify-start" tabs={[
+            { name: "Overview", icon: "BookText", link: `/services/${service.name}/overview`, content: <Overview /> },
+            { name: "Logs", icon: "ScrollText", link: `/services/${service.name}/logs`, content: <Logs /> },
           ]} />
           {/* <div className="mb-4 border-b border-black/10 dark:border-white/10">
             <ul className="flex flex-wrap -mb-px text-sm font-medium px-12 text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">

@@ -6,6 +6,7 @@ import { apiFetch } from "@/libs/apiClient";
 import Textbox from "@/components/Textbox";
 import DropDown, { OptionType } from "@/components/Dropdown";
 import CheckRadio from "@/components/CheckRadio";
+import { Icon } from "@/components/Icon";
 import { twMerge } from "tailwind-merge";
 
 // define column type
@@ -24,7 +25,8 @@ type ColumnType = {
 type ActionType = {
   label: string;
   icon: JSX.Element;
-  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, row: any) => void;
+  multiple?: boolean;
+  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, selected: any) => void;
 }
 
 // define prop type
@@ -32,6 +34,8 @@ type DataTableProps = {
   columns: ColumnType[];
   endpoint: string;
   method?: string;
+  resultVariable?: string;
+  primaryField?: string;
   isSearchable?: boolean | undefined;
   isSelectable?: boolean | undefined;
   orderBy?: string | undefined;
@@ -40,11 +44,13 @@ type DataTableProps = {
   session: SessionData;
 };
 
-export default function DataTable({ columns, endpoint, method = "GET", isSearchable = true, isSelectable = false, orderBy = "", recordsPerPage = 10, actions, session }: DataTableProps) {
+export default function DataTable({ columns, endpoint, method = "GET", resultVariable, primaryField = "id", isSearchable = true, isSelectable = false, orderBy = "", recordsPerPage = 10, actions, session }: DataTableProps) {
   const { showProgress } = useProgress();
   const [fieldsValue, setFieldsValue] = useState<any>({});
   const [searchQuery, setSearchQuery] = useState<any>({});
-  const [data, setData] = useState<any>([]);
+  const [allSelected, setAllSelected] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [data, setData] = useState<unknown[]>([]);
 
   const fetchData = async () => {
     try {
@@ -96,15 +102,14 @@ export default function DataTable({ columns, endpoint, method = "GET", isSearcha
       // add page value to search params
       url.searchParams.append("order_by", orderBy);
 
-      console.log(url.toString())
-
       // call api response
       const response = await apiFetch(session, url.toString(), {
-        method: method
+        method: method,
+        cache: "no-store"
       });
 
       // set data
-      setData(response);
+      setData(resultVariable ? response[resultVariable] : response);
 
       // pause
       setTimeout(() => {
@@ -162,24 +167,50 @@ export default function DataTable({ columns, endpoint, method = "GET", isSearcha
     }
   }
 
+  const onSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // get element
+    const { checked, id, value } = e.target;
+
+    // if select all
+    if (id == "select-all") {
+      // if selecteds
+      if (checked) {
+        // select all rows        
+        setSelected(data.map((row: any) => row[primaryField]));
+      } else {
+        // unselect all rows
+        setSelected([]);
+      }
+    } else {
+      // if selected
+      if (checked) {
+        // add selected row to list
+        setSelected([...selected, value]);
+      } else {
+        // remove selected row from list
+        setSelected((prevKeys) => prevKeys.filter(key => key !== value));
+      }
+    }
+  }
+
+  useEffect(() => {
+    setAllSelected(selected.length > 0 ? true : false)
+  }, [selected]);
+
   useEffect(() => {
     fetchData();
   }, [searchQuery]);
 
-  useEffect(() => {
-
-  }, []);
-
   return (
     <>
-      <div className="-bg-white -dark:bg-gray-800 rounded-md overflow-hidden">
+      <div className="bg-white dark:bg-gray-900 border border-black/10 dark:border-white/10 rounded-md overflow-hidden">
         <div className="overflow-x-auto">
           <table className={twMerge("data-table")}>
             <thead>
               <tr>
                 {isSelectable && (
                   <th className="w-[20px] px-4 py-2.5">
-                    <CheckRadio type="checkbox" id={"abc"} />
+                    <CheckRadio type="checkbox" id="select-all" onChange={onSelect} checked={allSelected} />
                   </th>
                 )}
                 {columns.map((column, index) =>
@@ -197,7 +228,13 @@ export default function DataTable({ columns, endpoint, method = "GET", isSearcha
                   </th>
                 )}
                 {actions && (
-                  <th className="w-[100px] p-2.5">Action</th>
+                  <th className="w-[100px] p-2.5">
+                    <div className="flex items-center justify-center gap-3">
+                      {actions.filter((action) => typeof action.multiple == "undefined" || action.multiple == true).map((action, index) =>
+                        <button className={"cursor-pointer disabled:cursor-default disabled:opacity-40"} key={index} title={action.label} onClick={(e) => action.onClick(e, selected)} disabled={selected.length > 0 ? false : true}>{action.icon}</button>
+                      )}
+                    </div>
+                  </th>
                 )}
               </tr>
             </thead>
@@ -206,7 +243,7 @@ export default function DataTable({ columns, endpoint, method = "GET", isSearcha
                 <tr key={index} className="border-t border-black/10 dark:border-white/10">
                   {isSelectable && (
                     <td className="text-left px-4 py-2.5">
-                      <CheckRadio type="checkbox" id={"customCheckcolor1-" + index} />
+                      <CheckRadio type="checkbox" id={"row-" + index} value={row[primaryField]} checked={selected.includes(row[primaryField])} onChange={onSelect} />
                     </td>
                   )}
                   {columns.map((column, index) =>
@@ -218,7 +255,7 @@ export default function DataTable({ columns, endpoint, method = "GET", isSearcha
                     <td className="text-left p-2.5">
                       <div className="flex items-center justify-center gap-3">
                         {actions.map((action, index) =>
-                          <button className="cursor-pointer" key={index} title={action.label} onClick={(e) => action.onClick(e, row)}>{action.icon}</button>
+                          <button className={"cursor-pointer disabled:cursor-default disabled:opacity-40"} key={index} title={action.label} onClick={(e) => action.onClick(e, [row[primaryField]])} disabled={selected.includes(row[primaryField])}>{action.icon}</button>
                         )}
                       </div>
                     </td>
@@ -227,6 +264,23 @@ export default function DataTable({ columns, endpoint, method = "GET", isSearcha
               )}
             </tbody>
           </table>
+          <div className="bg-gray-100 dark:bg-gray-800 border-t border-black/10 dark:border-white/10 flex gap-2 flex-row justify-center p-2.5">
+            <button className="p-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-500 rounded-lg flex items-center cursor-pointer">
+              <Icon name="ChevronsLeft" size={16} />
+            </button>
+            <button className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg flex items-center cursor-pointer">
+              <Icon name="ChevronLeft" size={16} />
+            </button>
+            <button className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg flex items-center cursor-pointer text-xs">
+              1
+            </button>
+            <button className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg flex items-center cursor-pointer">
+              <Icon name="ChevronRight" size={16} />
+            </button>
+            <button className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg flex items-center cursor-pointer">
+              <Icon name="ChevronsRight" size={16} />
+            </button>
+          </div>
         </div>
       </div>
     </>

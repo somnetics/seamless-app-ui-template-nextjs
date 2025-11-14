@@ -2,7 +2,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 import styles from "./Button.module.css";
 import Button from "@/components/Button";
 
-export default function Form() {
+export default function FormOld() {
   return (
     <form className="space-y-6 pt-4">
       <div className={"relative grid gap-10 py-12 px-8 w-4/5 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 text-sm rounded-xl z-1"}>
