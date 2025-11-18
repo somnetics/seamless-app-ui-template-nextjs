@@ -204,8 +204,8 @@ export default function DataTable({ columns, endpoint, method = "GET", resultVar
   return (
     <>
       <div className="bg-white dark:bg-gray-900 border border-black/10 dark:border-white/10 rounded-md overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className={twMerge("data-table")}>
+        <div className={twMerge("data-table")}>
+          <table>
             <thead>
               <tr>
                 {isSelectable && (
@@ -227,15 +227,16 @@ export default function DataTable({ columns, endpoint, method = "GET", resultVar
                     }
                   </th>
                 )}
-                {actions && (
-                  <th className="w-[100px] p-2.5">
+
+                <th className="w-[100px] p-2.5">
+                  {isSelectable && actions ?
                     <div className="flex items-center justify-center gap-3">
                       {actions.filter((action) => typeof action.multiple == "undefined" || action.multiple == true).map((action, index) =>
-                        <button className={"cursor-pointer disabled:cursor-default disabled:opacity-40"} key={index} title={action.label} onClick={(e) => action.onClick(e, selected)} disabled={selected.length > 0 ? false : true}>{action.icon}</button>
+                        <button className={twMerge("btn-action group")} key={index} title={action.label} onClick={(e) => action.onClick(e, selected)} disabled={selected.length > 0 ? false : true}>{action.icon}</button>
                       )}
                     </div>
-                  </th>
-                )}
+                    : "Actions"}
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -255,7 +256,7 @@ export default function DataTable({ columns, endpoint, method = "GET", resultVar
                     <td className="text-left p-2.5">
                       <div className="flex items-center justify-center gap-3">
                         {actions.map((action, index) =>
-                          <button className={"cursor-pointer disabled:cursor-default disabled:opacity-40"} key={index} title={action.label} onClick={(e) => action.onClick(e, [row[primaryField]])} disabled={selected.includes(row[primaryField])}>{action.icon}</button>
+                          <button className={twMerge("btn-action group")} key={index} title={action.label} onClick={(e) => action.onClick(e, [row[primaryField]])} disabled={selected.includes(row[primaryField])}>{action.icon}</button>
                         )}
                       </div>
                     </td>
@@ -264,20 +265,20 @@ export default function DataTable({ columns, endpoint, method = "GET", resultVar
               )}
             </tbody>
           </table>
-          <div className="bg-gray-100 dark:bg-gray-800 border-t border-black/10 dark:border-white/10 flex gap-2 flex-row justify-center p-2.5">
-            <button className="p-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-500 rounded-lg flex items-center cursor-pointer">
+          <div className="table-naigation bg-gray-100 dark:bg-gray-800 border-t border-black/10 dark:border-white/10 flex gap-2 flex-row justify-center p-2.5">
+            <button className="btn-nav">
               <Icon name="ChevronsLeft" size={16} />
             </button>
-            <button className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg flex items-center cursor-pointer">
+            <button className="btn-nav">
               <Icon name="ChevronLeft" size={16} />
             </button>
-            <button className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg flex items-center cursor-pointer text-xs">
+            <button className="btn-nav text-xs">
               1
             </button>
-            <button className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg flex items-center cursor-pointer">
+            <button className="btn-nav">
               <Icon name="ChevronRight" size={16} />
             </button>
-            <button className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg flex items-center cursor-pointer">
+            <button className="btn-nav">
               <Icon name="ChevronsRight" size={16} />
             </button>
           </div>

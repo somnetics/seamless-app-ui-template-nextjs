@@ -2,7 +2,7 @@
 
 .check-radio {
   @apply flex items-center gap-2 text-sm font-normal whitespace-nowrap;
-  @apply transition-colors duration-[300ms] leading-tight;
+  @apply transition-colors duration-[100ms] leading-tight;
 }
 
 .check-radio .check-radio-input:checked[type=checkbox] {

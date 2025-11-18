@@ -43,15 +43,20 @@ const sizes = cva(
         sm: "text-sm",
         md: "text-md",
         lg: "text-lg",
-      }
+      },
+      rounded: {
+        sm: "rounded-sm",
+        md: "rounded-md",
+        lg: "rounded-lg",
+      },
     },
   }
 );
 
 export default function FileInput({ esize = "md", rounded = "sm", ...props }: FileInputProps) {
   return (
-    <div className={twMerge(variants({ color: props.disabled ? "disabled" : props.readOnly ? "readonly" : "primary", rounded: rounded }), props.className)}>
-      <input {...props} type="file" className={sizes({ size: esize })} />
+    <div className={twMerge(variants({ color: props.disabled ? "disabled" : props.readOnly ? "readonly" : "primary", rounded: rounded}), props.className)}>
+      <input {...props} type="file" className={sizes({ size: esize, rounded: rounded })} />
     </div>
   );
 }

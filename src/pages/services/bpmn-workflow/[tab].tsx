@@ -162,7 +162,7 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
                 <div className="flex items-center">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Documentation</p>
-                    <Link href={`/documentation/${service.name}/v3.5`} target="_blank" className="text-[13px] flex items-center">
+                    <Link href={`/documentation/${service.name}/v3.5`} className="text-[13px] flex items-center">
                       <span className="me-2">API Documentation</span>
                       <ExternalLink size={15} className="text-primary-500 hover:text-primary-600" />
                     </Link>
