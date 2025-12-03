@@ -56,7 +56,7 @@ export default function ServiceList({ session }: { session: SessionData }) {
               </button>
             ))}
           </div> */}
-          <div className="flex items-center justify-center flex-wrap gap-3 py-4 sticky top-[64px] z-50 bg-white dark:bg-gray-900">
+          <div className="flex items-center justify-center flex-wrap gap-3 py-4 sticky top-[64px] z-50">
             <Tags tags={[{ label: "All Services", value: "" }, ...Services.map((service: Service) => ({ label: service.title, value: service.name }))]} value={[""]} onSelect={serviceOnClick} />
           </div>
 

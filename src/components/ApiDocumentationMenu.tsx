@@ -1517,7 +1517,7 @@ export default function MainMenu({ session, service, endpoints, setEndpoints }: 
             >
               {(isMainMenuOpen || session.isMenuCollapse) == "true" ? <PanelLeftClose size={16} /> : <PanelLeftOpen size={16} />}
             </button>
-          </div>
+          </div>          
           <OverlayScrollbarsComponent className="px-4 flex-1" options={{ scrollbars: { autoHide: "leave", theme: (theme || session.theme) == "dark" ? "os-theme-light" : "os-theme-dark" } }}>
             <div className="flex flex-col">
               {apiTags && apiTags.map(([tag, endpoints]: any, index: number) => (
@@ -1549,13 +1549,13 @@ export default function MainMenu({ session, service, endpoints, setEndpoints }: 
                       </div>
                     ))}
                   </div>
-                  {index <= [tag, endpoints].length - 1 && (
+                  {/* {index <= [tag, endpoints].length - 1 && (
                     <div className="mb-[15px] mt-4 border-t border-black/10 dark:border-white/10"></div>
-                  )}
+                  )} */}
                 </React.Fragment>
               ))}
             </div>
-          </OverlayScrollbarsComponent>
+          </OverlayScrollbarsComponent>         
           <div className="sticky bottom-0 z-10 mt-auto flex flex-col gap-4 p-4">
             {(isMainMenuOpen || session.isMenuCollapse) == "true" && (
               <div className="hidden lg:block">

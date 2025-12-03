@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 // import MainMenu from "@/components/MainMenu";
 // import Header from "@/components/Header";
 // import { Apis, Api } from "@/libs/apis";
-import { ExternalLink, Trash2, Download, Edit2, Copy, ArrowLeft, KeySquare, Plus } from "lucide-react";
+import { ExternalLink, Trash2, Download, Edit2, Copy, ArrowLeft, KeySquare, Plus, BookMarked } from "lucide-react";
 
 import Head from "next/head";
 import Image from "next/image";
@@ -32,6 +32,7 @@ import { Apis, Api } from "@/libs/apis";
 import Overview from "@/components/BpmnWorkflow/Overview";
 import Daigrams from "@/components/BpmnWorkflow/Daigrams";
 import Trash from "@/components/BpmnWorkflow/Trash";
+import Apidocumentation from "@/components/BpmnWorkflow/Apidocumentation";
 
 import DropDown from '@/components/Dropdown';
 import Textbox from '@/components/Textbox';
@@ -155,11 +156,17 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
                 </div>
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
+                    <p className="font-semibold">Author</p>
+                    <p className="text-[13px] text-gray-600 dark:text-gray-300">Mr. Susanta Das</p>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <div className="flex flex-col justify-center">
                     <p className="font-semibold">Status</p>
                     <p className="text-[13px] text-gray-600 dark:text-gray-300">Active</p>
                   </div>
                 </div>
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Documentation</p>
                     <Link href={`/documentation/${service.name}/v3.5`} className="text-[13px] flex items-center">
@@ -167,15 +174,15 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
                       <ExternalLink size={15} className="text-primary-500 hover:text-primary-600" />
                     </Link>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
           <TabContent className="sticky top-[64px] z-[999] bg-gray-50 dark:bg-gray-950" ulClassName="px-12 mt-3 mb-4 justify-start" tabs={[
-            { name: "Overview", icon: "BookText", link: "/services/bpmn-workflow/overview", content: <Overview session={session} /> }, {
-              name: "Daigrams", icon: "Workflow", link: "/services/bpmn-workflow/daigrams", content: <Daigrams session={session} endpoint="/seamless/auth/user" />
-            },
+            { name: "Overview", icon: "BookText", link: "/services/bpmn-workflow/overview", content: <Overview session={session} /> }, 
+            { name: "Daigrams", icon: "Workflow", link: "/services/bpmn-workflow/daigrams", content: <Daigrams session={session} endpoint="/seamless/auth/user" /> },
             { name: "Trash", icon: "Trash2", link: "/services/bpmn-workflow/trash", content: <Trash session={session} endpoint="/seamless/auth/user" /> },
+            { name: "API Documentation", icon: "BookMarked", link: "/services/bpmn-workflow/apidocumentation", content: <Apidocumentation session={session} service={service} /> },
           ]} />
         </div>
       </Page>
