@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { SessionData } from "@/libs/session";
 import { checkSession } from "@/libs/checkSession";
 import MainMenu from "@/components/MainMenu";
-import Header from "@/components/Header";
+import Header from "@/components/HeaderBar";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
 import Form from "@/components/FormOld";
@@ -17,7 +17,7 @@ export default function Index({ session }: { session: SessionData }) {
 
   return (
     <>
-      <Page session={session} title="Seamless Developer Console" breadcrumbs={[{ link: "/", name: "Home" }]}>
+      <Page session={session} title="Home" breadcrumbs={[{ link: "/", name: "Home" }]}>
         <div className="mx-auto flex max-w-screen-2xl flex-col">
           {/* <div className="mt-8 w-full px-5 lg:mt-12">
             <div className="flex w-full items-center justify-between">

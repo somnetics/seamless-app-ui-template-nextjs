@@ -15,7 +15,7 @@ import { getIronSession } from "iron-session";
 import { sessionOptions, SessionData, defaultSession } from "@/libs/session";
 import { checkSession } from "@/libs/checkSession";
 import MainMenu from "@/components/MainMenu";
-import Header from "@/components/Header";
+import Header from "@/components/HeaderBar";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
 import { Search, Info, Pin, Star } from "lucide-react";

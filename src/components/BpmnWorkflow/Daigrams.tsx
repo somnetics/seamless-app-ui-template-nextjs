@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Trash2, Download, Edit2, Copy } from "lucide-react";
 import { SessionData } from "@/libs/session";
-import DataTable from "@/components/DataTable";
+import SearchTable from "@/components/SearchTable";
 
 export default function Daigrams({ session, endpoint }: { session: SessionData, endpoint: string }) {
   return (
-    <DataTable
+    <SearchTable
       columns={[
         { field: "username", label: "Username", render: (value, row) => <Link href={"/services/bpmn-workflow/modeler/" + row.id} className="text-primary-500 hover:text-primary-600">{value}</Link> },
         { field: "firstName", label: "First Name" },

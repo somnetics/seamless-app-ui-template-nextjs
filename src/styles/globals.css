@@ -167,6 +167,10 @@ html.dark {
   --tw-menu-item-hover-color: #fff
 }
 
+.collapsed {
+  display: none;
+}
+
 /* @import "prismjs/themes/prism-tomorrow.css"; */
 
 /* optional Tailwind prose tweaks */

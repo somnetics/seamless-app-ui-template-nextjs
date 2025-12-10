@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
 import SideMenu from "@/components/sidemenu";
-import Header from "@/components/header";
+import Header from "@/components/HeaderBar";
 import { Apis, Api } from "@/libs/apis";
 import { ExternalLink, Trash2, Download, Edit2, Copy, ArrowLeft, KeySquare, Plus, X, User } from 'lucide-react';
 import Button from '@/components/Button';
@@ -122,7 +122,7 @@ export default function ApiDetails({ meta, service }: PageProps) {
       <main className="min-h-screen xl:flex">
         <SideMenu />
         <div className="flex-1 transition-all duration-300 ease-in-out lg:ml-[85px]">
-          <Header />
+          <HeaderBar />
           {/* include SideDrawerForm Component */}
           {/* <SideDrawerForm /> */}
           <div className="flex w-full item-center justify-between border-b border-gray-200 py-3 px-12">

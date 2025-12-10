@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { SessionData } from "@/libs/session";
 import { checkSession } from "@/libs/checkSession";
 import MainMenu from "@/components/MainMenu";
-import Header from "@/components/Header";
+import Header from "@/components/HeaderBar";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
 import { Search, Info, Pin, Star } from "lucide-react";
@@ -24,7 +24,7 @@ export default function ServiceList({ session }: { session: SessionData }) {
 
   return (
     <>
-      <Page session={session} title="Seamless Developer Console" breadcrumbs={[
+      <Page session={session} title="Services" breadcrumbs={[
         { link: "/services", name: "Services" },
       ]}>
         <div className="relative mx-auto flex max-w-9/10 flex-col">

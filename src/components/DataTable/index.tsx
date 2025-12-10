@@ -1,289 +1,365 @@
-import { useState, useEffect, useCallback, JSX } from "react";
-import { useProgress } from "@/components/Progress";
-import { SessionData } from "@/libs/session";
-import { debounce } from "@/libs/functions";
-import { apiFetch } from "@/libs/apiClient";
-import Textbox from "@/components/Textbox";
-import DropDown, { OptionType } from "@/components/Dropdown";
-import CheckRadio from "@/components/CheckRadio";
-import { Icon } from "@/components/Icon";
-import { twMerge } from "tailwind-merge";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { randomId } from "@/libs/functions";
+// import StoreContext from "@/context/StoreContext";
+import Dropdown from "@/components/Dropdown";
+import AutoComplete from "@/components/Autocomplete";
 
-// define column type
-type ColumnType = {
-  field: string;
-  label: string;
-  alias?: string | undefined;
-  type?: "text" | "select" | "date";
-  options?: OptionType[];
-  width?: number | string | undefined;
-  defaultValue?: string | undefined;
-  render?: (value: string, row: any) => JSX.Element;
-}
+export default function DataTable({ name, columns, onAddFocusField, value, onChange }: { name: string, columns: any, onAddFocusField?: string, value?: string, onChange?: any }) {
+  // const storeContext = useContext(StoreContext);
 
-// define action type
-type ActionType = {
-  label: string;
-  icon: JSX.Element;
-  multiple?: boolean;
-  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, selected: any) => void;
-}
+  const [data, setData] = useState<any>([]);
+  const [loaded, setLoaded] = useState<boolean>(false);
 
-// define prop type
-type DataTableProps = {
-  columns: ColumnType[];
-  endpoint: string;
-  method?: string;
-  resultVariable?: string;
-  primaryField?: string;
-  isSearchable?: boolean | undefined;
-  isSelectable?: boolean | undefined;
-  orderBy?: string | undefined;
-  recordsPerPage?: number | undefined;
-  actions?: ActionType[] | undefined;
-  session: SessionData;
-};
+  // load data
+  async function loadData(value: any = []) {
+    // let rows
+    let rows: any = [];
 
-export default function DataTable({ columns, endpoint, method = "GET", resultVariable, primaryField = "id", isSearchable = true, isSelectable = false, orderBy = "", recordsPerPage = 10, actions, session }: DataTableProps) {
-  const { showProgress } = useProgress();
-  const [fieldsValue, setFieldsValue] = useState<any>({});
-  const [searchQuery, setSearchQuery] = useState<any>({});
-  const [allSelected, setAllSelected] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string[]>([]);
-  const [data, setData] = useState<unknown[]>([]);
+    // set id
+    let _id: string = randomId();
 
-  const fetchData = async () => {
-    try {
-      // activate page progress
-      showProgress(true);
+    // check value type
+    if (typeof value === "string") {
+      // get values
+      value = JSON.parse(value);
 
-      // get url from endpoint
-      const endpointUrl = new URL(`${window.origin}${endpoint}`);
+      // set rows
+      rows = [...value];
+    } else {
+      // set rows
+      rows = [...data, ...value];
 
-      // extract endpoint
-      const url = new URL(`${endpointUrl.origin}${endpointUrl.pathname}`);
+      // get data
+      const cols: any = { _id: _id };
 
-      // loop params
-      endpointUrl.searchParams.forEach((value: string, key: string) => {
-        // add page params to search params
-        url.searchParams.append(key, value.toString());
+      // loop columns
+      columns.forEach((column: any) => {
+        // set default column value
+        cols[column.name] = typeof column.default !== "undefined" ? column.default : "";
       });
 
-      // add page value to search params
-      // url.searchParams.append("page", currentPage.toString());
+      // push row
+      rows.push(cols);
+    }
 
-      // add page value to search params
-      url.searchParams.append("size", recordsPerPage.toString());
+    // set data
+    setData(rows);
 
-      // add search fields
-      columns.forEach((column) => {
-        // get field value
-        searchQuery[column.field] = typeof searchQuery[column.field] !== "undefined" ? searchQuery[column.field] : column.defaultValue || "";
-
-        // check field name and value
-        if (typeof column.field !== "undefined" && searchQuery[column.field].trim() !== "") {
-          // get field alias
-          const alias = column.alias;
-
-          // add field key value to search params
-          url.searchParams.append(`${column.alias ? `${alias}.${column.field}` : column.field}`, searchQuery[column.field].trim());
-
-          // push field info
-          // struct.push({
-          //   name: `${alias != "" ? `${alias}.` : ""}${field.name}`,
-          //   type: field.type
-          // });
-        }
-      });
-
-      // add table struct to search params
-      // url.searchParams.append("struct", JSON.stringify(struct));
-
-      // add page value to search params
-      url.searchParams.append("order_by", orderBy);
-
-      // call api response
-      const response = await apiFetch(session, url.toString(), {
-        method: method,
-        cache: "no-store"
-      });
-
-      // set data
-      setData(resultVariable ? response[resultVariable] : response);
-
-      // pause
+    // on add focus field
+    if (typeof onAddFocusField !== "undefined") {
       setTimeout(() => {
-        // activate page progress
-        showProgress(false);
-      }, 250);
-    } catch (err: any) {
-      // activate page progress
-      showProgress(false);
+        // newly added row field
+        const field = document.querySelector(`[data-rowid="${_id}"]#${onAddFocusField}`) as HTMLInputElement;
+
+        // set focus on field
+        if (field) field.focus();
+      }, 100);
     }
   }
 
-  // manage multiple key strokes
-  const setSearchParams = useCallback(debounce((name: string, value: string) => {
+  // on add new
+  async function onAdd(e: any) {
+    e.preventDefault();
+
+    // add data
+    loadData([]);
+  }
+
+  // on remove
+  function onRemove(e: any) {
+    e.preventDefault();
+
+    // storeContext.askConfirm({
+    //   title: "Are you sure?",
+    //   message: "Would you like to delete this item!",
+    //   label: "Yes, delete it!",
+    //   color: "danger",
+    //   callback: (isConfirm: boolean) => {
+    //     if (isConfirm) {
+    //       // get data
+    //       const rows: any = [...data];
+    //       const index = rows.findIndex((r: any) => r._id == e.target.dataset.id);
+
+    //       // if row exists
+    //       if (index > -1) {
+    //         // delete row
+    //         rows.splice(index, 1);
+    //       }
+
+    //       // set data
+    //       setData(rows);
+    //     }
+    //   }
+    // })
+  }
+
+  // on focus
+  function onEdit(e: any) {
+    e.preventDefault();
+
+    // // get data info
+    const rowid = e.target.dataset.rowid;
+    const id = e.target.id;
+
+    // get column
+    const column = columns.find((column: any) => column.name == id && typeof column.onEdit == "function");
+
+    // if callback method defined
+    if (typeof column !== "undefined") {
+      // get data
+      const rows: any = [...data];
+      const index = rows.findIndex((r: any) => r._id == rowid);
+
+      // // cal on focus callback
+      column.onEdit(rows[index], (row: any) => {
+        // update data
+        rows[index] = row;
+
+        // set data
+        setData(rows);
+      });
+    }
+  }
+
+  // on focus
+  function onFocus(e: any) {
+    if (e.target.value.trim() == "") onEdit(e)
+  }
+
+  // on double click
+  function onDoubleClick(e: any) {
+    if (e.target.value.trim() != "") onEdit(e);
+  }
+
+  // on focus
+  function onBlur(e: any) {
+    e.preventDefault();
+
+    // // get data info
+    const rowid = e.target.dataset.rowid;
+    const id = e.target.id;
+
+    // get column
+    const column = columns.find((column: any) => column.name == id && typeof column.onBlur == "function");
+
+    // if callback method defined
+    if (typeof column !== "undefined") {
+      // get data
+      const rows: any = [...data];
+      const index = rows.findIndex((r: any) => r._id == rowid);
+
+      // // cal on focus callback
+      column.onBlur(rows[index], (row: any) => {
+        // update data
+        rows[index] = row;
+
+        // set data
+        setData(rows);
+      });
+    }
+  }
+
+  // on change
+  function _onChange(e: any) {
+    e.preventDefault();
+
+    // get data info
+    const rowid = e.target.dataset.rowid;
+    const id = e.target.id;
+
+    // get value element
+    const valueElement = document.querySelector(`.datatable textarea[name="${name}"]`) as HTMLTextAreaElement;
+
+    // get data
+    const rows: any = JSON.parse(valueElement.value);
+    const index = rows.findIndex((r: any) => r._id == rowid);
+
+    // if row exists
+    if (index > -1) {
+      // update value
+      rows[index][id] = e.target.value;
+    }
+
     // set data
-    setSearchQuery((prevState: any) => ({
-      ...prevState,
-      [name]: value
-    }));
-  }, 500), []);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
-    // get element
-    const { name, value, type } = e.target;
-
-    // set data
-    setFieldsValue((prevState: any) => ({
-      ...prevState,
-      [name]: value
-    }));
-
-    // if not text element
-    if (type !== "text") {
-      // set data
-      setSearchQuery((prevState: any) => ({
-        ...prevState,
-        [name]: value
-      }));
-    }
-  }
-
-  const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    // get element
-    const { name, value } = e.currentTarget;
-
-    if (e.key == "Enter") {
-      // prevent from submit
-      e.preventDefault();
-
-      // fetch data
-      fetchData();
-    } else {
-      // set search params 
-      setSearchParams(name, value);
-    }
-  }
-
-  const onSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // get element
-    const { checked, id, value } = e.target;
-
-    // if select all
-    if (id == "select-all") {
-      // if selecteds
-      if (checked) {
-        // select all rows        
-        setSelected(data.map((row: any) => row[primaryField]));
-      } else {
-        // unselect all rows
-        setSelected([]);
-      }
-    } else {
-      // if selected
-      if (checked) {
-        // add selected row to list
-        setSelected([...selected, value]);
-      } else {
-        // remove selected row from list
-        setSelected((prevKeys) => prevKeys.filter(key => key !== value));
-      }
-    }
+    setData(rows);
   }
 
   useEffect(() => {
-    setAllSelected(selected.length > 0 ? true : false)
-  }, [selected]);
+    // empty data on load
+    loadData(value);
+  }, [value]);
 
   useEffect(() => {
-    fetchData();
-  }, [searchQuery]);
+    // get value element
+    // const valueElement = document.querySelector(`.datatable textarea[name="${name}"]`) as HTMLTextAreaElement;
+
+    // // set value to element
+    // valueElement.value = JSON.stringify(data);
+
+    // on loaded
+    if (loaded) {
+      // dispatch change event
+      // valueElement.dispatchEvent(new Event('change'));
+    } else {
+      // set loaded
+      if (data.length) setLoaded(true);
+    }
+  }, [data]);
+
+  // useEffect(() => {
+  //   // get value element
+  //   const valueElement = document.querySelector(`.datatable textarea[name="${name}"]`) as HTMLTextAreaElement;
+
+  //   // listen to on change events
+  //   if (typeof onChange !== "undefined" && typeof onChange == "function") {
+  //     // on change callback event
+  //     valueElement.addEventListener('change', onChange);
+  //   }
+  // }, []);
 
   return (
-    <>
-      <div className="bg-white dark:bg-gray-900 border border-black/10 dark:border-white/10 rounded-md overflow-hidden">
-        <div className={twMerge("data-table")}>
-          <table>
-            <thead>
-              <tr>
-                {isSelectable && (
-                  <th className="w-[20px] px-4 py-2.5">
-                    <CheckRadio type="checkbox" id="select-all" onChange={onSelect} checked={allSelected} />
-                  </th>
-                )}
-                {columns.map((column, index) =>
-                  <th key={index} className="text-left p-2.5" style={{ width: column.width ?? "auto" }}>
-                    {isSearchable ?
-                      column.type == "text" || typeof column.type === "undefined" ?
-                        <Textbox type="text" esize="sm" rounded="sm" name={column.field} placeholder={column.label} value={typeof fieldsValue[column.field] !== "undefined" ? fieldsValue[column.field] : column.defaultValue || ""} onChange={onChange} onKeyUp={onKeyUp} />
-                        : column.type == "select" ?
-                          <DropDown esize="sm" rounded="sm" name={column.field} options={[{ label: "", value: "" }, ...column.options || []]} value={typeof fieldsValue[column.field] !== "undefined" ? fieldsValue[column.field] : column.defaultValue || ""} onChange={onChange} />
-                          : column.type == "date" && (
-                            <Textbox type="date" esize="sm" rounded="sm" name={column.field} placeholder={column.label} value={typeof fieldsValue[column.field] !== "undefined" ? fieldsValue[column.field] : column.defaultValue || ""} onChange={onChange} onKeyUp={onKeyUp} />
-                          )
-                      : column.label
-                    }
-                  </th>
-                )}
-
-                <th className="w-[100px] p-2.5">
-                  {isSelectable && actions ?
-                    <div className="flex items-center justify-center gap-3">
-                      {actions.filter((action) => typeof action.multiple == "undefined" || action.multiple == true).map((action, index) =>
-                        <button className={twMerge("btn-action group")} key={index} title={action.label} onClick={(e) => action.onClick(e, selected)} disabled={selected.length > 0 ? false : true}>{action.icon}</button>
-                      )}
-                    </div>
-                    : "Actions"}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {data && data.map((row: any, index: number) =>
-                <tr key={index} className="border-t border-black/10 dark:border-white/10">
-                  {isSelectable && (
-                    <td className="text-left px-4 py-2.5">
-                      <CheckRadio type="checkbox" id={"row-" + index} value={row[primaryField]} checked={selected.includes(row[primaryField])} onChange={onSelect} />
-                    </td>
-                  )}
-                  {columns.map((column, index) =>
-                    <td key={index} className="text-left p-2.5">
-                      {typeof column.render === "function" ? column.render(row[column.field], row) : row[column.field]}
-                    </td>
-                  )}
-                  {actions && (
-                    <td className="text-left p-2.5">
-                      <div className="flex items-center justify-center gap-3">
-                        {actions.map((action, index) =>
-                          <button className={twMerge("btn-action group")} key={index} title={action.label} onClick={(e) => action.onClick(e, [row[primaryField]])} disabled={selected.includes(row[primaryField])}>{action.icon}</button>
-                        )}
-                      </div>
-                    </td>
-                  )}
-                </tr>
-              )}
-            </tbody>
-          </table>
-          <div className="table-naigation bg-gray-100 dark:bg-gray-800 border-t border-black/10 dark:border-white/10 flex gap-2 flex-row justify-center p-2.5">
-            <button className="btn-nav">
-              <Icon name="ChevronsLeft" size={16} />
-            </button>
-            <button className="btn-nav">
-              <Icon name="ChevronLeft" size={16} />
-            </button>
-            <button className="btn-nav text-xs">
-              1
-            </button>
-            <button className="btn-nav">
-              <Icon name="ChevronRight" size={16} />
-            </button>
-            <button className="btn-nav">
-              <Icon name="ChevronsRight" size={16} />
-            </button>
+    <div className="datatable">
+      <div className="flex-table">
+        <div className="flex-table-header">
+          <div className="flex-table-row">
+            <div className="flex-table-col text-center p-0" style={{ width: "45px" }} tabIndex={-1}>#</div>
+            {columns.map((column: any, id: number) => (
+              <div key={id} data-field={column.name} className={"flex-table-col" + (column.type == "hidden" ? " d-none" : "")} tabIndex={-1} style={{ width: column.width ?? "auto" }}>{column.label}</div>
+            ))}
+            <div className="flex-table-col bg-primary p-0" style={{ width: "45px" }}>
+              <div className="d-flex align-items-center justify-content-evenly">
+                <Link href="#" onClick={onAdd} className="d-flex" tabIndex={-1}>
+                  <i className="material-symbols-rounded text-white icon-check pe-none">add</i>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
+        <div className="flex-table-body" style={{ overflow: "auto" }}>
+          {data.map((row: any, id: number) => (
+            <div key={id} className="flex-table-row">
+              <div className="flex-table-col text-center p-0" tabIndex={-1}>{Number(id) + 1}</div>
+              {columns.map((column: any, id: number) => (
+                <div key={id} className={"flex-table-col p-0" + (column.type == "hidden" ? " d-none" : "")}>
+                  {column.type == "select" && column.options ?
+                    <select className="form-control data-field w-100" id={column.name} data-rowid={row._id} value={row[column.name]} onChange={_onChange}>
+                      {column.options.map((option: any, id: number) => (
+                        <option key={id} value={option.value}>{option.label}</option>
+                      ))}
+                    </select>
+                    : column.type == "dropdown" ?
+                      <Dropdown
+                        className="form-control data-field w-100"
+                        options={column.options}
+                        // position={column.position}
+                        id={column.name}
+                        value={row[column.name]}
+                        // rowid={row._id}
+                        onChange={_onChange}
+                        // onSelected={(item: any, element: any) => {
+                        //   // get next element
+                        //   const nextElement = element.target.closest(".flex-table-col").nextSibling.querySelector(".data-field");
+
+                        //   // if element found
+                        //   if (nextElement) {
+                        //     // focus to next element
+                        //     nextElement.focus();
+                        //   }
+                        // }}
+                      />
+                      : column.type == "autocomplete" ?
+                        <AutoComplete
+                          className="form-control data-field w-100"
+                          endpoint={column.endpoint}
+                          searchField={column.searchField}
+                          descriptionField={column.descriptionField}
+                          onSelected={(item: any, element: any) => {
+                            const rows: any = [...data];
+                            const index = rows.findIndex((r: any) => r._id == row._id);
+
+                            // update data
+                            rows[index] = { ...rows[index], ...item };
+
+                            // set data
+                            setData(rows);
+
+                            // get next element
+                            const nextElement = element.target.closest(".flex-table-col").nextSibling.querySelector(".data-field");
+
+                            // if element found
+                            if (nextElement) {
+                              // focus to next element
+                              nextElement.focus();
+                            }
+                          }}
+                          onChange={(value: any) => {
+                            const rows: any = [...data];
+                            const index = rows.findIndex((r: any) => r._id == row._id);
+
+                            // update data
+                            rows[index][column.name] = value;
+
+                            // set data
+                            setData(rows);
+                          }}
+                          id={column.name}
+                          rowid={row._id}
+                          value={row[column.name]}
+                        />
+                        : column.type == "readonly" ?
+                          <input
+                            className="form-control data-field w-100"
+                            type="text"
+                            data-rowid={row._id}
+                            id={column.name}
+                            autoComplete="off"
+                            readOnly={true}
+                            spellCheck={false}
+                            value={row[column.name]}
+                            tabIndex={-1}
+                          /> : column.type == "hidden" ?
+                            <input
+                              type="hidden"
+                              data-rowid={row._id}
+                              id={column.name}
+                              value={row[column.name]}
+                              tabIndex={-1}
+                            /> : <input
+                              className="form-control data-field w-100"
+                              type="text"
+                              data-rowid={row._id}
+                              id={column.name}
+                              onDoubleClick={onDoubleClick}
+                              onChange={_onChange}
+                              onFocus={onFocus}
+                              onBlur={onBlur}
+                              autoComplete="off"
+                              spellCheck={false}
+                              tabIndex={column.tabIndex}
+                              value={row[column.name]}
+                            />
+                  }
+                </div>
+              ))}
+              <div className="flex-table-col p-0">
+                <div className="d-flex align-items-center justify-content-evenly">
+                  <Link href="#" onClick={onRemove} data-id={row._id} data-action="remove" className="d-flex" tabIndex={-1}>
+                    <i className="material-symbols-rounded text-danger icon-check pe-none">delete_forever</i>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </>
-  );
+      {/* <div className="w-100 mt-3">
+        <div className="d-flex align-items-center justify-content-evenly">
+          <button className="btn btn-secondary" onClick={onAdd}>Add New Item</button>
+        </div>
+      </div> */}
+      <textarea className="form-control w-100 mt-3 d-none" name={name} cols={30} rows={10} readOnly={true} spellCheck={false} value={JSON.stringify(data)} onChange={onChange}></textarea>
+    </div>
+  )
 }

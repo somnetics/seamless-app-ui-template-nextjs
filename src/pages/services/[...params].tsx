@@ -16,7 +16,7 @@ import { getIronSession } from "iron-session";
 import { sessionOptions, SessionData, defaultSession } from "@/libs/session";
 import { checkSession } from "@/libs/checkSession";
 import MainMenu from "@/components/MainMenu";
-import Header from "@/components/Header";
+import Header from "@/components/HeaderBar";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
 import { ScrollText } from "lucide-react";
@@ -53,7 +53,7 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
 
   return (
     <>
-      <Page session={session} title="Seamless Developer Console" breadcrumbs={[
+      <Page session={session} title={service.title} breadcrumbs={[
         { link: "/services", name: "Services" },
         { link: "/services/" + service.name, name: service.title },
       ]}>

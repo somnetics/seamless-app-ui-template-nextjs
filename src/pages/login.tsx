@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Head from "next/head";
+import Header from "@/components/Header";
 import { useRouter } from "next/router";
 import { FormEvent } from "react";
 import { checkLogin } from "@/libs/checkSession";
@@ -112,14 +112,12 @@ export default function Login() {
 
   return (
     <>
-      <Head>
-        <title>Seamless - Developer Console</title>
-      </Head>
+      <Header title="Sign-in" />
       <main className={styles.LoginBg + " flex h-screen min-h-full flex-col justify-center px-6 py-12 lg:px-8"}>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="flex gap-2 items-start justify-center mb-8">
             <Image className="block" src="/icons/logo-light.svg" alt="" width={175} height={37} />
-            <span className="inline-flex items-center rounded-sm px-1 py-[2px] leading-tight text-xs font-medium inset-ring bg-blue-light-400/20 text-blue-light-400 inset-ring-blue-light-400/30">v{process.env.NEXT_PUBLIC_SEAMLESS_VERSION}</span>
+            <span className="inline-flex items-center rounded-sm px-1 py-[2px] leading-tight text-xs font-medium inset-ring bg-blue-light-400/20 text-blue-light-400 inset-ring-blue-light-400/30">v{process.env.NEXT_PUBLIC_APP_VERSION}</span>
           </div>
           <div className={styles.Card}>
             <form className="space-y-6" onSubmit={onSubmit}>

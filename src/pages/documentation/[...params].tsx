@@ -7,7 +7,7 @@ import { sessionOptions, SessionData, defaultSession } from "@/libs/session";
 import { checkSession } from "@/libs/checkSession";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import Header from "@/components/Header";
+import Header from "@/components/HeaderBar";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
 import Form from "@/components/FormOld";
@@ -47,7 +47,7 @@ export default function Documentation({ session, meta, service, id, tab }: PageP
 
   return (
     <>
-      <Page session={session} title="Seamless Developer Console" breadcrumbs={[{ link: "/", name: "Home" }]} menu={<ApiDocumentationMenu session={session} service={service} endpoints={endpoints} setEndpoints={setEndpoints} />}>
+      <Page session={session} title={`${service.title} - Documentation`} breadcrumbs={[{ link: "/", name: "Home" }]} menu={<ApiDocumentationMenu session={session} service={service} endpoints={endpoints} setEndpoints={setEndpoints} />}>
         <div className="relative mx-auto flex flex-col">
           <div className="px-12">
             <div className="w-full p-4 mx-auto1 border-b1 border-black/10 dark:border-white/101">
