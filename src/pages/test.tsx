@@ -9,31 +9,19 @@ export default function TestPage({ session }: { session: SessionData }) {
         <>
             <Page session={session} title="Seamless Developer Console" breadcrumbs={[{ link: "/", name: "Home" }]}>
                 <div>This is the test page</div>
-                {/* <AutoComplete
-                    id="dropdown"
-                    size="sm"
-                    rounded="sm"
-                    name="dropdown"
-                    optionItems={[
-                        { label: "Active", value: "Active" },
-                        { label: "Inactive", value: "Inactive" },
-                    ]}
-                /> */}
                 <AutoComplete
-                    optionItems={
-                        ["Web Development", "AI & ML", "Cybersecurity", "Cloud Computing", "Apple", "Ant", "Apex", "Anchor", "Automation",
-                            "Backend", "Binary", "Blockchain", "Bugfix", "Bootstrap",
-                            "Data", "Database", "Debug", "Deployment",
-                            "Machine", "Matrix", "Middleware", "Model",
-                            "Cyber", "Cipher", "Cypher", "Compute", "Cloud",
-                            "Processing", "Programming", "Compression", "Connection", "Encryption",
-                            "Web", "Website", "WebApp", "Workflow",
-                            "AI", "Algorithm", "Analytics",
-                            "Container", "Cluster", "Cache"
-                        ]
-                    }
+                    option={[
+                        { label: "Web", value: "Web" },
+                        { label: "Data", value: "Data" },
+                        { label: "Cyber", value: "Cyber" },
+                        { label: "Database", value: "Database" },
+                        { label: "Matrix", value: "Matrix" },
+                        { label: "Algorithm", value: "Algorithm" },
+                    ]}
+                    // endpoint="http://172.30.10.46:4000/api/options"
+                    // method="GET"
                     placeholder="Search or select a category..."
-                    multipleSelect={true}
+                    multipleSelect={false}
 
                 />
             </Page>

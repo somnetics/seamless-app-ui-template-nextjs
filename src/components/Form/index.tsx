@@ -1,7 +1,5 @@
 import { cva } from "class-variance-authority";
-import { Eye, Calendar, EyeOff } from "lucide-react";
 import { twMerge } from "tailwind-merge";
-import { propagateServerField } from "next/dist/server/lib/render-server";
 import { useState } from "react";
 import Button from "@/components/Button";
 import CheckRadio from "@/components/CheckRadio";
@@ -100,7 +98,7 @@ export default function CreateForm({ formFields, size, rounded, method, endpoint
       //reset fields
       setFieldsValue("");
 
-    }else{
+    } else {
       console.log("Fill required fields")
     }
 
@@ -108,8 +106,6 @@ export default function CreateForm({ formFields, size, rounded, method, endpoint
   }
 
   return (
-    // <div className="flex items-center justify-center min-h-[92vh] bg-gray-100 dark:bg-gray-900">
-    //  <div className="bg-white dark:bg-gray-800 border border-black/10 rounded-xl p-6 shadow-lg w-[650px] max-w-4xl max-h-[90vh] overflow-y-auto"> 
     <div className="flex items-center justify-center min-h-[92vh]">
       <form {...props} onSubmit={submitForm} className={props.className} noValidate>
         <div className="grid grid-cols-12 space-y-4 gap-4">
@@ -207,7 +203,5 @@ export default function CreateForm({ formFields, size, rounded, method, endpoint
         </div>
       </form>
     </div>
-    // </div>
-    // </div>
   );
 }
