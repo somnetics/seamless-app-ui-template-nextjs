@@ -67,8 +67,12 @@ export default function Textbox({ esize = "md", rounded = "md", ...props }: Text
             <Icon name={inputType == "text" ? "EyeOff" : "Eye"} size={20} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-100 cursor-pointer" />
           </a>
         </div>
-        :
-        <input {...props} className={sizes({ size: esize })} />
+        : props.type === "search" ?
+          <div className={"flex items-center justify-between"}>
+            <Icon name="Search" size={16} className="text-gray-400 w-9" />
+            <input {...props} type="search" className={twMerge("!pl-0", sizes({ size: esize }))} />
+          </div>
+          : <input {...props} className={sizes({ size: esize })} />
       }
     </div>
   );

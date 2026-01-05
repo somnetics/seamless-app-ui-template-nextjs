@@ -13,6 +13,7 @@ import {
   DragEndEvent,
   useDraggable,
   useDroppable,
+  DragOverlay
 } from '@dnd-kit/core'
 import {
   arrayMove,
@@ -21,6 +22,8 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+
+// import { DragOverlay } from '@dnd-kit/core';
 
 import { cva } from "class-variance-authority";
 import { coordinateGetter } from "./multipleContainersKeyboardPreset";
@@ -112,13 +115,19 @@ function ToolboxItem({ fieldType, isOverlay, onAdd }: ToolboxItemProps) {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
     id: `tool-${fieldType}`,
     data: { source: 'toolbox', fieldType },
-  })
+  });
 
   const style: React.CSSProperties = {
-    transform: CSS.Transform.toString(transform),
-    // opacity: isDragging ? 0.5 : 1,
+    transform: transform
+      ? CSS.Transform.toString({
+        ...transform,
+        scaleX: 1,
+        scaleY: 1,
+      })
+      : undefined,
+    opacity: isDragging ? 0.5 : 1,
     touchAction: 'none',
-  }
+  };
 
   const variants = cva("w-full p-2 border rounded text-left cursor-pointer bg-white hover:bg-gray-50", {
     variants: {
@@ -153,6 +162,7 @@ function useCanvasDroppable(id: string) {
 export default function FormBuilder(): JSX.Element {
   const [fields, setFields] = useState<FieldItem[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [activeTool, setActiveTool] = useState<FieldType | null>(null);
 
   // const sensors = useSensors(useSensor(PointerSensor))
   // const sensors = useSensors(
@@ -235,9 +245,12 @@ export default function FormBuilder(): JSX.Element {
   function onDragStart(event: DragStartEvent) {
     // if (!hasDraggableData(event.active)) return;
 
-    const data = event.active.data.current;
+    // const data = event.active.data.current;
+    // console.log(data)
 
-    console.log(data)
+
+    const type = event.active.data?.current?.fieldType as FieldType | undefined;
+    if (type) setActiveTool(type);
 
     // if (data?.type === "Column") {
     //   setActiveColumn(data.column);
@@ -275,12 +288,16 @@ export default function FormBuilder(): JSX.Element {
     // }
   }
 
+  const clearActive = () => setActiveTool(null);
+
   const onDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     // console.log(over)
 
     const source = active.data?.current?.source as string | undefined
     const fieldType = active.data?.current?.fieldType as FieldType | undefined
+
+    clearActive()
 
     if (source === 'toolbox' && fieldType) {
       // Only add if dropped inside canvas

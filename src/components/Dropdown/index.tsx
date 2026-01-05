@@ -9,7 +9,7 @@ export type OptionType = {
 
 // define type
 type DropdownType = {
-  esize?: "sm" | "md" | "lg";  
+  esize?: "sm" | "md" | "lg";
   rounded?: "sm" | "md" | "lg";
   options?: OptionType[];
 };

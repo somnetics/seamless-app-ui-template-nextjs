@@ -18,7 +18,8 @@ export default function Daigrams({ session, endpoint }: { session: SessionData, 
           ], defaultValue: "Active"
         },
       ]}
-      isSelectable={true}      
+      isSelectable={true}
+      isSearchable={false}
       endpoint={endpoint}
       resultVariable="users"
       actions={[
@@ -27,6 +28,7 @@ export default function Daigrams({ session, endpoint }: { session: SessionData, 
         { label: "Download", icon: <Download size={16} className="text-green-500 hover:text-green-600" />, onClick: (e, selected) => { console.log(selected) } },
       ]}
       session={session}
+      style={{ height: "calc(100vh - 313px)" }}
     />
   )
 }

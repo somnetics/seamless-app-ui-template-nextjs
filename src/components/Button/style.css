@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .btn {
-  @apply flex items-center gap-2 text-sm font-medium whitespace-nowrap;
+  @apply flex items-center gap-1.5 text-sm font-medium whitespace-nowrap;
   @apply transition-colors duration-[300ms] no-underline rounded-md px-3 py-2 leading-tight;  
 }
 
@@ -26,15 +26,15 @@
 }
 
 .btn.text-sm {
-  @apply px-3 py-1 text-sm;
+  @apply px-2 py-1 text-sm;
 }
 
 .btn.text-md {
-  @apply px-4 py-2 text-base;
+  @apply px-3 py-2 text-base;
 }
 
 .btn.text-lg {
-  @apply px-6 py-3 text-lg;
+  @apply px-4 py-3 text-lg;
 }
 
 .btn.rounded-sm {

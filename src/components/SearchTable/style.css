@@ -1,19 +1,23 @@
 @reference "../../styles/globals.css";
 
 .data-table {
-  @apply overflow-x-auto;
+  @apply bg-white dark:bg-gray-800 border border-black/10 dark:border-white/10 rounded-md flex flex-col justify-between overflow-hidden overflow-x-auto;
 }
 
 .data-table table {
   @apply table-auto w-full text-sm;
 }
 
-.data-table thead {
-  @apply bg-gray-100 dark:bg-gray-800;
+.data-table thead, .data-table > .table-navigation  {
+  @apply bg-gray-100/70 dark:bg-gray-700/30;
 }
 
 .data-table tbody tr {
-  @apply hover:bg-gray-200/50 dark:hover:bg-gray-800/50 transition-colors duration-200;
+  @apply hover:bg-gray-100/70 dark:hover:bg-gray-700/30 transition-colors duration-200;
+}
+
+.data-table th, .data-table td {
+  @apply py-2 px-3 text-left not-last:border-r border-b border-black/10 dark:border-white/10;
 }
 
 .data-table .btn-action {
@@ -24,8 +28,10 @@
   @apply group-disabled:text-gray-500 group-disabled:hover:text-gray-500 dark:group-disabled:text-gray-400 dark:group-disabled:hover:text-gray-400;
 }
 
-.data-table .table-naigation .btn-nav {
+.data-table .table-navigation .btn-nav {
   @apply p-2 hover:bg-gray-300 dark:hover:bg-gray-700 rounded-lg flex items-center cursor-pointer;
 }
 
-/* -bg-gray-100 -dark:bg-gray-700 */
+.data-table > .table-navigation {
+  @apply border-t border-black/10 dark:border-white/10 flex gap-2 flex-row justify-center py-2 px-3;
+}

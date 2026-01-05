@@ -6,6 +6,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --text-base: 14px;
   /* --color-white: #ffffff; */
   /* --color-black: #101828; */
 
@@ -169,6 +170,10 @@ html.dark {
 
 .collapsed {
   display: none;
+}
+
+label {
+  font-size: var(--text-sm);
 }
 
 /* @import "prismjs/themes/prism-tomorrow.css"; */

@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback, JSX } from "react";
+import { useState, useEffect, useCallback, JSX, CSSProperties } from "react";
 import { useProgress } from "@/components/Progress";
 import { SessionData } from "@/libs/session";
 import { debounce } from "@/libs/functions";
 import { apiFetch } from "@/libs/apiClient";
+import Button from "@/components/Button";
 import Textbox from "@/components/Textbox";
 import DropDown, { OptionType } from "@/components/Dropdown";
 import CheckRadio from "@/components/CheckRadio";
@@ -41,10 +42,11 @@ type SearchTableProps = {
   orderBy?: string | undefined;
   recordsPerPage?: number | undefined;
   actions?: ActionType[] | undefined;
+  style: CSSProperties | undefined;
   session: SessionData;
 };
 
-export default function SearchTable({ columns, endpoint, method = "GET", resultVariable, primaryField = "id", isSearchable = true, isSelectable = false, orderBy = "", recordsPerPage = 10, actions, session }: SearchTableProps) {
+export default function SearchTable({ columns, endpoint, method = "GET", resultVariable, primaryField = "id", isSearchable = true, isSelectable = false, orderBy = "", recordsPerPage = 10, actions, style, session }: SearchTableProps) {
   const { showProgress } = useProgress();
   const [fieldsValue, setFieldsValue] = useState<any>({});
   const [searchQuery, setSearchQuery] = useState<any>({});
@@ -193,6 +195,26 @@ export default function SearchTable({ columns, endpoint, method = "GET", resultV
     }
   }
 
+  const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // get element
+    const { name, value, type } = e.target;
+
+    // set data
+    // setFieldsValue((prevState: any) => ({
+    //   ...prevState,
+    //   [name]: value
+    // }));
+
+    // // if not text element
+    // if (type !== "text") {
+    //   // set data
+    //   setSearchQuery((prevState: any) => ({
+    //     ...prevState,
+    //     [name]: value
+    //   }));
+    // }
+  }
+
   useEffect(() => {
     setAllSelected(selected.length > 0 ? true : false)
   }, [selected]);
@@ -203,18 +225,76 @@ export default function SearchTable({ columns, endpoint, method = "GET", resultV
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-900 border border-black/10 dark:border-white/10 rounded-md overflow-hidden">
-        <div className={twMerge("data-table")}>
+      <div className="data-table" style={style}>
+        <div>
+          <div className="flex items-center justify-between p-3 border-b border-black/10 dark:border-white/10">
+            <div className="flex flex-col">
+              <h1>View Records</h1>
+              <span className="text-xs text-gray-500">Keep track of logs and activities</span>
+            </div>
+            <div className="flex items-center">
+              <div className="flex items-center gap-2">
+                <Button color="success" size="md" className="text-white">
+                  <Icon name="Plus" size={16}  />
+                  <span>Add New</span>
+                </Button>
+              </div>
+
+
+              {/* <button className={twMerge("btn-action group")} key={index} title={action.label} onClick={(e) => action.onClick(e, selected)} disabled={selected.length > 0 ? false : true}>{action.icon} Delete</button> */}
+
+              {/* <Button color="secondary" size="sm" className="btn border dark:border-white/10 !px-2">
+                <Icon name="Plus" size={16} className="text-green-500 hover:text-green-600" />
+                <span>Create New</span>
+              </Button>
+
+              <Button color="secondary" size="sm" className="btn border dark:border-white/10 !px-2">
+                <Icon name="Trash" size={16} className="text-red-500 hover:text-red-600" />
+                <span>Trash</span>
+              </Button> */}
+            </div>
+          </div>
+          <div className="flex items-center justify-between py-2 px-3 border-b border-black/10 dark:border-white/10">
+            <Textbox type="search" esize="sm" rounded="sm" placeholder="Search Data" onChange={onSearch} className="!w-auto" />
+            <div className="flex items-center">
+              {isSelectable && actions && (
+                <div className="flex items-center gap-2">
+                  {actions.filter((action) => typeof action.multiple == "undefined" || action.multiple == true).map((action, index) =>
+                    // <Button key={index} color="secondary" size="sm" className="btn border dark:border-white/10" disabled={selected.length > 0 ? false : true}>
+                    //   {action.icon}
+                    //   <span>{action.label}</span>
+                    // </Button>
+
+                    <button key={index} className="p-[9px] hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg flex items-center cursor-pointer no-underline visited:text-inherit" type="button">
+                      {action.icon}
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {/* <button className={twMerge("btn-action group")} key={index} title={action.label} onClick={(e) => action.onClick(e, selected)} disabled={selected.length > 0 ? false : true}>{action.icon} Delete</button> */}
+
+              {/* <Button color="secondary" size="sm" className="btn border dark:border-white/10 !px-2">
+                <Icon name="Plus" size={16} className="text-green-500 hover:text-green-600" />
+                <span>Create New</span>
+              </Button>
+
+              <Button color="secondary" size="sm" className="btn border dark:border-white/10 !px-2">
+                <Icon name="Trash" size={16} className="text-red-500 hover:text-red-600" />
+                <span>Trash</span>
+              </Button> */}
+            </div>
+          </div>
           <table>
             <thead>
               <tr>
                 {isSelectable && (
-                  <th className="w-[20px] px-4 py-2.5">
+                  <th className="w-[20px]">
                     <CheckRadio type="checkbox" id="select-all" onChange={onSelect} checked={allSelected} />
                   </th>
                 )}
                 {columns.map((column, index) =>
-                  <th key={index} className="text-left p-2.5" style={{ width: column.width ?? "auto" }}>
+                  <th key={index} style={{ width: column.width ?? "auto" }}>
                     {isSearchable ?
                       column.type == "text" || typeof column.type === "undefined" ?
                         <Textbox type="text" esize="sm" rounded="sm" name={column.field} placeholder={column.label} value={typeof fieldsValue[column.field] !== "undefined" ? fieldsValue[column.field] : column.defaultValue || ""} onChange={onChange} onKeyUp={onKeyUp} />
@@ -227,33 +307,24 @@ export default function SearchTable({ columns, endpoint, method = "GET", resultV
                     }
                   </th>
                 )}
-
-                <th className="w-[100px] p-2.5">
-                  {isSelectable && actions ?
-                    <div className="flex items-center justify-center gap-3">
-                      {actions.filter((action) => typeof action.multiple == "undefined" || action.multiple == true).map((action, index) =>
-                        <button className={twMerge("btn-action group")} key={index} title={action.label} onClick={(e) => action.onClick(e, selected)} disabled={selected.length > 0 ? false : true}>{action.icon}</button>
-                      )}
-                    </div>
-                    : "Actions"}
-                </th>
+                <th className="w-[100px] !text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
               {data && data.map((row: any, index: number) =>
-                <tr key={index} className="border-t border-black/10 dark:border-white/10">
+                <tr key={index}>
                   {isSelectable && (
-                    <td className="text-left px-4 py-2.5">
+                    <td>
                       <CheckRadio type="checkbox" id={"row-" + index} value={row[primaryField]} checked={selected.includes(row[primaryField])} onChange={onSelect} />
                     </td>
                   )}
                   {columns.map((column, index) =>
-                    <td key={index} className="text-left p-2.5">
+                    <td key={index}>
                       {typeof column.render === "function" ? column.render(row[column.field], row) : row[column.field]}
                     </td>
                   )}
                   {actions && (
-                    <td className="text-left p-2.5">
+                    <td>
                       <div className="flex items-center justify-center gap-3">
                         {actions.map((action, index) =>
                           <button className={twMerge("btn-action group")} key={index} title={action.label} onClick={(e) => action.onClick(e, [row[primaryField]])} disabled={selected.includes(row[primaryField])}>{action.icon}</button>
@@ -265,23 +336,23 @@ export default function SearchTable({ columns, endpoint, method = "GET", resultV
               )}
             </tbody>
           </table>
-          <div className="table-naigation bg-gray-100 dark:bg-gray-800 border-t border-black/10 dark:border-white/10 flex gap-2 flex-row justify-center p-2.5">
-            <button className="btn-nav">
-              <Icon name="ChevronsLeft" size={16} />
-            </button>
-            <button className="btn-nav">
-              <Icon name="ChevronLeft" size={16} />
-            </button>
-            <button className="btn-nav text-xs">
-              1
-            </button>
-            <button className="btn-nav">
-              <Icon name="ChevronRight" size={16} />
-            </button>
-            <button className="btn-nav">
-              <Icon name="ChevronsRight" size={16} />
-            </button>
-          </div>
+        </div>
+        <div className="table-navigation">
+          <button className="btn-nav">
+            <Icon name="ChevronsLeft" size={16} />
+          </button>
+          <button className="btn-nav">
+            <Icon name="ChevronLeft" size={16} />
+          </button>
+          <button className="btn-nav text-xs">
+            1
+          </button>
+          <button className="btn-nav">
+            <Icon name="ChevronRight" size={16} />
+          </button>
+          <button className="btn-nav">
+            <Icon name="ChevronsRight" size={16} />
+          </button>
         </div>
       </div>
     </>

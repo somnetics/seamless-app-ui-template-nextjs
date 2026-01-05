@@ -12,24 +12,35 @@ export default async function handle(
   // check request
   if (req.method === "POST" && req.query.action === "login") {
     // call api
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_HOST}/auth/authenticate`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // realm: process.env.NEXT_PUBLIC_SEAMLESS_KEYCLOAK_REALM,
-        // authUrl: process.env.NEXT_PUBLIC_SEAMLESS_KEYCLOAK_URL,
-        client_id: process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_ID,
-        client_secret: process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_SECRET,
-        username: req.body.username,
-        password: req.body.password,
-        grant_type: "password",
-      })
-    });
+    // const response = await fetch(`${process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_HOST}/auth/authenticate`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     // realm: process.env.NEXT_PUBLIC_SEAMLESS_KEYCLOAK_REALM,
+    //     // authUrl: process.env.NEXT_PUBLIC_SEAMLESS_KEYCLOAK_URL,
+    //     client_id: process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_ID,
+    //     client_secret: process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_SECRET,
+    //     username: req.body.username,
+    //     password: req.body.password,
+    //     grant_type: "password",
+    //   })
+    // });
 
-    // get response data
-    const data = await response.json();
+    // // get response data
+    // const data = await response.json();
+
+    const data = {
+      status: 200,
+      username: 'soumen.sardar',
+      fullname: 'Soumen Sardar',
+      email: 'Soumen Sardar',
+      message: 'User successfully authenticated',
+      access_token: '',
+      refresh_token: '',
+      access: '',
+    }
 
     // handle success
     if (data.status == 200) {

@@ -3,6 +3,7 @@
 @import "../components/Textarea/style.css";
 @import "../components/CheckRadio/style.css";
 @import "../components/Dropdown/style.css";
+@import "../components/AutoSuggest/style.css";
 @import "../components/SearchTable/style.css";
 @import "../components/Tags/style.css";
 @import "../components/FileInput/style.css";

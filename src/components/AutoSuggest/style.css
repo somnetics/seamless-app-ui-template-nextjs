@@ -1,0 +1,53 @@
+@reference "../../styles/globals.css";
+
+.autosuggest {
+  /* @apply overflow-auto; */
+  /* @apply relative w-full bg-[#2f3b4a] text-gray-100 rounded-md border border-[#3a4657] py-1.5 */
+  @apply relative flex flex-col rounded-md overflow-hidden;
+  @apply bg-white dark:bg-gray-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 w-full font-light;
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* .autosuggest.primary {
+  @apply focus-within:ring-primary-500;
+} */
+
+/*options dropdown*/
+.autosuggest .hide {
+  @apply hidden;
+  /* display: none; */
+}
+
+.autosuggest .show {
+  @apply flex;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+/*multiselect tags*/
+.autosuggest .input {
+  @apply border-none outline-none text-base; 
+}
+
+.autosuggest .multiselect {
+  /* @apply flex flex-row gap-2 py-1.5; */
+  @apply flex flex-wrap gap-2 p-2; 
+}
+
+.autosuggest .list {
+  @apply flex-col overflow-auto;
+}
+
+.autosuggest .item > a {
+  @apply flex px-2 py-1;
+}
+
+.autosuggest .tag{
+ /* @apply flex px-2 py-0.5 bg-sky-600 text-white text-base rounded-md items-center gap-1 cursor-default text-nowrap w-auto; */
+ @apply flex px-2 py-0.5 text-white bg-primary-500 hover:bg-primary-600 text-sm rounded-md items-center gap-1 cursor-default text-nowrap w-auto;
+}
+
+.autosuggest .tag.hover{
+  @apply text-white hover:bg-primary-600;
+
+}

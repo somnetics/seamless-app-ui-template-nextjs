@@ -1,6 +1,8 @@
 import { debounce } from "@/libs/functions";
 import React, { useCallback, useEffect, useState } from "react";
 import { useProgress } from "@/components/Progress";
+import { cva } from "class-variance-authority";
+import { twMerge } from "tailwind-merge";
 
 //define option type
 export type OptionType = {
@@ -12,7 +14,7 @@ export type OptionType = {
 // define auto complete option type
 export type AutoCompleteOptions = {
 	id?: string,
-	rowid?: string,
+	// rowid?: string,
 	name?: string,
 	value?: string,
 	type?: string,
@@ -21,6 +23,7 @@ export type AutoCompleteOptions = {
 	endpoint?: string,
 	method?: string,
 	required?: boolean,
+	disabled?: boolean,
 	pattern?: string,
 	placeholder?: string,
 	className?: string,
@@ -28,17 +31,52 @@ export type AutoCompleteOptions = {
 	onAddNew?: (value: any, element: any) => void,
 	onChange?: (value: any, element: any) => void,
 	onClear?: () => void
-	option?: OptionType[],
-	size?: "sm" | "md" | "lg" | undefined;
-	rounded?: "sm" | "md" | "lg" | undefined;
-	multipleSelect?: boolean
+	options?: OptionType[],
+	multiple?: boolean
+	esize?: "sm" | "md" | "lg";
+	rounded?: "sm" | "md" | "lg";
 }
 
-export default function Autocomplete({ option = [], ...props }: AutoCompleteOptions) {
+// type AuotCompleteProps = React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & AutoCompleteOptions
+type AuotCompleteProps = React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> & AutoCompleteOptions
+
+// define variants
+const variants = cva(
+	"select",
+	{
+		variants: {
+			color: {
+				primary: "primary",
+				readonly: "readonly",
+				disabled: "disabled pe-none",
+			},
+			rounded: {
+				sm: "rounded-sm",
+				md: "rounded-md",
+				lg: "rounded-lg",
+			}
+		},
+	}
+);
+
+// definr sizes
+const sizes = cva(
+	"select-input",
+	{
+		variants: {
+			size: {
+				sm: "text-sm",
+				md: "text-md",
+				lg: "text-lg",
+			}
+		},
+	}
+);
+
+export default function AutoComplete({ esize = "md", rounded = "md", options = [], ...props }: AuotCompleteProps) {
 	const { showProgress } = useProgress();
 
 	const [value, setValue] = useState<string>("");
-	const [multiValue, setMultiValue] = useState<OptionType[]>([]);
 	const [results, setResults] = useState<OptionType[]>([]);
 	const [top, setTop] = useState<string>("38px");
 	const [bottom, setBottom] = useState<string>("auto");
@@ -49,12 +87,13 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 	// manage multiple key strokes
 	const getItems = useCallback(debounce(async (query: string, callback: Function) => {
 		// if not empty
-		if (query.trim() != "" && query.trim().length >= 3) {
+		if (query.trim() != "" && query.trim().length >= 1) {
 			// activate form Progress
 			showProgress(true);
 
 			// call api
 			const response = await fetch(`${props.endpoint}?${props.searchField}=${query}&size=8`, { method: props.method ?? "GET" });
+			console.log(response)
 
 			// get response data
 			const data = await response.json();
@@ -71,7 +110,7 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 				showProgress(false);
 			}, 500);
 		}
-	}, 500), [])
+	}, 50), [])
 
 	function isVisible(element: HTMLElement) {
 		// get element rect
@@ -115,7 +154,7 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 				getItems(e.target.value);
 			} else {
 				// reset search result
-				setResults(option);
+				setResults(options);
 
 				// on clear
 				if (typeof props.onClear === "function") props.onClear();
@@ -163,6 +202,8 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 	function onSelection(e: any) {
 		// e.preventDefault();
 
+		console.log(selection.selectedIndex);
+
 		// get selected item
 		let selectedItem = results[selection.selectedIndex];
 
@@ -170,8 +211,7 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 		if (selection.selectedIndex == -1) {
 			// get selected index
 			const filteredOptions: OptionType[] = results
-				//filter the values not in multivalue
-				// .filter((option: OptionType) => !multiValue.includes(option))
+				//filter the values, set value true if not already true
 				.filter((option: OptionType) => option.select == false)
 
 				//filter the selected item
@@ -193,7 +233,6 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 
 			//selected item
 			selectedItem = filteredOptions[e];
-			console.log(filteredOptions[e])
 
 			//set query
 			setQuery(selectedItem.value)
@@ -201,8 +240,7 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 			//set value
 			setValue(selectedItem.value)
 
-			// if (props.multipleSelect && !multiValue.includes(selectedItem)) {
-			if (props.multipleSelect && selectedItem.select == false) {
+			if (props.multiple && selectedItem.select == false) {
 				//set select to true; add tag
 				selectedItem.select = true;
 
@@ -212,13 +250,35 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 				//reset value
 				setValue("");
 			}
+
+			const results1 = [...results];
+
+			console.log(selection.selectedIndex);
+			console.log(results1);
+
+			results1[selection.selectedIndex].select = true;
+
+			setResults(results1);
 		}
 
 		// on get selected
 		if (typeof props.onSelected === "function") props.onSelected(selectedItem, e);
 
+		// console.log(results);
+
 		// reset search result
-		setResults(results);
+		// setResults(results);
+
+		// setResults((prevData: OptionType) => ([
+		// 	...prevData,
+
+		// ]));
+
+		//set field
+		// setResults((prevData: OptionType[]) => ({
+		// 	...prevData,
+		// 	select: true
+		// }));
 
 		// update selection
 		setSelection({
@@ -248,7 +308,6 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 				// get selected item
 
 				const selectedItem = results
-					// .filter((option: OptionType) => !multiValue.includes(option))
 					.filter((option: OptionType) => option.select == false)
 					.filter((option: OptionType) => {
 						option.value.toLowerCase().includes(value.toLowerCase());
@@ -265,12 +324,12 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 						// return state
 						return index >= 0 ? true : false;
 					})[selection.selectedIndex];
-				
+
 				//set query and value
 				setQuery(selectedItem.value)
 				setValue(selectedItem.value)
 
-				if (props.multipleSelect && selectedItem.select == false) {
+				if (props.multiple && selectedItem.select == false) {
 					//set select to true; add tag
 					selectedItem.select = true;
 
@@ -361,10 +420,13 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 		if (value.length == 0) setQuery("");
 
 		//set all select values to false
-		results.filter((option: OptionType) => option.select = false)	
+		
+		console.log(results)
+
+		results.filter((options: OptionType) => options.select = false)
 
 		//set results if present
-		if (option.length !== 0) setResults(option)
+		if (options.length !== 0) setResults(options)
 
 		// show hide suggestions
 		setShowSuggestions(results.length ? true : false);
@@ -377,8 +439,9 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 
 	return (
 		<div className="relative p-4">
-			<div className="flex flex-wrap items-center gap-2 rounded-xl border border-gray-600 p-2 w-1/2">
-				{props.multipleSelect && results.filter((option: OptionType) => option.select == true).map((option: OptionType, index: number) => (
+			{/* <div className="flex flex-wrap items-center gap-2 rounded-xl border border-gray-600 p-2 w-1/2"> */}
+			<div className={twMerge(variants({ color: props.disabled ? "disabled" : "primary", rounded: rounded }), "flex flex-wrap items-center gap-2 rounded-xl border border-gray-600 p-2 w-1/2", props.className)} >
+				{props.multiple && results.filter((option: OptionType) => option.select == true).map((option: OptionType, index: number) => (
 					<span
 						key={option.value}
 						className="px-2 py-1 bg-blue-500 text-white rounded-md flex items-center gap-1"
@@ -387,10 +450,11 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 						<button onClick={() => removeTag(option.value)} className="cursor-pointer">x</button>
 					</span>
 				))}
+
 				<input
+					name="autocomplete"
 					type={props.type ?? "search"}
 					placeholder={props.placeholder}
-					// value={value ?? multiValue}
 					value={value ?? results.filter((option: OptionType) => option.select == true)}
 					onKeyDown={onKeyDown}
 					onClick={onFocus}
@@ -399,40 +463,54 @@ export default function Autocomplete({ option = [], ...props }: AutoCompleteOpti
 					onBlur={onBlur}
 					className="w-full focus:outline-none p-2"
 				/>
+
+				<select {...props} value={results.filter((option: OptionType) => option.select == true).map((option: OptionType) => option.value)[0]}>
+					{results.map((option: OptionType, index: number) => (
+						<option key={index} value={option.value}>
+							{option.label}
+						</option>
+					))}
+				</select>
 			</div>
 
 			{showSuggestions && results.length > 0 && (
-				<ul className={`absolute w-1/2 rounded-md mt-1 shadow-lg max-h-60 overflow-y-auto ${showSuggestions ? " show" : ""} ${top} ${bottom}`} onMouseDown={onMouseDown}>
-					{results
-						.filter((option: OptionType) => option.select == false)
-						.filter((option: OptionType) => {
-							option.value.toLowerCase().includes(value.toLowerCase());
+				// <ul className={`absolute w-1/2 rounded-md mt-1 shadow-lg max-h-60 overflow-y-auto ${showSuggestions ? " show" : ""} ${top} ${bottom}`} onMouseDown={onMouseDown}>
+				<ul className={twMerge(sizes({ size: esize }), `w-full rounded-md mt-1 shadow-lg max-h-60 ${showSuggestions ? " show" : ""} ${top} ${bottom}`)} onMouseDown={onMouseDown}>
+					{
+						results
+							.filter((option: OptionType) => option.select == false)
+							.filter((option: OptionType) => {
+								option.value.toLowerCase().includes(value.toLowerCase());
 
-							// get text
-							let text = query;
+								// get text
+								let text = query;
 
-							// remove white spaces and make it uppercase            
-							text = text.trim().replace(/\s+/g, ' ').toUpperCase();
+								// remove white spaces and make it uppercase            
+								text = text.trim().replace(/\s+/g, ' ').toUpperCase();
 
-							// find the index
-							const index = option.value.toUpperCase().indexOf(text);
+								// find the index
+								const index = option.value.toUpperCase().indexOf(text);
 
-							// return state
-							return index >= 0 ? true : false;
-						})
-						.map((option: OptionType, index: number) => (
-							<li
-								key={index}
-								className={`p-2 cursor-pointer hover:bg-gray-600 ${index == selection.selectedIndex ? "bg-gray-600" : ""}`}
-								onClick={() => onSelection(index)}
-							>
-								<div className="flex items-center gap-2">
-									<p className="pe-none">{highlight(option.label, query)}</p>
-								</div>
-							</li>
-						))}
+								// return state
+								return index >= 0 ? true : false;
+							})
+							.map((option: OptionType, index: number) => (
+								<li
+									key={index}
+									value={option.value}
+									className={`p-2 cursor-pointer hover:bg-gray-600 ${index == selection.selectedIndex ? "bg-gray-600" : ""}`}
+									onClick={() => onSelection(index)}
+								>
+
+									<div className="flex items-center gap-2">
+										<p className="pe-none">{highlight(option.label, query)}</p>
+									</div>
+								</li>
+							))
+					}
 				</ul>
-			)}
-		</div>
+			)
+			}
+		</div >
 	)
 }
