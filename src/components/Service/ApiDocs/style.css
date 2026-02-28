@@ -1,0 +1,65 @@
+@reference "../../../styles/globals.css";
+
+.icon-method-get {
+  @apply bg-teal-500/20 text-teal-500 inset-ring inset-ring-teal-500/30;
+}
+
+.text-method-get {  
+  @apply text-teal-500;
+}
+
+.icon-method-post {
+  @apply bg-amber-500/20 text-amber-500 inset-ring inset-ring-amber-500/30;
+}
+
+.text-method-post {  
+  @apply text-amber-500;
+}
+
+.icon-method-put {
+  @apply bg-blue-500/20 text-blue-500 inset-ring inset-ring-blue-500/30;
+}
+
+.text-method-put {  
+  @apply text-blue-500;
+}
+
+.icon-method-patch {
+  @apply bg-violet-500/20 text-violet-500 inset-ring inset-ring-violet-500/30;
+}
+
+.text-method-patch {  
+  @apply text-violet-500;
+}
+
+.icon-method-delete {
+  @apply bg-red-500/20 text-red-500 inset-ring inset-ring-red-500/30;
+}
+
+.text-method-delete {  
+  @apply text-red-500;
+}
+
+.icon-method-head {
+  @apply bg-indigo-500/20 text-indigo-500 inset-ring inset-ring-indigo-500/30;
+}
+
+.text-method-head {  
+  @apply text-indigo-500;
+}
+
+.icon-method-options {
+  @apply bg-pink-500/20 text-pink-500 inset-ring inset-ring-pink-500/30;
+}
+
+.text-method-options {  
+  @apply text-pink-500;
+}
+
+.icon-method-unknown {
+  @apply bg-slate-500/20 text-slate-500 inset-ring inset-ring-slate-500/30;
+}
+
+.text-method-unknown {  
+  @apply text-slate-500;
+}

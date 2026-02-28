@@ -7,7 +7,7 @@ export default function ApiEndpoint({ path, method, details, schemas }) {
         {method.toUpperCase()} {path}
       </h1>
 
-      <p className="mt-2 text-gray-600">{details.description}</p>
+      <p className="mt-2 text-slate-600">{details.description}</p>
 
       {/* Parameters */}
       {details.parameters && (
@@ -17,7 +17,7 @@ export default function ApiEndpoint({ path, method, details, schemas }) {
             {details.parameters.map((p, i) => (
               <div key={i} className="p-3 border rounded bg-white shadow">
                 <p><strong>{p.name}</strong> ({p.in})</p>
-                <p className="text-sm text-gray-700">{p.description}</p>
+                <p className="text-sm text-slate-700">{p.description}</p>
               </div>
             ))}
           </div>

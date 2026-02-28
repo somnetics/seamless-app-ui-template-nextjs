@@ -1,0 +1,58 @@
+@reference "../../styles/globals.css";
+
+.container {
+  height: calc(100vh - 87px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.actionToolbar {
+  height: 40px;
+}
+
+.canvas {
+  position: relative;
+  flex: 1 1 auto;
+  color: var(--text-color);
+}
+
+.canvas *:focus {
+  outline: none;
+}
+
+.propertyPanel {
+  width: 450px;
+  z-index: 10;
+  overflow: auto;
+  @apply border-s border-black/10 dark:border-white/10;
+}
+
+.propertyPanel:empty {
+  display: none;
+}
+
+.ZoomTools {
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.revisions {
+  width: 400px;
+  z-index: 10;
+  overflow: auto;
+}
+
+.revisions:empty {
+  display: none;
+}
+
+.elementIcon {
+  font-size: 3rem !important;
+}

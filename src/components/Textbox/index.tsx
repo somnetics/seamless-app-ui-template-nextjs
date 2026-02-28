@@ -59,21 +59,37 @@ export default function Textbox({ esize = "md", rounded = "md", ...props }: Text
   };
 
   return (
-    <div className={twMerge(variants({ color: props.disabled ? "disabled" : props.readOnly ? "readonly" : "primary", rounded: rounded }), props.className)}>
+    <div className={twMerge("form-element", props.className)}>
       {props.type === "password" ?
-        <div className={"flex items-center justify-between"}>
+        <>
           <input {...props} type={inputType} className={sizes({ size: esize })} />
-          <a href="#" className="px-3" onClick={toggleType}>
-            <Icon name={inputType == "text" ? "EyeOff" : "Eye"} size={20} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-100 cursor-pointer" />
+          <a href="#" className="px-3" onClick={toggleType} tabIndex={-1}>
+            <Icon name={inputType == "text" ? "EyeOff" : "Eye"} size={18} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-100 cursor-pointer" />
           </a>
-        </div>
+        </>
         : props.type === "search" ?
-          <div className={"flex items-center justify-between"}>
-            <Icon name="Search" size={16} className="text-gray-400 w-9" />
+          <div className="search">
+            <Icon name="Search" size={16} className="text-slate-400 w-9" />
             <input {...props} type="search" className={twMerge("!pl-0", sizes({ size: esize }))} />
           </div>
           : <input {...props} className={sizes({ size: esize })} />
       }
     </div>
+    // <div className={twMerge(variants({ color: props.disabled ? "disabled" : props.readOnly ? "readonly" : "primary", rounded: rounded }), props.className)}>
+    //   {props.type === "password" ?
+    //     <div className="secure">
+    //       <input {...props} type={inputType} className={sizes({ size: esize })} />
+    //       <a href="#" className="px-3" onClick={toggleType}>
+    //         <Icon name={inputType == "text" ? "EyeOff" : "Eye"} size={20} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-100 cursor-pointer" />
+    //       </a>
+    //     </div>
+    //     : props.type === "search" ?
+    //       <div className="search">
+    //         <Icon name="Search" size={16} className="text-slate-400 w-9" />
+    //         <input {...props} type="search" className={twMerge("!pl-0", sizes({ size: esize }))} />
+    //       </div>
+    //       : <input {...props} className={sizes({ size: esize })} />
+    //   }
+    // </div>
   );
 }

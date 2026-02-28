@@ -56,7 +56,7 @@ export default function Documentation({ session, meta, service, id, tab }: PageP
                   <Image className="h-[60px]" src={service.icon || ""} alt={service.title || ""} width={60} height={60} />
                   <div className="flex flex-col justify-center">
                     <h2 className="text-[24px] font-semibold">{service.title}</h2>
-                    <p className="truncate overflow-hidden text-ellipsis text-gray-600 dark:text-gray-300">{service.description}</p>
+                    <p className="truncate overflow-hidden text-ellipsis text-slate-600 dark:text-slate-300">{service.description}</p>
                   </div>
                 </div>
               </div>
@@ -66,25 +66,25 @@ export default function Documentation({ session, meta, service, id, tab }: PageP
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Name</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">{service.title}</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">{service.title}</p>
                   </div>
                 </div>
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Version</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">3.5</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">3.5</p>
                   </div>
                 </div>
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Type</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">Public API</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">Public API</p>
                   </div>
                 </div>
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Status</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">Active</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">Active</p>
                   </div>
                 </div>
                 <div className="flex items-center">
@@ -100,8 +100,8 @@ export default function Documentation({ session, meta, service, id, tab }: PageP
             </div>
             <div className="p-4">
               <span className="font-semibold text-sm w-auto">{apiDetails.name || apiDetails.link}</span>
-              <div className="p-2 mt-4 flex items-center border border-gray-700 rounded-md w-auto space-x-2">
-                <div className={twMerge("flex items-center bg-gray-700 text-sm font-semibold p-2 rounded", apiDetails.color)}>
+              <div className="p-2 mt-4 flex items-center border border-slate-700 rounded-md w-auto space-x-2">
+                <div className={twMerge("flex items-center bg-slate-700 text-sm font-semibold p-2 rounded", apiDetails.color)}>
                   <span>{apiDetails.method}</span>
                 </div>
                 <Textbox type="text" esize="sm" rounded="sm" className="py-1" defaultValue={apiDetails.link} />

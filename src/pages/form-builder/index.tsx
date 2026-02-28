@@ -66,8 +66,8 @@ function SortableItem({ id, item, isOverlay, onSelect }: SortableItemProps) {
   const variants = cva("bg-white border rounded p-3 mb-3 shadow-sm flex justify-between items-start", {
     variants: {
       dragging: {
-        over: "outline-2- outline-dashed- outline-gray-500- opacity-30",
-        overlay: "outline-2- outline-dashed- outline-gray-500-",
+        over: "outline-2- outline-dashed- outline-slate-500- opacity-30",
+        overlay: "outline-2- outline-dashed- outline-slate-500-",
       },
     },
   });
@@ -82,14 +82,14 @@ function SortableItem({ id, item, isOverlay, onSelect }: SortableItemProps) {
     >
       <div className="flex-1">
         <div className="font-medium">{item.label || item.type}</div>
-        <div className="text-xs text-gray-500">{item.type}</div>
+        <div className="text-xs text-slate-500">{item.type}</div>
       </div>
 
       <div className="flex gap-2 items-center">
         <button
           {...attributes}
           {...listeners}
-          className="px-2 py-1 border rounded text-sm bg-gray-100"
+          className="px-2 py-1 border rounded text-sm bg-slate-100"
           title="Drag to reorder"
         >
           ☰
@@ -129,7 +129,7 @@ function ToolboxItem({ fieldType, isOverlay, onAdd }: ToolboxItemProps) {
     touchAction: 'none',
   };
 
-  const variants = cva("w-full p-2 border rounded text-left cursor-pointer bg-white hover:bg-gray-50", {
+  const variants = cva("w-full p-2 border rounded text-left cursor-pointer bg-white hover:bg-slate-50", {
     variants: {
       dragging: {
         over: "outline-2- outline-dashed- outline-red-500- opacity-30",
@@ -337,7 +337,7 @@ export default function FormBuilder(): JSX.Element {
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}>
-        <div className="min-h-screen bg-gray-50 p-6">
+        <div className="min-h-screen bg-slate-50 p-6">
           <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6">
             <aside className="col-span-3">
               <div className="sticky- top-6- space-y-4">
@@ -348,7 +348,7 @@ export default function FormBuilder(): JSX.Element {
                       <ToolboxItem key={t} fieldType={t} onAdd={addField} isOverlay />
                     ))}
                   </div>
-                  <div className="text-xs text-gray-500 mt-2">Drag or click to add a field.</div>
+                  <div className="text-xs text-slate-500 mt-2">Drag or click to add a field.</div>
                 </div>
               </div>
             </aside>
@@ -363,7 +363,7 @@ export default function FormBuilder(): JSX.Element {
                 <SortableContext items={fields.map((f) => f.id)} strategy={verticalListSortingStrategy}>
                   <div>
                     {fields.length === 0 && (
-                      <div className="text-gray-400">No fields yet — drag or click from the toolbox.</div>
+                      <div className="text-slate-400">No fields yet — drag or click from the toolbox.</div>
                     )}
                     {fields.map((f) => (
                       <SortableItem key={f.id} id={f.id} item={f} onSelect={(id) => setSelectedId(id)} isOverlay />
@@ -378,7 +378,7 @@ export default function FormBuilder(): JSX.Element {
                 <h3 className="font-semibold mb-2">Inspector</h3>
                 {selectedField ? (
                   <div>
-                    <div className="mb-2 text-sm text-gray-600">Editing: {selectedField.type}</div>
+                    <div className="mb-2 text-sm text-slate-600">Editing: {selectedField.type}</div>
                     <label className="block text-xs">Label</label>
                     <input
                       value={selectedField.label || ''}
@@ -414,7 +414,7 @@ export default function FormBuilder(): JSX.Element {
                     </div>
                   </div>
                 ) : (
-                  <div className="text-sm text-gray-500">Select a field to edit its properties.</div>
+                  <div className="text-sm text-slate-500">Select a field to edit its properties.</div>
                 )}
               </div>
             </aside>
@@ -425,7 +425,7 @@ export default function FormBuilder(): JSX.Element {
       <div className="col-span-12">
         <div className="bg-white rounded shadow p-4 mt-4">
           <h3 className="font-semibold mb-2">Form JSON</h3>
-          <pre className="text-xs max-h-60 overflow-auto bg-gray-100 p-3 rounded">{JSON.stringify(fields, null, 2)}</pre>
+          <pre className="text-xs max-h-60 overflow-auto bg-slate-100 p-3 rounded">{JSON.stringify(fields, null, 2)}</pre>
         </div>
       </div>
     </>

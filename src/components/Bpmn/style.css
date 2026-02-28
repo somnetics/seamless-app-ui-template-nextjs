@@ -1,0 +1,199 @@
+@import "bpmn-js/dist/assets/bpmn-js.css";
+@import 'bpmn-js/dist/assets/diagram-js.css';
+@import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
+@import '@bpmn-io/properties-panel/assets/properties-panel.css';
+
+:root {
+  --bpmn-fill-color: var(--color-slate-100);
+  --bpmn-stroke-color: #525252;
+  --bpmn-border-color: hsl(0 0% 100%);
+  --bpmn-notok-color: hsl(360, 100%, 97%);  
+}
+
+html.dark {
+  --bpmn-fill-color: var(--color-slate-800);
+  --bpmn-stroke-color: #c6c6c6;
+  --bpmn-border-color: hsl(0 0% 15%);
+  --bpmn-notok-color: hsl(0, 51%, 7%);  
+}
+
+.bjs-container svg {
+  outline: none;
+}
+
+.djs-grid {
+  background-size: 20px 20px;  /* Change grid spacing */
+  background-color: rgba(0, 0, 0, 0.1); /* Change grid color */
+}
+
+.djs-container svg.new-parent {
+  background: var(--bpmn-fill-color) !important;
+}
+
+.djs-context-pad .entry {
+  background-color: var(--bpmn-fill-color);
+  box-shadow: 0 0 2px 1px var(--bpmn-border-color);
+  /* @apply border border-black/10 dark:border-white/10; */
+}
+
+[class^="bpmn-icon-"]:before,
+[class*=" bpmn-icon-"]:before {
+  color: var(--bpmn-stroke-color);
+}
+
+#modeler.readonly .djs-palette.open {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+#modeler.readonly .djs-context-pad.open {
+  display: none;
+}
+
+.djs-palette {
+  background: var(--bpmn-fill-color);
+  border: solid 1px var(--bs-border-color);
+  @apply rounded-lg border border-black/10 dark:border-white/10;
+}
+
+.djs-palette .entry,
+.djs-palette .djs-palette-toggle {
+  color: var(--bpmn-stroke-color);
+}
+
+#modeler .bjs-powered-by {
+  color: var(--bpmn-stroke-color) !important;
+}
+
+.djs-popup {
+  background: var(--bpmn-fill-color);
+}
+
+.djs-popup-search input:focus {
+  background: var(--bpmn-fill-color);
+}
+
+.djs-popup .entry.selected {
+  background: var(--bg-menu-hover);
+}
+
+.djs-popup-search-icon > path {
+  fill: var(--bpmn-stroke-color);
+}
+
+.djs-popup-search input {
+  background: var(--bpmn-fill-color);
+}
+
+.djs-shape.connect-not-ok .djs-visual > :nth-child(1),
+.djs-shape.drop-not-ok .djs-visual > :nth-child(1) {
+  fill: var(--bpmn-notok-color) !important;
+}
+
+.djs-context-pad .entry:hover {
+  background: var(--bpmn-fill-color);
+}
+
+/* rest methods */
+.rest-method {
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  padding: 0px 4px;
+  border-radius: 2px;
+}
+
+.rest-method.get {
+  background-color: var(--bs-primary) !important;
+}
+
+.rest-method.post {
+  background-color: var(--bs-success) !important;
+}
+
+.rest-method.put,
+.rest-method.patch {
+  background-color: var(--bs-warning) !important;
+}
+
+.rest-method.delete {
+  background-color: var(--bs-danger) !important;
+}
+/* rest methods */
+
+.properties-header {
+  @apply flex items-center gap-2 sm:z-[2] w-full h-[60px] px-3 translate-x-full sm:translate-x-0;
+  @apply bg-slate-100 dark:bg-slate-800 border-b border-black/10 dark:border-white/10;
+}
+
+/* service offline / online animation */
+.service-offline {
+  position: relative;
+  background: rgb(128, 128, 128);
+  border-radius: 50%;
+  display: flex;
+  height: 12px;
+  width: 12px;
+}
+
+.service-offline-sm {
+  position: relative;
+  background: rgb(128, 128, 128);
+  border-radius: 50%;
+  display: flex;
+  height: 8px;
+  width: 8px;
+}
+
+.service-online {
+  position: relative;
+  background: var(--bs-success);
+  border-radius: 50%;
+  display: flex;
+  height: 12px;
+  width: 12px;
+}
+
+.service-online-sm {
+  position: relative;
+  background: var(--bs-success);
+  border-radius: 50%;
+  display: flex;
+  height: 8px;
+  width: 8px;
+}
+
+.service-online:before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: 0px;
+  right: 0px;
+  border-radius: 50%;
+  background: var(--color-danger);
+  animation: online-pulse 1.5s infinite;
+  -webkit-animation: online-pulse 1.5s infinite;
+  -moz-animation: online-pulse 1.5s infinite;
+}
+
+@-webkit-keyframes online-pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(40, 167, 69, 0.7);
+  }
+
+  100% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes online-pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(40, 167, 69, 0.7);
+  }
+
+  100% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+}
+/* online animation */

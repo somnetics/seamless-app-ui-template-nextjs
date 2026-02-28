@@ -61,7 +61,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       {children}
       <div className="flex flex-col items-center justify-center w-full fixed top-5 z-1000 gap-2">
         {toasts.map((toast) => (
-          <div key={toast.id} className={"flex items-center w-full relative max-w-md p-4 text-gray-500 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800 transition-opacity duration-250 ease-in-out " + (toast.visible ? "opacity-100" : "opacity-0")} role="alert">
+          <div key={toast.id} className={"flex items-center w-full relative max-w-md p-4 text-slate-500 bg-white rounded-lg shadow-sm dark:text-slate-400 dark:bg-slate-800 transition-opacity duration-250 ease-in-out " + (toast.visible ? "opacity-100" : "opacity-0")} role="alert">
             {toast.type == MessageTypes.Success ? (
               <div className="inline-flex items-center justify-center shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
                 <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -92,7 +92,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               </div>
             )}
             <div className="ms-3 text-sm font-normal">{toast.message}</div>
-            <button type="button" onClick={() => hideToast(toast.id)} className="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 cursor-pointer" data-dismiss-target="#toast-default" aria-label="Close">
+            <button type="button" onClick={() => hideToast(toast.id)} className="ms-auto -mx-1.5 -my-1.5 bg-white text-slate-400 hover:text-slate-900 rounded-lg focus:ring-2 focus:ring-slate-300 p-1.5 hover:bg-slate-100 inline-flex items-center justify-center h-8 w-8 dark:text-slate-500 dark:hover:text-white dark:bg-slate-800 dark:hover:bg-slate-700 cursor-pointer" data-dismiss-target="#toast-default" aria-label="Close">
               <span className="sr-only">Close</span>
               <svg className="w-3 h-3 pointer-events-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />

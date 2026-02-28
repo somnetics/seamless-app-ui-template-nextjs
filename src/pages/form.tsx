@@ -83,7 +83,7 @@ export default function FormPage({ session }: { session: SessionData }) {
               },
             ]}
             isSelectable={true}
-            isSearchable={false}
+            // isSearchable={false}
             // endpoint={endpoint}
             resultVariable="users"
             actions={[

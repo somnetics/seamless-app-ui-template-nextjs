@@ -52,12 +52,19 @@ const sizes = cva(
 
 export default function DropDown({ esize = "md", rounded = "md", options = [], ...props }: DropdownProps) {
   return (
-    <div className={twMerge(variants({ color: props.disabled ? "disabled" : "primary", rounded: rounded }), props.className)}>
-      <select {...props} className={sizes({ size: esize })}>
+    <div className={twMerge("form-element", props.className)}>
+      <select {...props}>
         {options.map((option: OptionType, index: number) =>
           <option key={index} value={option.value}>{option.label}</option>
         )}
       </select>
     </div>
+    // <div className={twMerge(variants({ color: props.disabled ? "disabled" : "primary", rounded: rounded }), props.className)}>
+    //   <select {...props} className={sizes({ size: esize })}>
+    //     {options.map((option: OptionType, index: number) =>
+    //       <option key={index} value={option.value}>{option.label}</option>
+    //     )}
+    //   </select>
+    // </div>
   );
 }

@@ -18,7 +18,7 @@ import MainMenu from "@/components/MainMenu";
 import Header from "@/components/HeaderBar";
 import Page from "@/components/Page";
 import Button from "@/components/Button";
-import { Search, Info, Pin, Star } from "lucide-react";
+import { Search, Pin, Star, User, IdCard, Layers, Save, Files } from "lucide-react";
 import Form from "@/components/FormOld";
 import { useProgress } from "@/components/Progress";
 import { useModal } from '@/components/Modal';
@@ -30,6 +30,7 @@ import { Apis, Api } from "@/libs/apis";
 
 import Account from "@/components/Admin/Accounts";
 import Users from "@/components/Admin/Users";
+import Info from "@/components/Registration/Info";
 
 interface PageProps {
   session: SessionData;
@@ -47,48 +48,19 @@ export default function ApiDetails({ session, meta }: PageProps) {
   const { showProgress } = useProgress();
   const { showModal } = useModal();
 
-  // const [serviceDetails, setServiceDetails] = useState<Api>();
-
-  // useEffect(() => {
-  //   if (router.query.params) {
-  //     const serviceName = router.query.params[0];
-  //     setServiceDetails(Apis.find((app) => app.name == serviceName))
-  //   }
-  // }, [router.query.params])
-
   return (
     <>
       <Page session={session} title="Seamless Developer Console" breadcrumbs={[
-        { link: "/services", name: "Admin" },
+        { link: "/services", name: "User registration" },
       ]} border={true}>
         <div className="relative mx-auto flex flex-col">
           <TabContent ulClassName="px-12 mt-3 mb-4" containerClassName="w-full mx-auto px-[20px] max-w-[1400px] py-10" tabs={[
-            { name: "Account", icon: "UserCog", link: "/admin/account", content: <Account /> },
-            { name: "Tenants", icon: "Building2", link: "/admin/tenants", content: <Users /> },
-            { name: "Users", icon: "User", link: "/admin/users", content: <Users /> },
-            { name: "Services", icon: "ServerCog", link: "/admin/services", content: <Account /> },
+            { name: "Info", icon: "User", link: "/registration/info", content: <Info session={session} /> },
+            { name: "Personal", icon: "IdCard", link: "/registration/personal", content: <Users /> },
+            { name: "Accounts", icon: "User", link: "/registration/accounts", content: <Account /> },
+            { name: "Documents", icon: "Files", link: "/registration/document", content: <Account /> },
+            { name: "Submit", icon: "ServerCog", link: "/registration/submit", content: <Account /> },
           ]} />
-
-          {/* <div className="h-fit mx-auto lg:max-w-[800px] w-full">A</div> */}
-
-          {/* <div className="w-full mx-auto px-[20px] max-w-[1400px] py-10">
-              <div className="flex items-center justify-between mb-25">
-                <h1 className="text-xl font-semibold text-surface-foreground-0 leading-tight">My collections</h1>
-                <button type="button" className="items-center transition-colors duration-[300ms] no-underline inline-flex py-[10px] px-[25px] sprinkles-text-base font-semibold rounded-[6px] whitespace-nowrap bg-blueFreepik text-white hover:bg-blueScience dark:text-blueScience dark:hover:bg-blueFreepik">
-                  <span className="hidden sm:block pl-5 font-semibold">New collection</span>
-                </button>
-              </div>
-              <div className="mx-auto my-12 max-w-screen-sm text-center text-surface-foreground-2">
-                <div className="mb-30 flex justify-center">
-                  <div className="grid justify-center items-center rounded-[6px] w-[50px] min-w-[50px] h-[50px] min-h-[50px] bg-piki-blue-100 text-piki-blue-500 dark:bg-piki-blue-700 dark:text-piki-blue-300"></div>
-                </div>
-                <p className="mb-10 text-lg font-semibold">No collections to show yet! Find here any of our curated collections that you save</p>
-                <p className="mb-20 leading-normal">Collections let you do your own content curation and organize assets that belong together. Want to try?</p>
-                <button type="button" className="items-center transition-colors duration-[300ms] no-underline inline-flex py-[10px] px-[25px] sprinkles-text-base font-semibold rounded-[6px] whitespace-nowrap bg-blueFreepik text-white hover:bg-blueScience dark:text-blueScience dark:hover:bg-blueFreepik">
-                  <span className="hidden sm:block pl-5 font-semibold">New collection</span>
-                </button>
-              </div>
-            </div> */}
         </div>
       </Page>
     </>

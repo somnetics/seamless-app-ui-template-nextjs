@@ -53,6 +53,19 @@ export function randomKey() {
   return result.join('');
 }
 
+// return unique id
+export function uuid() {
+  // return unique key
+  const uniqueKey = () => {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+
+  // return uuid
+  return `${uniqueKey()}${uniqueKey()}-${uniqueKey()}-${uniqueKey()}-${uniqueKey()}-${uniqueKey()}${uniqueKey()}${uniqueKey()}`;
+}
+
 // export is valid email
 export function isValidEmail(email: string) {
   // check if valid email

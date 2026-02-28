@@ -48,14 +48,14 @@ function SortableItem({ id, item, onSelect }: SortableItemProps) {
     >
       <div className="flex-1">
         <div className="font-medium">{item.label || item.type}</div>
-        <div className="text-xs text-gray-500">{item.type}</div>
+        <div className="text-xs text-slate-500">{item.type}</div>
       </div>
 
       <div className="flex gap-2 items-center">
         <button
           {...attributes}
           {...listeners}
-          className="px-2 py-1 border rounded text-sm bg-gray-100"
+          className="px-2 py-1 border rounded text-sm bg-slate-100"
           title="Drag to reorder"
         >
           ☰
@@ -153,7 +153,7 @@ export default function FormBuilder(): JSX.Element {
   const selectedField = fields.find((f) => f.id === selectedId) || null
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-slate-50 p-6">
       <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6">
         {/* Toolbox */}
         <aside className="col-span-3">
@@ -182,7 +182,7 @@ export default function FormBuilder(): JSX.Element {
               </div>
             </div>
 
-            <div className="text-xs text-gray-500">Tip: click a toolbox item to add it. Drag list items to reorder. Use Edit to change field properties.</div>
+            <div className="text-xs text-slate-500">Tip: click a toolbox item to add it. Drag list items to reorder. Use Edit to change field properties.</div>
           </div>
         </aside>
 
@@ -195,7 +195,7 @@ export default function FormBuilder(): JSX.Element {
               <SortableContext items={fields.map((f) => f.id)} strategy={verticalListSortingStrategy}>
                 <div>
                   {fields.length === 0 && (
-                    <div className="text-gray-400">No fields yet — use the toolbox to add some.</div>
+                    <div className="text-slate-400">No fields yet — use the toolbox to add some.</div>
                   )}
 
                   {fields.map((f) => (
@@ -219,7 +219,7 @@ export default function FormBuilder(): JSX.Element {
             <h3 className="font-semibold mb-2">Inspector</h3>
             {selectedField ? (
               <div>
-                <div className="mb-2 text-sm text-gray-600">Editing: {selectedField.type}</div>
+                <div className="mb-2 text-sm text-slate-600">Editing: {selectedField.type}</div>
                 <label className="block text-xs">Label</label>
                 <input
                   value={selectedField.label || ''}
@@ -255,7 +255,7 @@ export default function FormBuilder(): JSX.Element {
                 </div>
               </div>
             ) : (
-              <div className="text-sm text-gray-500">Select a field to edit its properties.</div>
+              <div className="text-sm text-slate-500">Select a field to edit its properties.</div>
             )}
           </div>
         </aside>
@@ -264,7 +264,7 @@ export default function FormBuilder(): JSX.Element {
           <div className="col-span-12">
             <div className="bg-white rounded shadow p-4 mt-4">
               <h3 className="font-semibold mb-2">Form JSON</h3>
-              <pre className="text-xs max-h-60 overflow-auto bg-gray-100 p-3 rounded">{JSON.stringify(fields, null, 2)}</pre>
+              <pre className="text-xs max-h-60 overflow-auto bg-slate-100 p-3 rounded">{JSON.stringify(fields, null, 2)}</pre>
             </div>
           </div>
         )}

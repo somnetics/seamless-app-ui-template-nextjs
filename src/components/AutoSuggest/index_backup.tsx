@@ -439,8 +439,8 @@ export default function AutoComplete({ esize = "md", rounded = "md", options = [
 
 	return (
 		<div className="relative p-4">
-			{/* <div className="flex flex-wrap items-center gap-2 rounded-xl border border-gray-600 p-2 w-1/2"> */}
-			<div className={twMerge(variants({ color: props.disabled ? "disabled" : "primary", rounded: rounded }), "flex flex-wrap items-center gap-2 rounded-xl border border-gray-600 p-2 w-1/2", props.className)} >
+			{/* <div className="flex flex-wrap items-center gap-2 rounded-xl border border-slate-600 p-2 w-1/2"> */}
+			<div className={twMerge(variants({ color: props.disabled ? "disabled" : "primary", rounded: rounded }), "flex flex-wrap items-center gap-2 rounded-xl border border-slate-600 p-2 w-1/2", props.className)} >
 				{props.multiple && results.filter((option: OptionType) => option.select == true).map((option: OptionType, index: number) => (
 					<span
 						key={option.value}
@@ -498,7 +498,7 @@ export default function AutoComplete({ esize = "md", rounded = "md", options = [
 								<li
 									key={index}
 									value={option.value}
-									className={`p-2 cursor-pointer hover:bg-gray-600 ${index == selection.selectedIndex ? "bg-gray-600" : ""}`}
+									className={`p-2 cursor-pointer hover:bg-slate-600 ${index == selection.selectedIndex ? "bg-slate-600" : ""}`}
 									onClick={() => onSelection(index)}
 								>
 

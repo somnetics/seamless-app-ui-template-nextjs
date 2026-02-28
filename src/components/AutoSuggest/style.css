@@ -2,9 +2,9 @@
 
 .autosuggest {
   /* @apply overflow-auto; */
-  /* @apply relative w-full bg-[#2f3b4a] text-gray-100 rounded-md border border-[#3a4657] py-1.5 */
+  /* @apply relative w-full bg-[#2f3b4a] text-slate-100 rounded-md border border-[#3a4657] py-1.5 */
   @apply relative flex flex-col rounded-md overflow-hidden;
-  @apply bg-white dark:bg-gray-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 w-full font-light;
+  @apply bg-white dark:bg-slate-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 w-full font-light;
   @apply transition-all duration-300 ease-in-out;
 }
 

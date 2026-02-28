@@ -1,8 +1,9 @@
 @reference "../../styles/globals.css";
 
 .txt {
-  @apply bg-white dark:bg-gray-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 w-full font-light;
-  @apply transition-all duration-300 ease-in-out;
+  @apply bg-white dark:bg-slate-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 w-full font-light;
+  /* @apply transition-all duration-300 ease-in-out; */
+  /* @apply form-elements; */
 }
 
 .txt.primary {
@@ -10,27 +11,27 @@
 }
 
 .txt.readonly {
-  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+  @apply focus-within:ring-0;
 }
 
 .txt.disabled {
-  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+  @apply bg-slate-400/30 hover:bg-slate-400/30 text-slate-400/50;
 }
 
 .txt .txt-input {
   @apply outline-none w-full font-light;
 }
 
-.txt .txt-input.text-sm {
-  @apply p-1 text-sm;
+/* .txt .txt-input.text-sm {
+  @apply px-2 py-[5px] text-sm;
 }
 
 .txt .txt-input.text-md {
-  @apply p-2 text-base;
+  @apply px-3 py-2.5 text-base;
 }
 
 .txt .txt-input.text-lg {
-  @apply p-3 text-lg;
+  @apply px-4 py-3.5 text-lg;
 }
 
 .txt.rounded-sm {
@@ -43,4 +44,12 @@
 
 .txt.rounded-lg {
   @apply rounded-lg;
+} */
+
+.secure{
+  @apply flex items-center justify-between;
+}
+
+.search{
+  @apply flex items-center justify-between;
 }

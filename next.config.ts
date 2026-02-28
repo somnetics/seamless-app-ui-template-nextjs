@@ -17,9 +17,21 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/seamless/:path*",
-        destination: `${process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_HOST}/:path*`
-      }
+        source: "/identity-hub/:path*",
+        destination: `${process.env.NEXT_PUBLIC_SEAMLESS_IDENTITY_HUB_API_HOST}/:path*`
+      },
+      {
+        source: "/identity-demo/:path*",
+        destination: `${process.env.NEXT_PUBLIC_SEAMLESS_IDENTITY_DEMO_API_HOST}/:path*`
+      },
+      // {
+      //   source: "/flowable/:path*",
+      //   destination: `${process.env.NEXT_PUBLIC_FLOWABLE_API_HOST}/:path*`
+      // },
+      // {
+      //   source: "/api/consultation/:path*",
+      //   destination: `http://localhost:5051/consultation/:path*`,
+      // },
     ]
   },
   // Configure `pageExtensions` to include markdown and MDX files

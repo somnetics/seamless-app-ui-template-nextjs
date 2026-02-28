@@ -65,7 +65,7 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
                   <Image className="h-[60px]" src={service.icon || ""} alt={service.title || ""} width={60} height={60} />
                   <div className="flex flex-col justify-center">
                     <h2 className="text-[24px] font-semibold">{service.title}</h2>
-                    <p className="truncate overflow-hidden text-ellipsis text-gray-600 dark:text-gray-300">{service.description}</p>
+                    <p className="truncate overflow-hidden text-ellipsis text-slate-600 dark:text-slate-300">{service.description}</p>
                   </div>
                 </div>
               </div>
@@ -75,25 +75,25 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Name</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">{service.title}</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">{service.title}</p>
                   </div>
                 </div>
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Version</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">3.5</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">3.5</p>
                   </div>
                 </div>
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Type</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">Public API</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">Public API</p>
                   </div>
                 </div>
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Status</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">Active</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">Active</p>
                   </div>
                 </div>
                 <div className="flex items-center">
@@ -115,12 +115,12 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
           {/* <div className="mb-4 border-b border-black/10 dark:border-white/10">
             <ul className="flex flex-wrap -mb-px text-sm font-medium px-12 text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
               <li className="me-3" role="presentation">
-                <button className="inline-block p-4 border-b-2 rounded-t-lg cursor-pointer text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 border-transparent" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+                <button className="inline-block p-4 border-b-2 rounded-t-lg cursor-pointer text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 border-transparent" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
                   API Keys
                 </button>
               </li>
               <li className="me-3" role="presentation">
-                <button className="inline-block p-4 border-b-2 rounded-t-lg cursor-pointer text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 border-transparent" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">
+                <button className="inline-block p-4 border-b-2 rounded-t-lg cursor-pointer text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 border-transparent" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">
                   OAuth 2.0 Client IDs
                 </button>
               </li>
@@ -134,7 +134,7 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
           <div id="default-tab-content">
             <div className="hidden1 rounded-lg px-12" id="profile" role="tabpanel" aria-labelledby="profile-tab">
               <table className="table-auto w-full text-sm">
-                <thead className="bg-gray-200 dark:bg-gray-700">
+                <thead className="bg-slate-200 dark:bg-slate-700">
                   <tr>
                     <th className="w-[20px] px-4 py-2.5">
                       <input type="checkbox" className="flex" />
@@ -164,7 +164,7 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
                       <div className="flex items-center justify-center">
                         <Edit2 size={16} className="text-blue-500 hover:text-blue-600 me-3 cursor-pointer" />
                         <Trash2 size={16} className="text-red-600 me-3 cursor-pointer" />
-                        <Download size={16} className="text-gray-700 dark:text-gray-100 cursor-pointer" />
+                        <Download size={16} className="text-slate-700 dark:text-slate-100 cursor-pointer" />
                       </div>
                     </td>
                   </tr>
@@ -185,7 +185,7 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
                       <div className="flex items-center justify-center">
                         <Edit2 size={16} className="text-blue-500 hover:text-blue-600 me-3 cursor-pointer" />
                         <Trash2 size={16} className="text-red-600 me-3 cursor-pointer" />
-                        <Download size={16} className="text-gray-700 dark:text-gray-100 cursor-pointer" />
+                        <Download size={16} className="text-slate-700 dark:text-slate-100 cursor-pointer" />
                       </div>
                     </td>
                   </tr>
@@ -206,26 +206,26 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
                       <div className="flex items-center justify-center">
                         <Edit2 size={16} className="text-blue-500 hover:text-blue-600 me-3 cursor-pointer" />
                         <Trash2 size={16} className="text-red-600 me-3 cursor-pointer" />
-                        <Download size={16} className="text-gray-700 dark:text-gray-100 cursor-pointer" />
+                        <Download size={16} className="text-slate-700 dark:text-slate-100 cursor-pointer" />
                       </div>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div className="hidden p-4 rounded-lg dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                This is some placeholder content the <strong className="font-medium text-gray-800 dark:text-white">Dashboard tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
+            <div className="hidden p-4 rounded-lg dark:bg-slate-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                This is some placeholder content the <strong className="font-medium text-slate-800 dark:text-white">Dashboard tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
               </p>
             </div>
-            <div className="hidden p-4 rounded-lg bg-gray-100 dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                This is some placeholder content the <strong className="font-medium text-gray-800 dark:text-white">Settings tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
+            <div className="hidden p-4 rounded-lg bg-slate-100 dark:bg-slate-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                This is some placeholder content the <strong className="font-medium text-slate-800 dark:text-white">Settings tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
               </p>
             </div>
-            <div className="hidden p-4 rounded-lg bg-gray-100 dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                This is some placeholder content the <strong className="font-medium text-gray-800 dark:text-white">Contacts tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
+            <div className="hidden p-4 rounded-lg bg-slate-100 dark:bg-slate-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                This is some placeholder content the <strong className="font-medium text-slate-800 dark:text-white">Contacts tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
               </p>
             </div>
           </div>
@@ -243,19 +243,19 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
     //       <div className="flex w-full item-center justify-between border-b border-black/10 dark:border-white/10 py-3 px-12">
     //         <div className="flex items-center">
     //           <a href="#" onClick={() => router.back()} className="hover:text-blue-500">
-    //             <ArrowLeft size={24} strokeWidth={2} className="text-gray-900 hover:text-blue-600 mx-3" />
+    //             <ArrowLeft size={24} strokeWidth={2} className="text-slate-900 hover:text-blue-600 mx-3" />
     //           </a>
-    //           <h2 className="text-gray-800 font-semibold">Service Details</h2>
+    //           <h2 className="text-slate-800 font-semibold">Service Details</h2>
     //         </div>
     //         <div className="flex items-center">
     //           <button className="group flex items-center gap-2 hover:bg-blue-100 text-black font-bold py-2 px-4 rounded transition">
-    //             <Plus size={16} strokeWidth={2} className="text-gray-900 group-hover:text-blue-600" />
-    //             <span className="text-gray-800 text-sm font-semibold group-hover:text-blue-600">Create Credentials</span>
+    //             <Plus size={16} strokeWidth={2} className="text-slate-900 group-hover:text-blue-600" />
+    //             <span className="text-slate-800 text-sm font-semibold group-hover:text-blue-600">Create Credentials</span>
     //           </button>
 
     //           <button disabled className="group flex items-center gap-2 text-black font-bold py-2 px-4 ms-2 rounded transition">
-    //             <Trash2 size={16} strokeWidth={2} className="text-gray-400 group-hover1:text-red-600" aria-disabled />
-    //             <span className="text-gray-400 text-sm font-semibold group-hover1:text-red-600">Delete</span>
+    //             <Trash2 size={16} strokeWidth={2} className="text-slate-400 group-hover1:text-red-600" aria-disabled />
+    //             <span className="text-slate-400 text-sm font-semibold group-hover1:text-red-600">Delete</span>
     //           </button>
     //         </div>
     //       </div>
@@ -265,8 +265,8 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
     //             <div className="flex items-center">
     //               <Image src={service.icon || ""} alt={service.title || ""} width={60} height={60} className="mr-4" />
     //               <div className="flex flex-col justify-center">
-    //                 <h2 className="text-[24px] text-gray-800 font-semibold">{service.title}</h2>
-    //                 <p className="text-gray-600 truncate overflow-hidden text-ellipsis">{service.description}</p>
+    //                 <h2 className="text-[24px] text-slate-800 font-semibold">{service.title}</h2>
+    //                 <p className="text-slate-600 truncate overflow-hidden text-ellipsis">{service.description}</p>
     //               </div>
     //             </div>
     //           </div>
@@ -275,31 +275,31 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
     //           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
     //             <div className="flex items-center border-r border-black/10 dark:border-white/10">
     //               <div className="flex flex-col justify-center">
-    //                 <p className="text-gray-800 font-semibold">Name</p>
-    //                 <p className="text-[13px] text-gray-600">{service.title}</p>
+    //                 <p className="text-slate-800 font-semibold">Name</p>
+    //                 <p className="text-[13px] text-slate-600">{service.title}</p>
     //               </div>
     //             </div>
     //             <div className="flex items-center border-r border-black/10 dark:border-white/10">
     //               <div className="flex flex-col justify-center">
-    //                 <p className="text-gray-800 font-semibold">Version</p>
-    //                 <p className="text-[13px] text-gray-600">3.5</p>
+    //                 <p className="text-slate-800 font-semibold">Version</p>
+    //                 <p className="text-[13px] text-slate-600">3.5</p>
     //               </div>
     //             </div>
     //             <div className="flex items-center border-r border-black/10 dark:border-white/10">
     //               <div className="flex flex-col justify-center">
-    //                 <p className="text-gray-800 font-semibold">Type</p>
-    //                 <p className="text-[13px] text-gray-600">Public API</p>
+    //                 <p className="text-slate-800 font-semibold">Type</p>
+    //                 <p className="text-[13px] text-slate-600">Public API</p>
     //               </div>
     //             </div>
     //             <div className="flex items-center border-r border-black/10 dark:border-white/10">
     //               <div className="flex flex-col justify-center">
-    //                 <p className="text-gray-800 font-semibold">Status</p>
-    //                 <p className="text-[13px] text-gray-600">Active</p>
+    //                 <p className="text-slate-800 font-semibold">Status</p>
+    //                 <p className="text-[13px] text-slate-600">Active</p>
     //               </div>
     //             </div>
     //             <div className="flex items-center">
     //               <div className="flex flex-col justify-center">
-    //                 <p className="text-gray-800 font-semibold">Documentation</p>
+    //                 <p className="text-slate-800 font-semibold">Documentation</p>
     //                 <a href={`/documentation/${service.name}/v3.5`} className="text-[13px] text-blue-600 flex items-center">
     //                   <span className="me-2">API Documentation</span>
     //                   <ExternalLink size={15} className="text-blue-600" />
@@ -309,15 +309,15 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
     //           </div>
     //         </div>
     //       </div>
-    //       <div className="mb-4 border-b border-black/10 dark:border-white/10 dark:border-gray-700 bg-white">
+    //       <div className="mb-4 border-b border-black/10 dark:border-white/10 dark:border-slate-700 bg-white">
     //         <ul className="flex flex-wrap -mb-px text-sm font-medium px-12 text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
     //           <li className="me-3" role="presentation">
-    //             <button className="inline-block p-4 border-b-2 rounded-t-lg cursor-pointer text-gray-500 hover:text-gray-800 border-gray-300 hover:border-gray-600" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+    //             <button className="inline-block p-4 border-b-2 rounded-t-lg cursor-pointer text-slate-500 hover:text-slate-800 border-slate-300 hover:border-slate-600" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
     //               API Keys
     //             </button>
     //           </li>
     //           <li className="me-3" role="presentation">
-    //             <button className="inline-block p-4 border-b-2 rounded-t-lg cursor-pointer text-gray-500 hover:text-gray-800 border-gray-300 hover:border-gray-600" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">
+    //             <button className="inline-block p-4 border-b-2 rounded-t-lg cursor-pointer text-slate-500 hover:text-slate-800 border-slate-300 hover:border-slate-600" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">
     //               OAuth 2.0 Client IDs
     //             </button>
     //           </li>
@@ -329,10 +329,10 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
     //         </ul>
     //       </div>
     //       <div id="default-tab-content">
-    //         <div className="hidden1 rounded-lg dark:bg-gray-800 px-12" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    //           {/* <p className="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong className="font-medium text-gray-800 dark:text-white">Profile tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p> */}
+    //         <div className="hidden1 rounded-lg dark:bg-slate-800 px-12" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    //           {/* <p className="text-sm text-slate-500 dark:text-slate-400">This is some placeholder content the <strong className="font-medium text-slate-800 dark:text-white">Profile tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p> */}
     //           <table className="table-auto w-full text-sm">
-    //             <thead className="bg-gray-200">
+    //             <thead className="bg-slate-200">
     //               <tr>
     //                 <th className="w-[20px] px-4 py-2.5">
     //                   <input type="checkbox" className="flex" />
@@ -362,7 +362,7 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
     //                   <div className="flex items-center justify-center">
     //                     <Edit2 size={16} className="text-blue-600 me-3 cursor-pointer" />
     //                     <Trash2 size={16} className="text-red-600 me-3 cursor-pointer" />
-    //                     <Download size={16} className="text-gray-600 cursor-pointer" />
+    //                     <Download size={16} className="text-slate-600 cursor-pointer" />
     //                   </div>
     //                 </td>
     //               </tr>
@@ -383,7 +383,7 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
     //                   <div className="flex items-center justify-center">
     //                     <Edit2 size={16} className="text-blue-600 me-3 cursor-pointer" />
     //                     <Trash2 size={16} className="text-red-600 me-3 cursor-pointer" />
-    //                     <Download size={16} className="text-gray-600 cursor-pointer" />
+    //                     <Download size={16} className="text-slate-600 cursor-pointer" />
     //                   </div>
     //                 </td>
     //               </tr>
@@ -404,26 +404,26 @@ export default function ApiDetails({ session, meta, service }: PageProps) {
     //                   <div className="flex items-center justify-center">
     //                     <Edit2 size={16} className="text-blue-600 me-3 cursor-pointer" />
     //                     <Trash2 size={16} className="text-red-600 me-3 cursor-pointer" />
-    //                     <Download size={16} className="text-gray-600 cursor-pointer" />
+    //                     <Download size={16} className="text-slate-600 cursor-pointer" />
     //                   </div>
     //                 </td>
     //               </tr>
     //             </tbody>
     //           </table>
     //         </div>
-    //         <div className="hidden p-4 rounded-lg dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-    //           <p className="text-sm text-gray-500 dark:text-gray-400">
-    //             This is some placeholder content the <strong className="font-medium text-gray-800 dark:text-white">Dashboard tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
+    //         <div className="hidden p-4 rounded-lg dark:bg-slate-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+    //           <p className="text-sm text-slate-500 dark:text-slate-400">
+    //             This is some placeholder content the <strong className="font-medium text-slate-800 dark:text-white">Dashboard tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
     //           </p>
     //         </div>
-    //         <div className="hidden p-4 rounded-lg bg-gray-100 dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-    //           <p className="text-sm text-gray-500 dark:text-gray-400">
-    //             This is some placeholder content the <strong className="font-medium text-gray-800 dark:text-white">Settings tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
+    //         <div className="hidden p-4 rounded-lg bg-slate-100 dark:bg-slate-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+    //           <p className="text-sm text-slate-500 dark:text-slate-400">
+    //             This is some placeholder content the <strong className="font-medium text-slate-800 dark:text-white">Settings tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
     //           </p>
     //         </div>
-    //         <div className="hidden p-4 rounded-lg bg-gray-100 dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
-    //           <p className="text-sm text-gray-500 dark:text-gray-400">
-    //             This is some placeholder content the <strong className="font-medium text-gray-800 dark:text-white">Contacts tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
+    //         <div className="hidden p-4 rounded-lg bg-slate-100 dark:bg-slate-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+    //           <p className="text-sm text-slate-500 dark:text-slate-400">
+    //             This is some placeholder content the <strong className="font-medium text-slate-800 dark:text-white">Contacts tab&apos;s associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.
     //           </p>
     //         </div>
     //       </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { debounce } from "@/libs/functions";
-import React, { useState, useEffect, useRef, useContext, useCallback } from "react";
+import React, { useState, useEffect, useRef, useContext, useCallback, JSX } from "react";
 import { useProgress } from "@/components/Progress";
 
 //define option type
@@ -26,6 +26,7 @@ export type AutoSuggestOptions = {
   pattern?: string,
   placeholder?: string,
   className?: string,
+  render?: (item: any, highlighted: any, query: string) => JSX.Element,
   onSelected?: (item: any, element: any) => void,
   onAddNew?: (value: any, element: any) => void,
   onChange?: React.ChangeEventHandler<HTMLSelectElement>,
@@ -139,7 +140,7 @@ export default function AutoSuggest(props: AutoSuggestOptions) {
       // prevent from submit
       e.preventDefault();
 
-      if(listRef.current){listRef.current.scrollBy({ top: 20, behavior: 'smooth' });}
+      if (listRef.current) { listRef.current.scrollBy({ top: 20, behavior: 'smooth' }); }
 
       // update selection
       setSelection({
@@ -150,7 +151,7 @@ export default function AutoSuggest(props: AutoSuggestOptions) {
       // prevent from submit
       e.preventDefault();
 
-      if(listRef.current){listRef.current.scrollBy({ top: -20, behavior: 'smooth' });}
+      if (listRef.current) { listRef.current.scrollBy({ top: -20, behavior: 'smooth' }); }
 
       // update selection
       setSelection({
@@ -237,18 +238,18 @@ export default function AutoSuggest(props: AutoSuggestOptions) {
     }
   }
 
-  //on blur 
+  // on blur 
   function onBlur(e: any) {
     // hide suggestions
     setShowSuggestions(false);
   }
 
-  //on mousedown
+  // on mousedown
   function onMouseDown(e: any) {
     e.preventDefault();
   }
 
-  //on change from keyboard
+  // on change from keyboard
   function onChange(e: any) {
     if (e.key != "Enter") {
       // check for empty value
@@ -454,8 +455,11 @@ export default function AutoSuggest(props: AutoSuggestOptions) {
                 data-index={index}
                 data-value={item.value}
                 tabIndex={-1}>
-                {highlight(item.label, query)}
-                {/* {typeof props.descriptionField !== "undefined" ? <small className="text-muted text-wrap pe-none">{item[props.descriptionField]}</small> : ""} */}
+                {typeof props.render === "function" ?
+                  props.render(item, highlight, query)
+                  :
+                  highlight(item.label, query)
+                }
               </Link>
             </li>
           )}

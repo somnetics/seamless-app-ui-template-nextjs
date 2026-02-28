@@ -39,11 +39,11 @@ const refreshAccessToken = async (session: SessionData): Promise<any | null> => 
   return token;
 };
 
-export async function apiFetch<T = any>(
+export async function apiFetch(
   session: SessionData,
   url: string,
   options: FetchOptions = {}
-): Promise<T> {
+): Promise<Response> {
   // get headers
   const headers = new Headers(options.headers || {});
 
@@ -55,8 +55,8 @@ export async function apiFetch<T = any>(
     // set bearer token to header
     if (token) {
       headers.set("Authorization", `Bearer ${session.access_token}`);
-      headers.set("client_id", process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_ID as string);
-      headers.set("client_secret", process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_SECRET as string);
+      // headers.set("client_id", process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_ID as string);
+      // headers.set("client_secret", process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_SECRET as string);
     }
   }
 
@@ -101,5 +101,5 @@ export async function apiFetch<T = any>(
   }
 
   // finaly return json
-  return response.json();
+  return response;
 }

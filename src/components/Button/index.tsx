@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 type ButtonType = {
   children: React.ReactNode;
   size?: "sm" | "md" | "lg";
-  color?: "primary" | "secondary" | "success" | "danger";
+  color?: "primary" | "secondary" | "success" | "danger" | "disabled" | "primary_transparent" | "transparent_success";
   rounded?: "sm" | "md" | "lg";
   processing?: boolean;
 };
@@ -24,6 +24,8 @@ const variants = cva(
         success: "success",
         danger: "danger",
         disabled: "disabled pe-none",
+        primary_transparent: "transparent-primary", 
+        transparent_success: "transparent-success",
       },
       rounded: {
         sm: "rounded-sm",

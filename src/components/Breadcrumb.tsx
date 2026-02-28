@@ -13,7 +13,7 @@ export function Breadcrumb({ navs }: { navs: Nav[] }) {
         {navs.map((nav, index) =>
           <React.Fragment key={index}>
             <Link href={nav.link}>
-              <span className="hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs">
+              <span className="hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs">
                 {nav.name}
               </span>
             </Link>

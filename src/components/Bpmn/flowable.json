@@ -1,0 +1,60 @@
+{
+  "name": "Flowable",
+  "uri": "http://flowable.org/bpmn",
+  "prefix": "flowable",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "types": [
+    {
+      "name": "Field",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String",
+          "redefines": null
+        },
+        {
+          "name": "string",
+          "type": "String",
+          "isBody": false
+        },
+        {
+          "name": "expression",
+          "type": "String",
+          "isBody": false
+        },
+        {
+          "name": "boolean",
+          "type": "Boolean",
+          "isBody": false
+        }
+      ]
+    },
+    {
+      "name": "String",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "value",
+          "isBody": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "Expression",
+      "superClass": ["Element"],
+      "properties": [
+        {
+          "name": "value",
+          "isBody": true,
+          "type": "String"
+        }
+      ]
+    }
+  ],
+  "enumerations": []
+}

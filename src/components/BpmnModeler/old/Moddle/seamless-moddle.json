@@ -1,0 +1,28 @@
+{
+  "name": "Seamless",
+  "uri": "http://somnetics/schema/bpmn",
+  "prefix": "seamless",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "types": [
+    {
+      "name": "CustomData",
+      "extends": [
+        "bpmn:Task"
+      ],
+      "properties": [
+        {
+          "name": "priority",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "owner",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    }
+  ]
+}

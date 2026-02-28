@@ -7,15 +7,21 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 
-import Announcements from "./announcements";
-import Canvas, { Field } from "./canvas";
-import Sidebar, { SidebarField } from "./sidebar";
+import Announcements from "@/components/FomBuilder/announcements";
+import Canvas, { Field } from "@/components/FomBuilder/canvas";
+import Sidebar, { SidebarField } from "@/components/FomBuilder/sidebar";
 
-function getData(prop) {
+// In your JS/TS entry point:
+import { ResizableBox } from 'react-resizable';
+import 'react-resizable/css/styles.css';
+
+import { Copyright, Heart } from "lucide-react";
+
+function getData(prop: any) {
   return prop?.data?.current ?? {};
 }
 
-function createSpacer({ id }) {
+function createSpacer({ id }: any) {
   return {
     id,
     type: "spacer",
@@ -25,12 +31,12 @@ function createSpacer({ id }) {
 
 export default function App() {
   const [sidebarFieldsRegenKey, setSidebarFieldsRegenKey] = useState(
-    Date.now()
+    1
   );
-  const spacerInsertedRef = useRef();
-  const currentDragFieldRef = useRef();
-  const [activeSidebarField, setActiveSidebarField] = useState(); // only for fields from the sidebar
-  const [activeField, setActiveField] = useState(); // only for fields that are in the form.
+  const spacerInsertedRef = useRef<any>(null);
+  const currentDragFieldRef = useRef<any>(null);
+  const [activeSidebarField, setActiveSidebarField] = useState<any>(); // only for fields from the sidebar
+  const [activeField, setActiveField] = useState<any>(); // only for fields that are in the form.
   const [data, updateData] = useImmer({
     fields: [],
   });
@@ -42,7 +48,7 @@ export default function App() {
     spacerInsertedRef.current = false;
   };
 
-  const handleDragStart = (e) => {
+  const handleDragStart = (e: any) => {
     const { active } = e;
     const activeData = getData(active);
 
@@ -71,12 +77,12 @@ export default function App() {
 
     setActiveField(field);
     currentDragFieldRef.current = field;
-    updateData((draft) => {
+    updateData((draft: any) => {
       draft.fields.splice(index, 1, createSpacer({ id: active.id }));
     });
   };
 
-  const handleDragOver = (e) => {
+  const handleDragOver = (e: any) => {
     const { active, over } = e;
     const activeData = getData(active);
 
@@ -95,7 +101,7 @@ export default function App() {
           id: active.id + "-spacer",
         });
 
-        updateData((draft) => {
+        updateData((draft: any) => {
           if (!draft.fields.length) {
             draft.fields.push(spacer);
           } else {
@@ -109,17 +115,17 @@ export default function App() {
       } else if (!over) {
         // This solves the issue where you could have a spacer handing out in the canvas if you drug
         // a sidebar item on and then off
-        updateData((draft) => {
-          draft.fields = draft.fields.filter((f) => f.type !== "spacer");
+        updateData((draft: any) => {
+          draft.fields = draft.fields.filter((f: any) => f.type !== "spacer");
         });
         spacerInsertedRef.current = false;
       } else {
         // Since we're still technically dragging the sidebar draggable and not one of the sortable draggables
         // we need to make sure we're updating the spacer position to reflect where our drop will occur.
         // We find the spacer and then swap it with the over skipping the op if the two indexes are the same
-        updateData((draft) => {
+        updateData((draft: any) => {
           const spacerIndex = draft.fields.findIndex(
-            (f) => f.id === active.id + "-spacer"
+            (f: any) => f.id === active.id + "-spacer"
           );
 
           const nextIndex =
@@ -135,14 +141,14 @@ export default function App() {
     }
   };
 
-  const handleDragEnd = (e) => {
+  const handleDragEnd = (e: any) => {
     const { over } = e;
 
     // We dropped outside of the over so clean up so we can start fresh.
     if (!over) {
       cleanUp();
-      updateData((draft) => {
-        draft.fields = draft.fields.filter((f) => f.type !== "spacer");
+      updateData((draft: any) => {
+        draft.fields = draft.fields.filter((f: any) => f.type !== "spacer");
       });
       return;
     }
@@ -156,8 +162,8 @@ export default function App() {
     if (nextField) {
       const overData = getData(over);
 
-      updateData((draft) => {
-        const spacerIndex = draft.fields.findIndex((f) => f.type === "spacer");
+      updateData((draft: any) => {
+        const spacerIndex = draft.fields.findIndex((f: any) => f.type === "spacer");
         draft.fields.splice(spacerIndex, 1, nextField);
 
         draft.fields = arrayMove(
@@ -173,9 +179,49 @@ export default function App() {
   };
 
   const { fields } = data;
-  console.log(JSON.stringify(fields));
+  // console.log(JSON.stringify(fields));
+
+  const state = {
+    width: 200,
+    height: 200,
+  };
+
+  // const onResize = (event, { node, size, handle }) => {
+  //   this.setState({ width: size.width, height: size.height });
+  // };
+
+  // const [width, setWidth] = useState(300)
+
+  const CustomHandle = ({ handleAxis }: { handleAxis: string }) => {
+    if (handleAxis === 'e' || handleAxis === 'w') {
+      return (
+        <span
+          className={`custom-handle custom-handle-${handleAxis}`}
+          onClick={(e) => e.stopPropagation()}
+        />
+      )
+    }
+    return null
+  }
+
   return (
     <div className="app">
+      <ResizableBox
+        style={{ backgroundColor: "#ff0" }}
+        width={200}
+        height={200}
+        draggableOpts={{ grid: [133.906, 133.906] }}
+        // minConstraints={[100, 100]}
+        // maxConstraints={[300, 300]}
+        axis="x"
+        resizeHandles={['e', 'w']}
+        // onResizeStop={(e, { size }) => setWidth(size.width)} 
+        // handle={(axis) => <CustomHandle handleAxis={axis} />}
+        handle={(axis) => <span className={`custom-handle custom-handle-${axis}`} />}
+      >
+        <span>Contents</span>
+      </ResizableBox>
+
       <div className="content">
         <DndContext
           onDragStart={handleDragStart}
@@ -183,15 +229,15 @@ export default function App() {
           onDragEnd={handleDragEnd}
           autoScroll
         >
-          <Announcements />
+          {/* <Announcements /> */}
           <Sidebar fieldsRegKey={sidebarFieldsRegenKey} />
           <SortableContext
             strategy={verticalListSortingStrategy}
-            items={fields.map((f) => f.id)}
+            items={fields.map((f: any) => f.id)}
           >
             <Canvas fields={fields} />
           </SortableContext>
-          <DragOverlay dropAnimation={false}>
+          <DragOverlay dropAnimation={null}>
             {activeSidebarField ? (
               <SidebarField overlay field={activeSidebarField} />
             ) : null}

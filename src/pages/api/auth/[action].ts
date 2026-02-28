@@ -12,45 +12,57 @@ export default async function handle(
   // check request
   if (req.method === "POST" && req.query.action === "login") {
     // call api
-    // const response = await fetch(`${process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_HOST}/auth/authenticate`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     // realm: process.env.NEXT_PUBLIC_SEAMLESS_KEYCLOAK_REALM,
-    //     // authUrl: process.env.NEXT_PUBLIC_SEAMLESS_KEYCLOAK_URL,
-    //     client_id: process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_ID,
-    //     client_secret: process.env.NEXT_PUBLIC_SEAMLESS_AUTH_API_CLIENT_SECRET,
-    //     username: req.body.username,
-    //     password: req.body.password,
-    //     grant_type: "password",
-    //   })
-    // });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SEAMLESS_IDENTITY_HUB_API_HOST}/auth/login`, {
+      method: "POST",      
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: req.body.username,
+        password: req.body.password,
+      })
+    });
 
-    // // get response data
-    // const data = await response.json();
+    // get response data
+    const data = await response.json();
 
-    const data = {
-      status: 200,
-      username: 'soumen.sardar',
-      fullname: 'Soumen Sardar',
-      email: 'Soumen Sardar',
-      message: 'User successfully authenticated',
-      access_token: '',
-      refresh_token: '',
-      access: '',
-    }
+    console.log(data);
+
+    // id: '019c8f16-7840-71d5-9cb8-caf27365c644',
+    //   full_name: 'User-001',
+    //     email: 'user001@techcorp.com',
+    //       gender: 'MALE',
+    //         status: 'active',
+    //           manager: null,
+    //             roles: [],
+    //               groups: [],
+    //                 organization: null,
+    //                   access_token: 'eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIwMTljOGYxNy1mM2M2LTc0MmItOWFhZS0xYmY5MjExMmM3OWEiLCJzdWIiOiIwMTljOGYxNi03ODQwLTcxZDUtOWNiOC1jYWYyNzM2NWM2NDQiLCJpYXQiOjE3NzE5MjcyMzcsImlzcyI6InNlYW1sZXNzNC9pZGVudGl0eS1odWIiLCJleHAiOjE3NzE5Mjc1MzcsIm9yZ2FuaXphdGlvbiI6IiIsInJvbGVzIjpbXSwiZ3JvdXBzIjpbXX0.zgmJsTJWe8LBTZMsiF7-MGVVakOfVKQ4KvRSY3jRVscryPOQJ_o3pJy6zSREe_jG',
+    //                     refresh_token:
+
+    // const data = {
+    //   id: "",
+    //   full_name: 'soumen.sardar',
+    //   email: 'Soumen Sardar',      
+    //   status: 'Soumen Sardar',      
+    //   manager: 'Soumen Sardar',      
+    //   roles: 'User successfully authenticated',
+    //   groups: 'User successfully authenticated',
+    //   organization: 'User successfully authenticated',
+    //   access_token: "",
+    //   refresh_token: ''
+    // }
 
     // handle success
-    if (data.status == 200) {
+    if (response.status == 200) {
       // set session data        
-      session.username = data.username;
-      session.fullname = data.fullname;
+      session.userid = data.id;
+      session.username = data.email;
+      session.fullname = data.full_name;
       session.email = data.email;
       session.access_token = data.access_token;
       session.refresh_token = data.refresh_token;
-      session.access = data.access;
+      // session.access = data.access;
       session.isLoggedIn = true;
 
       // save session
@@ -60,7 +72,7 @@ export default async function handle(
       res.json({ status: "success", message: "User successfully authenticated." });
     } else {
       // return json
-      res.json({ status: "error", message: data.message });
+      res.json({ status: "error", message: "data.message" });
     }
   } else if (req.method === "POST" && req.query.action === "logout") {
     // destroy destroy

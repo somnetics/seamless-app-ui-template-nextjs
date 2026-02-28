@@ -1,6 +1,7 @@
 import { cva } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useProgress } from "@/components/Progress";
 import Button from "@/components/Button";
 import CheckRadio from "@/components/CheckRadio";
 import Textbox from "@/components/Textbox";
@@ -8,6 +9,8 @@ import DropDown, { OptionType } from "@/components/Dropdown";
 import Textarea from "@/components/Textarea";
 import FileInput from "@/components/FileInput";
 import AutoSuggest from "@/components/AutoSuggest";
+import { apiFetch } from "@/libs/apiClient";
+import { SessionData } from "@/libs/session";
 
 // define properties
 type FieldType = {
@@ -38,15 +41,52 @@ type FormFieldType = {
   size?: "sm" | "md" | "lg" | undefined;
   rounded?: "sm" | "md" | "lg" | undefined;
   method: string | undefined;
-  endpoint: URL | RequestInfo;
+  endpoint: string;
+  session: SessionData;
 };
 
 type FormFieldProps = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> & FormFieldType;
 
-export default function CreateForm({ formFields, size, rounded, method, endpoint, ...props }: FormFieldProps) {
+export default function CreateForm({ formFields, size, rounded, method, endpoint, session, ...props }: FormFieldProps) {
 
   const [fieldsValue, setFieldsValue] = useState<any>({});
   const [isEmpty, setIsEmpty] = useState<{ [key: string]: boolean }>({});
+  const [data, setData] = useState<any>();
+
+  const { showProgress } = useProgress();
+
+  async function submitData(url: string) {
+    console.log(url)
+    // activate page progress
+    showProgress(true);
+    try {
+      // call api response
+      const response = await apiFetch(session, url, {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      // get response data
+      const results = await response.json();
+
+      console.log("API Response", results);
+
+      alert("Form Submitted")
+
+      // pause
+      setTimeout(() => {
+        // activate page progress
+        showProgress(false);
+      }, 250);
+    } catch (e: any) {
+      console.log(e.message);
+
+      showProgress(false);
+    }
+  }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     // get element
@@ -94,27 +134,38 @@ export default function CreateForm({ formFields, size, rounded, method, endpoint
       }
     });
 
-    console.log(fieldsValue);
+    const result: any = {}
+    Object.keys(fieldsValue).map((key: any) => {
+      if (key.includes(".")) {
+        const keys = key.split(".");
+        keys.reduce((acc: any, currentKey: any, index: any) => {
+          if (index === keys.length - 1) {
+            acc[currentKey] = fieldsValue[key];
+          } else {
+            acc[currentKey] = acc[currentKey] || {};
+          }
+          return acc[currentKey];
+        }, result);
+      } else {
+        result[key] = fieldsValue[key]
+      }
+      setData(result)
+    })
 
     //submit form api call
     //submit when all required fields are filled
     if (Object.values(newEmptyState).every((value) => value === false)) {
 
-      // send response
-      const response = await fetch(endpoint, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(fieldsValue),
-      });
+      // if endpoint
+      if (typeof endpoint !== "undefined" && endpoint.trim() !== "") {
+        // get url from endpoint
+        const endpointUrl = new URL(`${window.origin}${endpoint}`);
 
-      //convert response to json
-      const data = await response.json();
+        // extract endpoint
+        const url = new URL(`${endpointUrl.origin}${endpointUrl.pathname}`);
 
-      console.log("API Response", data);
-
-      alert("Form Submitted")
+        submitData(url.toString())
+      }
 
       //reset fields
       setFieldsValue("");
@@ -126,8 +177,12 @@ export default function CreateForm({ formFields, size, rounded, method, endpoint
     setIsEmpty(newEmptyState);
   }
 
+  useEffect(() => {
+    console.log(data)
+  })
+
   return (
-    <div className="flex items-center justify-center min-h-[92vh] flex-0">
+    <div className="flex justify-center min-h-[92vh] flex-0">
       <form {...props} onSubmit={submitForm} className={props.className} noValidate>
         <div className="grid grid-cols-12 space-y-4 gap-4 w-[600px]">
           {formFields.map((formField) =>

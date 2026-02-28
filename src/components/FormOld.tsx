@@ -5,7 +5,7 @@ import Button from "@/components/Button";
 export default function FormOld() {
   return (
     <form className="space-y-6 pt-4">
-      <div className={"relative grid gap-10 py-12 px-8 w-4/5 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 text-sm rounded-xl z-1"}>
+      <div className={"relative grid gap-10 py-12 px-8 w-4/5 text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 text-sm rounded-xl z-1"}>
         <div className="flex gap-2 flex-col items-center justify-center">
           <h1 className="text-2xl font-bold">Form Name</h1>
           <p className="text-center text-[13px]">Lets get started to build something interesting.</p>
@@ -15,7 +15,7 @@ export default function FormOld() {
             <label htmlFor="" className="">
               Username
             </label>
-            <div className="border-2 outline-2 outline-transparent bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 focus-within:outline-primary-500 rounded-md">
+            <div className="border-2 outline-2 outline-transparent bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 focus-within:outline-primary-500 rounded-md">
               <input type="text" name="username" className="outline-none p-2 w-full" placeholder="Enter Username" defaultValue="" required />
             </div>
           </div>
@@ -23,7 +23,7 @@ export default function FormOld() {
             <label htmlFor="" className="">
               Password
             </label>
-            <div className="outline-2 bg-white dark:bg-gray-700 outline-gray-200 dark:outline-gray-600 focus-within:outline-primary-600 rounded-md">
+            <div className="outline-2 bg-white dark:bg-slate-700 outline-slate-200 dark:outline-slate-600 focus-within:outline-primary-600 rounded-md">
               <input type="password" name="password" className="outline-none p-2 w-full" placeholder="Enter Password" defaultValue="" required />
             </div>
           </div>
@@ -33,7 +33,7 @@ export default function FormOld() {
             <label htmlFor="" className="">
               First Name
             </label>
-            <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
+            <div className="outline-2 outline-slate-700 focus-within:outline-indigo-600 rounded-md">
               <input type="text" name="firstname" className="outline-none p-2 w-full" placeholder="Enter First Name" defaultValue="" required />
             </div>
           </div>
@@ -41,7 +41,7 @@ export default function FormOld() {
             <label htmlFor="" className="">
               Last Name
             </label>
-            <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
+            <div className="outline-2 outline-slate-700 focus-within:outline-indigo-600 rounded-md">
               <input type="password" name="lastname" className="outline-none p-2 w-full" placeholder="Enter Last Name" defaultValue="" required />
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function FormOld() {
             <label htmlFor="" className="">
               Address
             </label>
-            <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
+            <div className="outline-2 outline-slate-700 focus-within:outline-indigo-600 rounded-md">
               <textarea name="address" className="outline-none p-2 w-full" placeholder="Enter Address" defaultValue="" required />
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function FormOld() {
             <label htmlFor="" className="">
               Phone
             </label>
-            <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
+            <div className="outline-2 outline-slate-700 focus-within:outline-indigo-600 rounded-md">
               <input type="number" name="phone" className="outline-none p-2 w-full" placeholder="Enter Phone Number" defaultValue="" required />
             </div>
           </div>
@@ -69,7 +69,7 @@ export default function FormOld() {
             <label htmlFor="" className="">
               Email
             </label>
-            <div className="outline-2 outline-gray-700 focus-within:outline-indigo-600 rounded-md">
+            <div className="outline-2 outline-slate-700 focus-within:outline-indigo-600 rounded-md">
               <input type="email" name="email" className="outline-none p-2 w-full" placeholder="Enter E-mail" defaultValue="" required />
             </div>
           </div>
@@ -78,8 +78,8 @@ export default function FormOld() {
           <label htmlFor="" className="">
             Gender
           </label>
-          {/* <select className="border border-indigo-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"> */}
-          <select className="border border-gray-700 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600">
+          {/* <select className="border border-indigo-300 text-slate-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"> */}
+          <select className="border border-slate-700 w-full p-2.5 dark:bg-slate-700 dark:border-slate-600">
             <option selected>Choose countries</option>
             <option value="US">United States</option>
             <option value="CA">Canada</option>
@@ -119,14 +119,14 @@ export default function FormOld() {
             Status
           </label>
           <div className="flex items-center">
-            <input checked id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-            <label htmlFor="default-radio-1" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <input checked id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-slate-100 border-slate-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-slate-800 focus:ring-2 dark:bg-slate-700 dark:border-slate-600" />
+            <label htmlFor="default-radio-1" className="ms-2 text-sm font-medium text-slate-900 dark:text-slate-300">
               Active
             </label>
           </div>
           <div className="flex items-center">
-            <input checked id="default-radio-2" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-            <label htmlFor="default-radio-2" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <input checked id="default-radio-2" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-slate-100 border-slate-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-slate-800 focus:ring-2 dark:bg-slate-700 dark:border-slate-600" />
+            <label htmlFor="default-radio-2" className="ms-2 text-sm font-medium text-slate-900 dark:text-slate-300">
               Inactive
             </label>
           </div>

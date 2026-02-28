@@ -1498,7 +1498,7 @@ export default function MainMenu({ session, service, endpoints, setEndpoints }: 
 
   return (
     <div className={"h-full transition-[width] duration-100 ease-in-out sm:sticky sm:left-0 sm:top-0 sm:w-16 hidden sm:block " + ((isMainMenuOpen || session.isMenuCollapse) == "true" ? "lg:w-[250px]" : "lg:w-16")}>
-      <nav className="bg-gray-100 dark:bg-gray-800 sm:z-[2] w-full fixed h-full sm:h-dvh translate-x-full sm:translate-x-0 sm:sticky sm:top-0 sm:left-0">
+      <nav className="bg-slate-100 dark:bg-slate-800 sm:z-[2] w-full fixed h-full sm:h-dvh translate-x-full sm:translate-x-0 sm:sticky sm:top-0 sm:left-0">
         <div className="flex h-full flex-col justify-stretch relative">
           <div className={"sticky top-0 z-10 flex shrink-0 items-center justify-between px-4 mb-4 sm:h-4 lg:h-16 border-b border-black/10 dark:border-white/10"}>
             {(isMainMenuOpen || session.isMenuCollapse) == "true" && (
@@ -1509,7 +1509,7 @@ export default function MainMenu({ session, service, endpoints, setEndpoints }: 
               </Link>
             )}
             <button
-              className="cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 p-[9px] sm:hidden lg:block"
+              className="cursor-pointer rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 p-[9px] sm:hidden lg:block"
               onClick={(e: any) => {
                 e.preventDefault();
                 saveMenuStateToSession((isMainMenuOpen || session.isMenuCollapse) == "true" ? "false" : "true");
@@ -1530,7 +1530,7 @@ export default function MainMenu({ session, service, endpoints, setEndpoints }: 
                   <div className="flex flex-col gap-1">
                     {endpoints.map((item: any, i: number) => (
                       <div key={i} className="group">
-                        <Link href={`/documentation/${service.name}/v2.3/${item.operationId}/params`} className={"text-xs w-full rounded-lg flex items-center gap-1 sm:h-8 h-10 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 py-1 ps-2 " + (pathname.startsWith(item.link) && item.link.length > 1 || item.link == pathname ? "bg-gray-200 dark:bg-gray-700" : "")}>
+                        <Link href={`/documentation/${service.name}/v2.3/${item.operationId}/params`} className={"text-xs w-full rounded-lg flex items-center gap-1 sm:h-8 h-10 group-hover:bg-slate-200 dark:group-hover:bg-slate-700 py-1 ps-2 " + (pathname.startsWith(item.link) && item.link.length > 1 || item.link == pathname ? "bg-slate-200 dark:bg-slate-700" : "")}>
                           {/* <span className={twMerge("font-semibold -ms-2 -w-[52] -text-end flex-none1", item.color)}>{item.method}</span> */}
                           {/* <span className="truncate flex-1">{item.name || item.link}</span> */}
                           {(isMainMenuOpen || session.isMenuCollapse) == "true" ?
@@ -1559,7 +1559,7 @@ export default function MainMenu({ session, service, endpoints, setEndpoints }: 
           <div className="sticky bottom-0 z-10 mt-auto flex flex-col gap-4 p-4">
             {(isMainMenuOpen || session.isMenuCollapse) == "true" && (
               <div className="hidden lg:block">
-                <button className="w-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg px-4 py-[9px]">
+                <button className="w-full bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 rounded-lg px-4 py-[9px]">
                   <div className="flex flex-col items-start gap-[2px] text-sm truncate">
                     <p className="text-left font-semibold text-amber-500 dark:text-amber-500">30 Days Free Trial</p>
                     <p className="text-left font-normal text-surface-foreground-0">Unlock more features</p>
@@ -1569,15 +1569,15 @@ export default function MainMenu({ session, service, endpoints, setEndpoints }: 
             )}
             <div className={"flex items-center justify-between gap-6 flex-col " + ((isMainMenuOpen || session.isMenuCollapse) == "true" ? "lg:flex-row" : "lg:flex-col")}>
               <div className={"flex gap-2 flex-col " + ((isMainMenuOpen || session.isMenuCollapse) == "true" ? "lg:flex-row" : "lg:flex-col")}>
-                <Link href="/admin/account" className={"p-[9px] hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg flex items-center cursor-pointer no-underline visited:text-inherit " + (pathname.startsWith("/admin") ? "bg-gray-200 dark:bg-gray-700" : "")}>
+                <Link href="/admin/account" className={"p-[9px] hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg flex items-center cursor-pointer no-underline visited:text-inherit " + (pathname.startsWith("/admin") ? "bg-slate-200 dark:bg-slate-700" : "")}>
                   <Settings size={16} />
                 </Link>
-                <a className="p-[9px] hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg flex items-center cursor-pointer no-underline visited:text-inherit" href="#">
+                <a className="p-[9px] hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg flex items-center cursor-pointer no-underline visited:text-inherit" href="#">
                   <Icon name="Bell" size={16} />
                 </a>
                 <ThemeToggle session={session} />
               </div>
-              <button onClick={handleLogout} className="p-[9px] hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg flex items-center cursor-pointer no-underline visited:text-inherit" type="button">
+              <button onClick={handleLogout} className="p-[9px] hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg flex items-center cursor-pointer no-underline visited:text-inherit" type="button">
                 <Icon name="LogOut" size={16} />
               </button>
             </div>

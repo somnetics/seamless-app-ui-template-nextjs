@@ -3,7 +3,7 @@ import { Trash2, Download, Edit2, Copy } from "lucide-react";
 export default function Logs() {
   return (
     <table className="table-auto w-full text-sm">
-      <thead className="bg-gray-200 dark:bg-gray-700">
+      <thead className="bg-slate-200 dark:bg-slate-700">
         <tr>
           <th className="w-[20px] px-4 py-2.5">
             <input type="checkbox" className="flex" />
@@ -33,7 +33,7 @@ export default function Logs() {
             <div className="flex items-center justify-center">
               <Edit2 size={16} className="text-blue-500 hover:text-blue-600 me-3 cursor-pointer" />
               <Trash2 size={16} className="text-red-600 me-3 cursor-pointer" />
-              <Download size={16} className="text-gray-700 dark:text-gray-100 cursor-pointer" />
+              <Download size={16} className="text-slate-700 dark:text-slate-100 cursor-pointer" />
             </div>
           </td>
         </tr>
@@ -54,7 +54,7 @@ export default function Logs() {
             <div className="flex items-center justify-center">
               <Edit2 size={16} className="text-blue-500 hover:text-blue-600 me-3 cursor-pointer" />
               <Trash2 size={16} className="text-red-600 me-3 cursor-pointer" />
-              <Download size={16} className="text-gray-700 dark:text-gray-100 cursor-pointer" />
+              <Download size={16} className="text-slate-700 dark:text-slate-100 cursor-pointer" />
             </div>
           </td>
         </tr>
@@ -75,7 +75,7 @@ export default function Logs() {
             <div className="flex items-center justify-center">
               <Edit2 size={16} className="text-blue-500 hover:text-blue-600 me-3 cursor-pointer" />
               <Trash2 size={16} className="text-red-600 me-3 cursor-pointer" />
-              <Download size={16} className="text-gray-700 dark:text-gray-100 cursor-pointer" />
+              <Download size={16} className="text-slate-700 dark:text-slate-100 cursor-pointer" />
             </div>
           </td>
         </tr>

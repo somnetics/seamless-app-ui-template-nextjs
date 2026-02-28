@@ -64,19 +64,19 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     <ModalContext.Provider value={{ showModal }}>
       {children}
       {visible && (
-        <div className={`fixed inset-0 z-[99999] bg-gray-900/50 w-full h-full overflow-y-auto`} aria-modal="true">
+        <div className={`fixed inset-0 z-[99999] bg-slate-900/50 w-full h-full overflow-y-auto`} aria-modal="true">
           <div className="relative max-w-2xl" style={{ margin: "50px auto" }}>
-            <form className="relative bg-white dark:bg-gray-800 rounded-lg shadow-sm" onSubmit={handleSubmit}>
-              <div className="flex items-center justify-between p-3 md:p-4 border-b rounded-t border-gray-200 dark:border-white/10">
-                <h3 className="text-xl font-semibold text-gray-600 dark:text-gray-300">
+            <form className="relative bg-white dark:bg-slate-800 rounded-lg shadow-sm" onSubmit={handleSubmit}>
+              <div className="flex items-center justify-between p-3 md:p-4 border-b rounded-t border-slate-200 dark:border-white/10">
+                <h3 className="text-xl font-semibold text-slate-600 dark:text-slate-300">
                   {modalOptions?.title}
                 </h3>
-                <X size={22} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-100 cursor-pointer" onClick={() => setVisible(false)} />
+                <X size={22} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-100 cursor-pointer" onClick={() => setVisible(false)} />
               </div>
               <div className="p-3 md:p-4 space-y-4">
                 {modalOptions?.body}
               </div>
-              <div className="flex justify-end items-center gap-2 p-3 md:p-4 border-t rounded-b border-gray-200 dark:border-white/10">
+              <div className="flex justify-end items-center gap-2 p-3 md:p-4 border-t rounded-b border-slate-200 dark:border-white/10">
                 <Button type="button" color="primary" onClick={() => setVisible(false)}>Submit</Button>
                 <Button type="button" color="secondary" onClick={() => setVisible(false)}>Cancel</Button>
               </div>

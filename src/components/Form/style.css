@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .txt {
-  @apply bg-white dark:bg-gray-600 outline-1 outline-black/10 dark:outline-white/10;
+  @apply bg-white dark:bg-slate-600 outline-1 outline-black/10 dark:outline-white/10;
 }
 
 .txt.primary {
@@ -9,11 +9,11 @@
 }
 
 .txt.readonly {
-  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+  @apply bg-slate-400/30 hover:bg-slate-400/30 text-slate-400/50;
 }
 
 .txt.disabled {
-  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+  @apply bg-slate-400/30 hover:bg-slate-400/30 text-slate-400/50;
 }
 
 .txt>.txt-input {

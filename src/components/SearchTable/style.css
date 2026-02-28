@@ -1,22 +1,231 @@
 @reference "../../styles/globals.css";
 
+/* card */
+.card {
+  --tw-bg-opacity: 1;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  /* box-shadow: none; */
+  /* border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important; */
+  border: none;
+}
+
+.card-head {
+  @apply rounded-t-md;
+  /* @apply rounded-t-md dark:bg-slate-700/30 border border-b-0 dark:border-slate-700; */
+}
+
+.card-footer {
+  @apply rounded-b-md;
+  /* background-color: var(--bg-table-head); */
+  min-height: 64px;
+}
+
+/* card */
+
+/* table */
+.table tr>*:first-child {
+  @apply pl-[16px];
+  /* padding-left: 16px; */
+}
+
+.table tr>*:last-child {
+  @apply pr-[16px];
+  /* padding-right: 16px; */
+}
+
+.table th,
+.table td {
+  @apply whitespace-nowrap;
+  /* white-space: nowrap; */
+}
+
+/* table */
+
+/* flex table */
+.flex-table {
+  @apply table relative w-full;
+  /* display: table;
+  position: relative;
+  width: 100%; */
+}
+
+.flex-table-header {
+  @apply table-header-group font-bold overflow-hidden bg-white dark:bg-slate-800 sticky top-0;
+  
+  /* display: table-header-group;
+  font-weight: bold;
+  background-color: var(--bg-table-head);
+  position: sticky;
+  top: 0; */
+}
+
+.flex-table-body {
+  @apply table-row-group;
+  /* display: table-row-group; */
+}
+
+.flex-table-row {
+  @apply table-row py-0 px-[8px];
+  /* display: table-row;
+  padding: 0 8px; */
+}
+
+.flex-table-row:hover {
+  @apply bg-[var(--bg-table-head)] cursor-pointer;
+  /* background-color: var(--bg-table-head);
+  cursor: pointer; */
+}
+
+.flex-table-header .flex-table-col,
+.flex-table-row .flex-table-col {
+  @apply table-cell p-[8px] border-b border-black/10 dark:border-white/10 text-base align-middle;
+
+  /* display: table-cell;
+  padding: 8px; */
+  /* text-wrap: nowrap; */
+  /* border-bottom: 1px solid var(--bs-border-color); */
+  /* vertical-align: middle; */
+}
+
+.flex-table-header .flex-table-col {
+  align-content: center;
+}
+
+/* .flex-table-header>.flex-table-row>.flex-table-col:not(:first-child):not(:last-child),
+.flex-table-body:not(.no-padding)>.flex-table-row>.flex-table-col:not(:first-child):not(:last-child) {
+  @apply py-[8px] px-[20px];  
+} */
+
+.flex-table-header>*:first-child,
+.flex-table-row>*:first-child {
+  @apply pl-[16px];
+}
+
+.flex-table-header>*:last-child,
+.flex-table-row>*:last-child {
+  @apply pr-[16px];
+}
+
+.table-responsive:after {
+  @apply after:content-[''] absolute top-[88.5px] left-0 w-full h-[calc(100%-88.5px)] bg-[url(/images/icons/list-empty-state.svg)] bg-center bg-no-repeat bg-size-[75px] opacity-[0] z-[-1];
+  /* content: " ";
+  position: absolute;
+  top: 88.5px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 88.5px);
+  background-image: url(/images/icons/list-empty-state.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 75px;
+  opacity: 0;
+  z-index: -1; */
+}
+
+.table-responsive.no-record-found:after {
+  @apply opacity-1 z-0;
+  /* opacity: 1;
+  z-index: 0; */
+}
+
+.flex-table-col.sorting,
+.flex-table-col.sorting_asc,
+.flex-table-col.sorting_desc {
+  /* @apply relative cursor-pointer !pr-[30px]; */
+  cursor: pointer;
+  padding-right: 30px !important;
+  position: relative;
+}
+
+.flex-table-col.sorting:before,
+.flex-table-col.sorting:after,
+.flex-table-col.sorting_asc:before,
+.flex-table-col.sorting_asc:after,
+.flex-table-col.sorting_desc:before,
+.flex-table-col.sorting_desc:after {
+  /* @apply block absolute bottom-[0.9rem] opacity-30 font-['Material_Symbols_Rounded']; */
+  position: absolute;
+  bottom: 0.9em;
+  display: block;
+  opacity: 0.3;
+  font-family: "Material Symbols Rounded";
+}
+
+.flex-table-col.sorting:before,
+.flex-table-col.sorting_asc:before,
+.flex-table-col.sorting_desc:before {
+  /* @apply right-[8px] top-[12px] before:content-["\e5c5"]; */
+  right: 8px; 
+  top: 12px;
+  content: "\e5c5";
+}
+
+.flex-table-col.sorting:after,
+.flex-table-col.sorting_asc:after,
+.flex-table-col.sorting_desc:after {
+  /* @apply right-[8px] top-[4px] after:content-["\e5c7"]; */
+  right: 8px;
+  top: 4px;
+  content: "\e5c7";
+}
+
+.flex-table-col.sorting_asc:before,
+.flex-table-col.sorting_desc:after {
+  /* @apply opacity-1; */
+  opacity: 1;
+}
+
+.flex-table-col.sorting.disable {
+  @apply pointer-events-none;
+  /* pointer-events: none; */
+}
+
+/* flex table */
+
+/* data table */
+
+.datatable .flex-table-header>*:first-child,
+.datatable .flex-table-row>*:first-child {
+  @apply pl-[12px];
+  /* padding-left: 12px; */
+}
+
+.datatable .flex-table-header>*:last-child,
+.datatable .flex-table-row>*:last-child {
+  @apply pr-[12px];
+  /* padding-right: 12px; */
+}
+
+.datatable .flex-table-header .flex-table-col,
+.datatable .flex-table-row .flex-table-col {
+  @apply py-[6px] px-[12px];
+  /* padding: 6px 12px; */
+}
+
 .data-table {
-  @apply bg-white dark:bg-gray-800 border border-black/10 dark:border-white/10 rounded-md flex flex-col justify-between overflow-hidden overflow-x-auto;
+  /* @apply bg-white dark:bg-slate-800 rounded-t-md -border -border-t-0 -border-black/10 -dark:border-white/10 flex flex-col justify-between overflow-hidden overflow-x-auto; */
+  @apply flex flex-col overflow-hidden overflow-x-auto;
 }
 
 .data-table table {
   @apply table-auto w-full text-sm;
 }
 
-.data-table thead, .data-table > .table-navigation  {
-  @apply bg-gray-100/70 dark:bg-gray-700/30;
+.data-table thead,
+.data-table>.table-navigation {
+  @apply bg-slate-100 dark:bg-slate-600;
 }
 
 .data-table tbody tr {
-  @apply hover:bg-gray-100/70 dark:hover:bg-gray-700/30 transition-colors duration-200;
+  @apply hover:bg-slate-100/70 dark:hover:bg-slate-700/30 transition-colors duration-200;
 }
 
-.data-table th, .data-table td {
+.data-table th,
+.data-table td {
   @apply py-2 px-3 text-left not-last:border-r border-b border-black/10 dark:border-white/10;
 }
 
@@ -25,13 +234,52 @@
 }
 
 .data-table .btn-action svg {
-  @apply group-disabled:text-gray-500 group-disabled:hover:text-gray-500 dark:group-disabled:text-gray-400 dark:group-disabled:hover:text-gray-400;
+  @apply group-disabled:text-slate-500 group-disabled:hover:text-slate-500 dark:group-disabled:text-slate-400 dark:group-disabled:hover:text-slate-400;
 }
 
 .data-table .table-navigation .btn-nav {
-  @apply p-2 hover:bg-gray-300 dark:hover:bg-gray-700 rounded-lg flex items-center cursor-pointer;
+  @apply p-2 hover:bg-slate-300 dark:hover:bg-slate-700 rounded-lg flex items-center cursor-pointer;
 }
 
-.data-table > .table-navigation {
+.data-table>.table-navigation {
   @apply border-t border-black/10 dark:border-white/10 flex gap-2 flex-row justify-center py-2 px-3;
 }
+
+/* data table */
+
+/* Scroll container */
+.custom-scroll {
+  @apply overflow-y-auto
+  /* scrollbar-width: none; */
+  /* -ms-overflow-style: none;  */
+}
+
+.custom-scroll::-webkit-scrollbar {
+  @apply w-1.5
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  @apply bg-slate-600 rounded-[10px];
+}
+
+.filter1 {
+  /* @apply overflow-auto; */
+  /* @apply relative w-full bg-[#2f3b4a] text-slate-100 rounded-md border border-[#3a4657] py-1.5 */
+  @apply relative flex flex-col rounded-md overflow-hidden;
+  @apply bg-white dark:bg-slate-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 w-full font-light;
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/*options dropdown*/
+.filter .hide {
+  @apply hidden;
+  /* display: none; */
+}
+
+.filter .show {
+  @apply flex;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+/*options dropdown*/

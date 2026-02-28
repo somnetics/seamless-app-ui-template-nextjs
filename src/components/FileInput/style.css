@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .file {
-  @apply bg-white dark:bg-gray-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 w-full font-light;
+  @apply bg-white dark:bg-slate-700 border border-black/10 dark:border-white/10 focus-within:outline-none focus-within:ring-2 w-full font-light;
   @apply transition-all duration-300 ease-in-out;
 }
 
@@ -10,16 +10,16 @@
 }
 
 .file.readonly {
-  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+  @apply bg-slate-400/30 hover:bg-slate-400/30 text-slate-400/50;
 }
 
 .file.disabled {
-  @apply bg-gray-400/30 hover:bg-gray-400/30 text-gray-400/50;
+  @apply bg-slate-400/30 hover:bg-slate-400/30 text-slate-400/50;
 }
 
 .file .file-input {
   @apply outline-none w-full font-light;
-  @apply text-black/40 dark:text-slate-200 dark:bg-gray-700 cursor-pointer file:cursor-pointer file:bg-black/10 file:hover:bg-black/20 file:dark:bg-gray-900 file:dark:hover:bg-gray-800 file:dark:text-slate-200;
+  @apply text-black/40 dark:text-slate-200 dark:bg-slate-700 cursor-pointer file:cursor-pointer file:bg-black/10 file:hover:bg-black/20 file:dark:bg-slate-900 file:dark:hover:bg-slate-800 file:dark:text-slate-200;
 }
 
 .file .file-input.text-sm {

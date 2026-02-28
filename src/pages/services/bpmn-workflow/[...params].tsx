@@ -32,7 +32,8 @@ import { Apis, Api } from "@/libs/apis";
 import Overview from "@/components/BpmnWorkflow/Overview";
 import Daigrams from "@/components/BpmnWorkflow/Daigrams";
 import Trash from "@/components/BpmnWorkflow/Trash";
-import Apidocumentation from "@/components/BpmnWorkflow/Apidocumentation";
+// import Apidocumentation from "@/components/BpmnWorkflow/Apidocumentation";
+import ApiDocs from "@/components/Service/ApiDocs";
 
 import DropDown from '@/components/Dropdown';
 import Textbox from '@/components/Textbox';
@@ -54,15 +55,6 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
   const { addToast } = useToast();
   const { showProgress } = useProgress();
   const { showModal } = useModal();
-
-  // const [serviceDetails, setServiceDetails] = useState<Api>();
-
-  // useEffect(() => {
-  //   if (router.query.params) {
-  //     const serviceName = router.query.params[0];
-  //     setServiceDetails(Apis.find((app) => app.name == serviceName))
-  //   }
-  // }, [router.query.params])
 
   const formBody = <>
     <Textbox />
@@ -91,47 +83,47 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
                   <Image className="h-[60px]" src={service.icon || ""} alt={service.title || ""} width={60} height={60} />
                   <div className="flex flex-col justify-center">
                     <h2 className="text-[24px] font-semibold">{service.title}</h2>
-                    <p className="truncate overflow-hidden text-ellipsis text-gray-600 dark:text-gray-300">{service.description}</p>
+                    <p className="truncate overflow-hidden text-ellipsis text-slate-600 dark:text-slate-300">{service.description}</p>
                   </div>
                 </div>
-                <Button
+                {/* <Button
                   onClick={() => {
                     showModal({
                       title: "New Task", body: formBody, onSubmit: async (formData, close) => {
-                        // // let updated data
-                        // const taskData: any = { project: project.id, status: "1" };
+                        // let updated data
+                        const taskData: any = { project: project.id, status: "1" };
 
-                        // // get form value
-                        // formData.forEach((value, key) => taskData[key] = value);
+                        // get form value
+                        formData.forEach((value, key) => taskData[key] = value);
 
-                        // // show progress
-                        // showProgress(true);
+                        // show progress
+                        showProgress(true);
 
-                        // // submit task
-                        // const data = await SubmitTask(session.token, taskData);
+                        // submit task
+                        const data = await SubmitTask(session.token, taskData);
 
-                        // // on error
-                        // if (data._type === "Error") {
-                        //   // show message
-                        //   addToast(data.message, MessageTypes.Error);
-                        // } else {
-                        //   // show message
-                        //   addToast("Task created successfully.", MessageTypes.Success, 1500);
-                        // }
+                        // on error
+                        if (data._type === "Error") {
+                          // show message
+                          addToast(data.message, MessageTypes.Error);
+                        } else {
+                          // show message
+                          addToast("Task created successfully.", MessageTypes.Success, 1500);
+                        }
 
-                        // // show progress
-                        // showProgress(false);
+                        // show progress
+                        showProgress(false);
 
                         // close window
                         close(true);
                       }
                     })
                   }}
-                  // className="flex items-center justify-center gap-2 font-medium transition duration-150 ease-in-out text-sm rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 p-2 cursor-pointer"
+                  // className="flex items-center justify-center gap-2 font-medium transition duration-150 ease-in-out text-sm rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 p-2 cursor-pointer"
                   color="secondary" className="btn border dark:border-white/10">
                   <Plus size={15} className="text-green-500 hover:text-green-600" />
                   <span>Create New</span>
-                </Button>
+                </Button> */}
               </div>
             </div>
             <div className="w-full p-4 mx-auto1">
@@ -139,31 +131,31 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Name</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">{service.title}</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">{service.title}</p>
                   </div>
                 </div>
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Version</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">3.5</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">3.5</p>
                   </div>
                 </div>
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Type</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">Public API</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">Public API</p>
                   </div>
                 </div>
                 <div className="flex items-center border-r border-black/10 dark:border-white/10">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Author</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">Mr. Susanta Das</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">Mr. Susanta Das</p>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <div className="flex flex-col justify-center">
                     <p className="font-semibold">Status</p>
-                    <p className="text-[13px] text-gray-600 dark:text-gray-300">Active</p>
+                    <p className="text-[13px] text-slate-600 dark:text-slate-300">Active</p>
                   </div>
                 </div>
                 {/* <div className="flex items-center">
@@ -178,11 +170,11 @@ export default function BpmnWorkflow({ session, meta, service, tab }: PageProps)
               </div>
             </div>
           </div>
-          <TabContent className="sticky top-[64px] z-[999] bg-gray-50 dark:bg-gray-950" ulClassName="px-12 mt-3 mb-4 justify-start" tabs={[
-            { name: "Overview", icon: "BookText", link: "/services/bpmn-workflow/overview", content: <Overview session={session} /> }, 
+          <TabContent className="sticky top-[64px] z-[999] bg-slate-100 dark:bg-slate-950" ulClassName="px-12 mt-3 mb-4 justify-start" tabs={[
+            { name: "Overview", icon: "BookText", link: "/services/bpmn-workflow/overview", content: <Overview session={session} /> },
             { name: "Daigrams", icon: "Workflow", link: "/services/bpmn-workflow/daigrams", content: <Daigrams session={session} endpoint="/seamless/auth/user" /> },
             { name: "Trash", icon: "Trash2", link: "/services/bpmn-workflow/trash", content: <Trash session={session} endpoint="/seamless/auth/user" /> },
-            { name: "API Documentation", icon: "BookMarked", link: "/services/bpmn-workflow/apidocumentation", content: <Apidocumentation session={session} service={service} /> },
+            { name: "API Documentation", icon: "BookMarked", link: "/services/bpmn-workflow/api-docs", content: <ApiDocs session={session} service={service} /> },
           ]} />
         </div>
       </Page>
@@ -217,7 +209,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   // get url path
-  const path = resolvedUrl.split("/")
+  const path = resolvedUrl.split("/");
 
   return {
     props: {

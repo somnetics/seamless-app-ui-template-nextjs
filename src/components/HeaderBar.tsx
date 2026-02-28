@@ -20,12 +20,12 @@ export default function HeaderBar({ session, navs, border = true }: { session: S
   // }, []);
 
   return (
-    <header className={"sticky top-0 z-[999] flex h-14 w-full shrink-0 items-center justify-between bg-white dark:bg-gray-900 border-black/10 dark:border-white/10 px-4 lg:h-16 lg:gap-4 " + (border ? "border-b" : "border-0")}>
+    <header className={"sticky top-0 z-[999] flex h-14 w-full shrink-0 items-center justify-between bg-slate-50 dark:bg-slate-900 border-black/10 dark:border-white/10 px-4 lg:h-16 lg:gap-4 " + (border ? "border-b" : "border-0")}>
       <div className="relative flex min-w-0 shrink-0 items-center gap-0 sm:gap-2 flex-1">
         {(isMainMenuOpen || session.isMenuCollapse) != "true" && (
           <div className="relative flex items-start gap-4">
             <button
-              className="cursor-pointer flex items-center rounded-lg hover:bg-gray-700 p-[9px] hover:bg-surface-2 sm:hidden"
+              className="cursor-pointer flex items-center rounded-lg hover:bg-slate-700 p-[9px] hover:bg-surface-2 sm:hidden"
               onClick={(e: any) => {
                 e.preventDefault();
                 saveMenuStateToSession(isMainMenuOpen == "true" ? "false" : "true");
@@ -45,13 +45,13 @@ export default function HeaderBar({ session, navs, border = true }: { session: S
 
         {/* <div className="flex flex-1 items-center gap-2">
           <a href="/pikaso/explore" className="">
-            <span className="hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs" data-cy="header-ai-suite-link">
+            <span className="hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs" data-cy="header-ai-suite-link">
               AI Suite
             </span>
           </a>
           <span className="opacity-50">/</span>
           <div className="group flex items-center gap-2">
-            <a aria-current="page" href="/pikaso/ai-image-generator" className="hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs">
+            <a aria-current="page" href="/pikaso/ai-image-generator" className="hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs">
               Image Generator
             </a>
           </div>
@@ -79,7 +79,7 @@ export default function HeaderBar({ session, navs, border = true }: { session: S
   /* <header className="sticky top-0 z-[1]">
   <div className="grid w-full grid-cols-2 grid-rows-[4rem] items-center justify-between border-b border-black/10 dark:border-white/10 px-4 pb-5 lg:flex lg:h-18 lg:pb-0">
     <div className={"flex items-center gap-2 -min-w-[150px]"}>
-      <button className="cursor-pointer flex items-center rounded-lg hover:bg-gray-700 p-[9px] hover:bg-surface-2 sm:hidden" onClick={() => setOpen(!open)}>
+      <button className="cursor-pointer flex items-center rounded-lg hover:bg-slate-700 p-[9px] hover:bg-surface-2 sm:hidden" onClick={() => setOpen(!open)}>
         <Menu size={16} />
       </button>
       {!open && (
@@ -91,17 +91,17 @@ export default function HeaderBar({ session, navs, border = true }: { session: S
     </div>
     <div className="flex flex-1 mx-auto max-w-screen-2xl items-center gap-2 -border-b border-black/10 dark:border-white/10 py-2 px-3">
       <a href="/pikaso/explore" className="">
-        <span className="text-surface-foreground-0 hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs" data-cy="header-ai-suite-link">AI Suite</span>
+        <span className="text-surface-foreground-0 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs" data-cy="header-ai-suite-link">AI Suite</span>
       </a>
       <span className="text-surface-foreground-4 opacity-50">/</span>
       <div className="group flex items-center gap-2">
-        <a aria-current="page" href="/pikaso/ai-image-generator" className="router-link-active router-link-exact-active hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs" data-cy="header-current-mode-link">Image Generator</a>
+        <a aria-current="page" href="/pikaso/ai-image-generator" className="router-link-active router-link-exact-active hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-2.5 rounded px-2 py-1 text-xs" data-cy="header-current-mode-link">Image Generator</a>
       </div>
     </div>
     {/* <div className="col-span-full row-[2] flex w-full flex-1 items-center gap-2">
       <div className="h-fit transition-all duration-300 ease-in-out mx-auto lg:max-w-[800px] w-full">
         <form className="relative flex w-full flex-auto items-stretch" action="/search">
-          <div className="relative mx-auto flex min-h-[42px] flex-auto items-center rounded-[24px] border transition-all border-black/10 dark:border-white/10 bg-gray-50 dark:bg-gray-800">
+          <div className="relative mx-auto flex min-h-[42px] flex-auto items-center rounded-[24px] border transition-all border-black/10 dark:border-white/10 bg-slate-50 dark:bg-slate-800">
             <div className="flex cursor-pointer items-center pl-7 pr-3" role="button" aria-label="Open autocomplete">
               <Search size={16} />
             </div>

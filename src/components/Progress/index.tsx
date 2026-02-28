@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import styles from "./Progress.module.css";
 
 type ProgressContextType = {
@@ -14,11 +15,20 @@ export function useProgress() {
 }
 
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const [progresss, setProgresss] = useState<boolean>(false);
 
   const showProgress = (show: boolean) => {
     setProgresss(show);
   };
+
+  useEffect(() => {
+    // on router loading complete
+    router.events.on("routeChangeComplete", (e) => {
+      // activate form Progress
+      showProgress(false);
+    });
+  }, [router.events]);
 
   return (
     <ProgressContext.Provider value={{ showProgress }}>

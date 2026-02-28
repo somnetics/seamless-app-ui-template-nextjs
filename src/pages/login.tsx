@@ -8,7 +8,6 @@ import { useToast, MessageTypes } from "@/components/Toast";
 import { Copyright, Heart } from "lucide-react";
 import Button from "@/components/Button";
 import Textbox from "@/components/Textbox";
-// import Textbox from "@/components/Textbox_test";
 import CheckRadio from "@/components/CheckRadio";
 import styles from "@/styles/login.module.css";
 
@@ -46,8 +45,8 @@ export default function Login() {
 
       try {
         // call api
-        const response = await fetch("/api/auth/login", {
-          method: "POST",
+        const response = await fetch("/api/auth/login", {        
+          method: "POST",                    
           headers: {
             "Content-Type": "application/json",
           },
@@ -127,33 +126,20 @@ export default function Login() {
                   <p className="text-center text-[13px]">Lets get started to build something interesting.</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="" className="">
-                    Username
-                  </label>
-                  {/* <div className="outline-2 outline-gray-300 dark:outline-gray-600 focus-within:outline-blue-600 rounded-md">
-                    <input type="text" name="username" className="outline-none p-2 w-full" defaultValue="soumen.sardar" />
-                  </div> */}
-                  <Textbox type="text" name="username" defaultValue="soumen.sardar" />
+                  <label htmlFor="username">Username</label>
+                  <Textbox type="text" name="username" id="username" defaultValue="user001@techcorp.com" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="" className="">
-                    Password
-                  </label>
-                  {/* <div className="outline-2 outline-gray-300 focus-within:outline-blue-600 rounded-md">
-                    <input type="password" name="password" className="outline-none p-2 w-full" defaultValue="admin123" />
-                  </div> */}
-                  <Textbox type="password" name="password" defaultValue="admin123" />
+                  <label htmlFor="password">Password</label>
+                  <Textbox type="password" name="password" id="password" defaultValue="hzPhvFPxY0z2A6Hu" />
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  {/* <label className="flex items-center">
-                    <input type="checkbox" className="accent-blue-600 hover:accent-blue-700 mr-2" /> Remember me
-                  </label> */}
                   <CheckRadio type="checkbox">Remember me</CheckRadio>
                   <a href="#" className="text-primary-500 hover:text-primary-600">
                     Forgot password?
                   </a>
                 </div>
-                <Button type="submit" className="justify-center h-11">
+                <Button type="submit" size="lg" className="justify-center">
                   Sign in to your account
                 </Button>
               </div>

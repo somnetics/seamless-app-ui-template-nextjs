@@ -20,7 +20,7 @@ const ThemeToggle = ({ session }: { session: SessionData }) => {
   };
 
   return (
-    <button onClick={toggleTheme} className="cursor-pointer flex items-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 p-[9px] hover:bg-surface-2">
+    <button onClick={toggleTheme} className="cursor-pointer flex items-center rounded-lg dark:text-white text-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 p-[9px] hover:bg-surface-2">
       {(globalState.theme || session.theme) == "light" ? <Moon size={16} /> : <Sun size={16} />}
     </button>
   );
